@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.target=ArithmeticPrinter
-comment0.text=\r\n\ --Problem1A--\r\n\ Step\ 1\:\ Write\ a\ brief\ discription\ for\ the\ program.\r\n\ Print\ the\ sum\ and\ product\ of\ the\ integers\ between\r\n\ 13\ and\ 17,\ inclusive.\r\n\r\n\ Step\ 2\:\ Enter\ your\ name\ for\ @author\ and\ today's\ date\ for\ @version\r\n\ @author\:\ Duc\ Pham\ \r\n\ @version\:\ 2021-01-30\r\n
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-numComments=2
