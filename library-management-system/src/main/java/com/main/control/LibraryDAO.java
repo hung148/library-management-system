@@ -1,7 +1,8 @@
-package com.main.model;
+package com.main.control;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.main.model.*;
 
 public class LibraryDAO {
     private final static String url = "jdbc:sqlite:library.db";

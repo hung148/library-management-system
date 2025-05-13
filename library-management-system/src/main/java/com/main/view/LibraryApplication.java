@@ -12,17 +12,14 @@ import java.net.URL;
 
 
 public class LibraryApplication extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
     @Override
     public void start(Stage stage) throws IOException  {
-            FXMLLoader loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
-            Scene scene = new Scene(loader.load());
-            URL cssURL = getClass().getResource("pageStyle.css");
-            scene.getStylesheets().add(cssURL.toExternalForm());
-            stage.setScene(scene);
-            stage.show();
-        }
+        FXMLLoader loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
+        Scene scene = new Scene(loader.load());
+        URL cssURL = getClass().getResource("pageStyle.css");
+        scene.getStylesheets().add(cssURL.toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
+}
 
