@@ -1,4 +1,4 @@
-package com.example.model;
+package com.main.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
