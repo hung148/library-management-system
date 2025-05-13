@@ -7,6 +7,7 @@ module com.main {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires javafx.graphics;
 
     opens com.main.view to javafx.fxml;
     opens com.main.control to javafx.fxml;

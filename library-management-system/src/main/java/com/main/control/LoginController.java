@@ -22,11 +22,14 @@ package com.main.control;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import com.main.view.LibraryApplication;
 
 //2 event buttons: log in and register
 public class LoginController {
@@ -44,15 +47,8 @@ public class LoginController {
     }
 
     private void showRegisterPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("register-page.fxml"));
         Stage stage = (Stage) registerPage.getScene().getWindow();
-        stage.setScene(new Scene(loader.load()));
+        stage.setScene(new Scene(LibraryApplication.register_loader.load()));
         stage.show();
     }
-
-
-
-
-
-
 }
