@@ -1,4 +1,4 @@
-package com.example.model;
+package com.main.model;
 
 public class Member extends User {
     // member is supended if balance is negative 

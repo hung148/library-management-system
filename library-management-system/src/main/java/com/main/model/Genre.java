@@ -1,4 +1,4 @@
-package com.example.model;
+package com.main.model;
 
 public class Genre {
     private int genreId;
