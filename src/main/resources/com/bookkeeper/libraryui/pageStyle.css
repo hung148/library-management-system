@@ -1,0 +1,7 @@
+.subLabels{
+    -fx-font-family: "Book Antiqua", monospace;
+    -fx-font-size: 13;
+}
+VBox{
+    -fx-background-color: rgba(91, 99, 96, 0.6);
+}
