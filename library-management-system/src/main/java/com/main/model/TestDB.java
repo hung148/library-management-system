@@ -1,13 +1,12 @@
 package com.main.model;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TestDB {
     public static void main(String[] args) {
         LibraryDAO.createDB();
         LibraryDAO.resetDB();
-        boolean loop = true;
+        // boolean loop = true;
         Scanner scan = new Scanner(System.in);
         System.out.println("Test library database");
         // login / signup test 
