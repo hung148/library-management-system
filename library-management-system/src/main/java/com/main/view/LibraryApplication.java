@@ -19,6 +19,7 @@ public class LibraryApplication extends Application {
         
         Scene scene = new Scene(login_loader.load());
         URL cssURL = getClass().getResource("pageStyle.css");
+        assert cssURL != null;
         scene.getStylesheets().add(cssURL.toExternalForm());
         stage.setScene(scene);
         stage.show();
