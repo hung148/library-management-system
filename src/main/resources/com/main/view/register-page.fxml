@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane stylesheets="@pageStyle.css" xmlns:fx="http://javafx.com/fxml/1" prefHeight="560.0" prefWidth="537.0"
-            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.main.control.RegisterController">
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.main.controller.RegisterController">
     <ImageView blendMode="SRC_ATOP" fitHeight="562.0" fitWidth="391.0" layoutX="-154.0" layoutY="-2.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
         <Image url="@marc-yusufu-zF-QWye2vNQ-unsplash.jpg"/>
     </ImageView>

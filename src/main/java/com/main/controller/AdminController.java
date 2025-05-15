@@ -1,4 +1,4 @@
-package com.main.control;
+package com.main.controller;
 
 public class AdminController {
 }

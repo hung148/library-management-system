@@ -17,7 +17,7 @@
 
 * */
 
-package com.main.control;
+package com.main.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

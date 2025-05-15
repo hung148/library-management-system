@@ -8,7 +8,7 @@ module com.main {
     requires javafx.graphics;
 
     opens com.main.view to javafx.fxml;
-    opens com.main.control to javafx.fxml;
-    exports com.main.control;
+    opens com.main.controller to javafx.fxml;
+    exports com.main.controller;
     exports com.main.view;
 }
