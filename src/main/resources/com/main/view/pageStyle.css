@@ -1,7 +1,14 @@
 .subLabels{
-    -fx-font-family: "Book Antiqua", monospace;
-    -fx-font-size: 13;
+    -fx-font-family: Century;
+    -fx-font-size: 14;
 }
 VBox{
     -fx-background-color: rgba(91, 99, 96, 0.6);
+}
+.loginBG {
+    -fx-background-color: rgba(243, 234, 234, 0.86);
+}
+.header{
+    -fx-font-family: "Century Schoolbook";
+    -fx-font-size: 27;
 }
