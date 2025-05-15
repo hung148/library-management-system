@@ -13,5 +13,5 @@ module com.main {
     opens com.main.control to javafx.fxml;
     exports com.main.control;
     exports com.main.view;
-    exports com.main.model;
+//    exports com.main.model;
 }
