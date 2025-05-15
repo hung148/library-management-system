@@ -1,6 +1,4 @@
-module com.main {
-    requires java.sql;
-    
+module com.main {    
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -13,5 +11,4 @@ module com.main {
     opens com.main.control to javafx.fxml;
     exports com.main.control;
     exports com.main.view;
-
 }
