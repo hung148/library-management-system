@@ -4,6 +4,7 @@ package com.main.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,11 +13,9 @@ import java.net.URL;
 
 
 public class LibraryApplication extends Application {
-    public static final FXMLLoader login_loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
-    public static final FXMLLoader register_loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
     @Override
     public void start(Stage stage) throws IOException  {
-        
+        FXMLLoader login_loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
         Scene scene = new Scene(login_loader.load());
         URL cssURL = getClass().getResource("pageStyle.css");
         assert cssURL != null;

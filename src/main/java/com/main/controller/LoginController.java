@@ -17,12 +17,11 @@
 
 * */
 
-package com.main.control;
+package com.main.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -47,8 +46,9 @@ public class LoginController {
     }
 
     private void showRegisterPage() throws IOException {
+        FXMLLoader register_loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
         Stage stage = (Stage) registerPage.getScene().getWindow();
-        stage.setScene(new Scene(LibraryApplication.register_loader.load()));
+        stage.setScene(new Scene(register_loader.load()));
         stage.show();
     }
 }

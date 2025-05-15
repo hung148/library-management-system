@@ -1,9 +1,8 @@
-package com.main.control;
+package com.main.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -26,8 +25,9 @@ public class RegisterController {
     }
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {
+        FXMLLoader login_loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
         Stage stage = (Stage) this.cancel.getScene().getWindow();
-        stage.setScene(new Scene(LibraryApplication.login_loader.load()));
-        stage.show();
+        stage.setScene(new Scene(login_loader.load()));
+        stage.show(); 
     }
 }
