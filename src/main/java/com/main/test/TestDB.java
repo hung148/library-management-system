@@ -59,6 +59,19 @@ public class TestDB {
             System.out.println(admin.toString());
             System.out.println("----------------------------");
         }
+        System.out.println("Test updateAdmin()");
+        Admin newadmin = new Admin();
+        newadmin.setName("newAdmin");
+        newadmin.setEmail("newAdminEmail");
+        newadmin.setPassword("newAdminPassword");
+        newadmin.setUsername("newAdminUsername");
+        newadmin.setBalance(2300);
+        LibraryDAO.updateAdmin("test2@gmail.com", newadmin);
+        for (Admin admin : LibraryDAO.getAdminList()) {
+            System.out.println("----------------------------");
+            System.out.println(admin.toString());
+            System.out.println("----------------------------");
+        }
         // test member 
         System.out.println("Test addMember()");
         LibraryDAO.addMember(
@@ -239,6 +252,33 @@ User email: test2@gmail.com
 User type: admin
 User status: normal
 User balance: 3000.0
+User id: 3
+----------------------------
+Test updateAdmin()
+User table created or already exist.
+Connection established.
+Update admin successfully
+User table created or already exist.
+Connection established.
+Retrieve admin list sucessfully
+----------------------------
+User name: Trinh Dinh Nguyen Hung
+User username: hung123
+User password: NguyenHungSky123@
+User email: trinhhungqt2004@gmail.com
+User type: admin
+User status: normal
+User balance: 1000.0
+User id: 1
+----------------------------
+----------------------------
+User name: newAdmin
+User username: newAdminUsername
+User password: newAdminPassword
+User email: newAdminEmail
+User type: admin
+User status: normal
+User balance: 2300.0
 User id: 3
 ----------------------------
 Test addMember()

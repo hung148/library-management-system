@@ -108,7 +108,7 @@ public class LibraryDAO {
     }
 
     public static void updateAdmin(int id, Admin admin) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE id = ? AND type = 'admin'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE id = ? AND type = 'admin'";
 
         try (Connection conn = DBInitiailzer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -116,9 +116,8 @@ public class LibraryDAO {
                 pstmt.setString(2, admin.getPassword());
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
-                pstmt.setString(5, admin.getType());
-                pstmt.setString(6, admin.getStatus());
-                pstmt.setInt(7, admin.getId());
+                pstmt.setDouble(5, admin.getBalance());
+                pstmt.setInt(6, admin.getId());
                 pstmt.executeUpdate();
                 System.out.println("Update admin successfully");
         } catch (SQLException e) {
@@ -127,7 +126,7 @@ public class LibraryDAO {
     }
 
     public static void updateAdmin(String email, Admin admin) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE email = ? AND type = 'admin'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE email = ? AND type = 'admin'";
 
         try (Connection conn = DBInitiailzer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -135,9 +134,8 @@ public class LibraryDAO {
                 pstmt.setString(2, admin.getPassword());
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
-                pstmt.setString(5, admin.getType());
-                pstmt.setString(6, admin.getStatus());
-                pstmt.setString(7, email);
+                pstmt.setDouble(5, admin.getBalance());
+                pstmt.setString(6, email);
                 pstmt.executeUpdate();
                 System.out.println("Update admin successfully");
         } catch (SQLException e) {
@@ -286,7 +284,8 @@ public class LibraryDAO {
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());
                 pstmt.setString(6, member.getStatus());
-                pstmt.setInt(7, member.getId());
+                pstmt.setDouble(7, member.getBalance());
+                pstmt.setInt(8, member.getId());
                 pstmt.executeUpdate();
                 System.out.println("Update member successfully");
         } catch (SQLException e) {
@@ -305,7 +304,8 @@ public class LibraryDAO {
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());
                 pstmt.setString(6, member.getStatus());
-                pstmt.setString(7, email);
+                pstmt.setDouble(7, member.getBalance());
+                pstmt.setString(8, email);
                 pstmt.executeUpdate();
                 System.out.println("Update member successfully");
         } catch (SQLException e) {
