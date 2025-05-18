@@ -27,8 +27,8 @@ public class LibraryApplication extends Application {
 //        stage.setScene(scene);
 //        stage.setResizable(false);
 //        stage.show();
-        loadAdminPage(stage);
-//        loadUserPage(stage);
+//        loadAdminPage(stage);
+        loadUserPage(stage);
 
     }
     private void loadAdminPage(Stage stage) throws IOException {

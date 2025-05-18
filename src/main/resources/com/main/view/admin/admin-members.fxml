@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
-   <Label layoutX="16.0" prefHeight="77.0" prefWidth="87.0" text="admin managing members page" wrapText="true" />
-    <Pane layoutX="27.0" layoutY="-3.0" opacity="0.46" prefHeight="420.0" prefWidth="470.0">
-        <ImageView fitHeight="420.0" fitWidth="432.0" layoutX="22.0" layoutY="4.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/vecteezy_colorful-books-background-seamless-pattern_6686218.jpg" />
-        </ImageView>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
+    <Pane layoutX="27.0" layoutY="-3.0" prefHeight="420.0" prefWidth="470.0">
+        <Label prefHeight="77.0" prefWidth="87.0" text="admin managing members page" wrapText="true"/>
     </Pane>
 </AnchorPane>
