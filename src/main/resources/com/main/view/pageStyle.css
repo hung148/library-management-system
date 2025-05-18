@@ -1,14 +1,14 @@
 .subLabels{
-    -fx-font-family: Century;
-    -fx-font-size: 14;
-}
-VBox{
-    -fx-background-color: rgba(91, 99, 96, 0.6);
+    -fx-font-family: "Nirmala UI";
+    -fx-font-size: 13;
 }
 .loginBG {
     -fx-background-color: rgba(243, 234, 234, 0.86);
 }
 .header{
     -fx-font-family: "Century Schoolbook";
-    -fx-font-size: 27;
+    -fx-font-size: 25;
+}
+VBox{
+    -fx-background-color: rgb(251, 234, 234);
 }

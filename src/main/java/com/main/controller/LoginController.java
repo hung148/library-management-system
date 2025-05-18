@@ -24,11 +24,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import com.main.view.LibraryApplication;
+
 
 //2 event buttons: log in and register
 public class LoginController {
@@ -37,18 +39,10 @@ public class LoginController {
     private Button registerPage;
 
     @FXML
-    private void onRegisterClick(ActionEvent event) {
-        try {
-            showRegisterPage();
-        } catch (IOException e) {
-            throw new RuntimeException("Page does not exist?");
-        }
-    }
-
-    private void showRegisterPage() throws IOException {
-        FXMLLoader register_loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
-        Stage stage = (Stage) registerPage.getScene().getWindow();
-        stage.setScene(new Scene(register_loader.load()));
+    private void onRegisterClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
+        Stage stage = (Stage) this.registerPage.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
         stage.show();
     }
 }

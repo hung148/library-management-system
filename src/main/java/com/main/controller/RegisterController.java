@@ -24,8 +24,9 @@ public class RegisterController {
 
     }
     @FXML
-    private void onCancelClick(ActionEvent event) throws IOException {
-        FXMLLoader login_loader =  new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
+    private void onCancelClick() throws IOException {
+        //fxml files are all under LibraryApplication.class?
+        FXMLLoader login_loader = new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
         Stage stage = (Stage) this.cancel.getScene().getWindow();
         stage.setScene(new Scene(login_loader.load()));
         stage.show(); 
