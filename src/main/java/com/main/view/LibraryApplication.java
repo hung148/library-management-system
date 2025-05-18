@@ -5,7 +5,6 @@ package com.main.view;
 import com.main.controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,7 +14,9 @@ import java.net.URL;
 
 
 public class LibraryApplication extends Application {
-    private FXMLLoader loader;
+    private final FXMLLoader loader = new FXMLLoader();
+    private final URL cssURL = getClass().getResource("pageStyle.css");
+
     @Override
     public void start(Stage stage) throws IOException  {
 //        FXMLLoader login_loader = new FXMLLoader(getClass().getResource("login-page.fxml"));
@@ -31,21 +32,21 @@ public class LibraryApplication extends Application {
 
     }
     private void loadAdminPage(Stage stage) throws IOException {
-        loader= new FXMLLoader();
         BorderPane pane = loader.load(LibraryApplication.class.getResourceAsStream(AdminNavigator.adminMenu));
         AdminController adminController = loader.getController();
         AdminNavigator.setAdminController(adminController);
         Scene adminScene = new Scene(pane);
+        adminScene.getStylesheets().add(cssURL.toExternalForm());
         stage.setScene(adminScene);
         stage.show();
     }
 
     private void loadUserPage(Stage stage) throws IOException {
-        loader= new FXMLLoader();
         BorderPane pane = loader.load(LibraryApplication.class.getResourceAsStream(UserNavigator.userMenu));
         UserController userController = loader.getController();
         UserNavigator.setUserController(userController);
         Scene userScene = new Scene(pane);
+        userScene.getStylesheets().add(cssURL.toExternalForm());
         stage.setScene(userScene);
         stage.show();
     }
