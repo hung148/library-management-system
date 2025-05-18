@@ -17,18 +17,18 @@ public class AdminController {
        adminDisplay.getChildren().setAll(node);
     }
     @FXML
-    private void clickAccount(ActionEvent event) {
+    private void clickAccount() {
         //click this open a new scene of admin-account.fxml
         AdminNavigator.navigateAdmin(AdminNavigator.adminAccount);
     }
     @FXML
-    private void clickBook(ActionEvent event) {
+    private void clickBook() {
         //click this --> open a new scene of admin-book.fxml
         AdminNavigator.navigateAdmin(AdminNavigator.adminBooks);
 
     }
     @FXML
-    private void clickMembers(ActionEvent event) {
+    private void clickMembers() {
         //click this --> open a new scene of admin-members.fxml
         AdminNavigator.navigateAdmin(AdminNavigator.adminMembers);
     }

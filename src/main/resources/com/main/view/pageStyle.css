@@ -3,7 +3,7 @@
     -fx-font-size: 13;
 }
 .loginBG {
-    -fx-background-color: rgba(243, 234, 234, 0.86);
+    -fx-background-color: rgb(244, 236, 236);
 }
 .header{
     -fx-font-family: "Century Schoolbook";
@@ -11,4 +11,9 @@
 }
 VBox{
     -fx-background-color: rgb(251, 234, 234);
+}
+
+.conerHeader {
+    -fx-background-color: rgba(216, 27, 27, 0.45);
+    -fx-border-color: gray;
 }

@@ -13,9 +13,11 @@ public class UserController {
     }
 
     @FXML
-    private void clickBook(ActionEvent event) {
+    private void clickBook() {
+        UserNavigator.navigateUser(UserNavigator.userBooks);
     }
     @FXML
-    private void clickAccount(ActionEvent event) {
+    private void clickAccount() {
+        UserNavigator.navigateUser(UserNavigator.userAccount);
     }
 }

@@ -4,14 +4,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
-    <Pane layoutX="179.0" layoutY="-6.0" opacity="0.46" prefHeight="420.0" prefWidth="382.0">
-        <children>
-            <ImageView fitHeight="420.0" fitWidth="432.0" layoutX="-21.0" layoutY="4.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../images/vecteezy_colorful-books-background-seamless-pattern_6686218.jpg" />
-                </image>
-            </ImageView>
-        </children></Pane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
+    <Pane layoutX="54.0" layoutY="-3.0" opacity="0.46" prefHeight="417.0" prefWidth="457.0">
+        <ImageView fitHeight="442.0" fitWidth="421.0" layoutX="4.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/vecteezy_colorful-books-background-seamless-pattern_6686218.jpg" />
+        </ImageView>
+    </Pane>
    <Label layoutX="23.0" layoutY="34.0" prefHeight="86.0" prefWidth="109.0" text="admin account page" wrapText="true" />
 </AnchorPane>
