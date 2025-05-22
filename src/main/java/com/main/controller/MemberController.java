@@ -1,11 +1,10 @@
 package com.main.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class UserController {
+public class MemberController {
     @FXML
     private Pane userDisplay;
     public void setUserDisplay(Node node) {
@@ -14,10 +13,10 @@ public class UserController {
 
     @FXML
     private void clickBook() {
-        UserNavigator.navigateUser(UserNavigator.userBooks);
+        MemberNavigator.navigateUser(MemberNavigator.memberBooks);
     }
     @FXML
     private void clickAccount() {
-        UserNavigator.navigateUser(UserNavigator.userAccount);
+        MemberNavigator.navigateUser(MemberNavigator.memberAccount);
     }
 }

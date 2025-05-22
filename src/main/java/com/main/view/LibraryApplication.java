@@ -42,9 +42,9 @@ public class LibraryApplication extends Application {
     }
 
     private void loadUserPage(Stage stage) throws IOException {
-        BorderPane pane = loader.load(LibraryApplication.class.getResourceAsStream(UserNavigator.userMenu));
-        UserController userController = loader.getController();
-        UserNavigator.setUserController(userController);
+        BorderPane pane = loader.load(LibraryApplication.class.getResourceAsStream(MemberNavigator.memberMenu));
+        MemberController memberController = loader.getController();
+        MemberNavigator.setUserController(memberController);
         Scene userScene = new Scene(pane);
         userScene.getStylesheets().add(cssURL.toExternalForm());
         stage.setScene(userScene);
