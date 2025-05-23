@@ -344,6 +344,106 @@ public class LibraryDAO {
             e.printStackTrace();
         }
     }
-
+    
+    /*===================================================================================================================================*/
     // add, remove, get, update book
+    public static void addBook(String isbn, String title, String author, String publisher, int totalCopies) {
+        String sql = "INSERT INTO bookTable (isbn, title, author, publisher, totalCopies, availableCopies) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try(Connection conn = DBInitializer.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isbn);
+            pstmt.setString(2, title);
+            pstmt.setString(3, author);
+            pstmt.setString(4, publisher);
+            pstmt.setInt(5, totalCopies);
+            pstmt.setInt(6, totalCopies);
+            pstmt.executeUpdate();
+            System.out.println("Successfully added book.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Book getBook(String isbn) {
+        String sql = "SELECT * FROM bookTable WHERE isbn = ?";
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isbn);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Book book = new Book(
+                		rs.getString("isbn"),
+                		rs.getString("title"),
+                		rs.getString("author"),
+                		rs.getString("publisher"),
+                		rs.getInt("totalCopies")
+                		);
+                
+                book.setAvailableCopies(rs.getInt("availableCopies"));
+                return book;
+            } else {
+                System.out.println("Book not found.");
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Book[] bookList() {
+        String sql = "SELECT * FROM bookTable";
+        List<Book> bookList = new ArrayList<>();
+        
+        try (Connection conn = DBInitializer.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+            	Book book = new Book(
+            			rs.getString("isbn"),
+                		rs.getString("title"),
+                		rs.getString("author"),
+                		rs.getString("publisher"),
+                		rs.getInt("totalCopies")
+                		);
+            	book.setAvailableCopies(rs.getInt("availableCopies"));
+                bookList.add(book);
+            }
+            System.out.println("Successfully retrieved book list.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookList.toArray(new Book[0]);
+    }
+
+    public static void updateBook(String isbn, Book book) {
+        String sql = "UPDATE bookTable SET totalCopies = ?, availableCopies = ? WHERE isbn = ?";
+
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, book.getTotalCopies());
+                pstmt.setInt(2, book.getAvailableCopies());
+                pstmt.setString(3, isbn);
+                pstmt.executeUpdate();
+                System.out.println("Successfully updated book.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeBook(String isbn) {
+        String sql = "DELETE FROM bookTable WHERE isbn = ?";
+        try (Connection conn = DBInitializer.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isbn);
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Book is removed.");
+            } else {
+                System.out.println("No book found with isbn " + isbn + ".");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
