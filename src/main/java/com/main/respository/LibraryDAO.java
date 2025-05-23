@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.main.entity.Admin;
+import com.main.entity.Book;
 import com.main.entity.Member;
 
 public class LibraryDAO {
@@ -350,7 +351,7 @@ public class LibraryDAO {
     public static void addBook(String isbn, String title, String author, String publisher, int totalCopies) {
         String sql = "INSERT INTO bookTable (isbn, title, author, publisher, totalCopies, availableCopies) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = DBInitializer.connect();
+        try(Connection conn = DBInitiailzer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             pstmt.setString(2, title);
@@ -367,7 +368,7 @@ public class LibraryDAO {
 
     public static Book getBook(String isbn) {
         String sql = "SELECT * FROM bookTable WHERE isbn = ?";
-        try (Connection conn = DBInitializer.connect(); 
+        try (Connection conn = DBInitiailzer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             ResultSet rs = pstmt.executeQuery();
@@ -395,7 +396,7 @@ public class LibraryDAO {
         String sql = "SELECT * FROM bookTable";
         List<Book> bookList = new ArrayList<>();
         
-        try (Connection conn = DBInitializer.connect();
+        try (Connection conn = DBInitiailzer.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -419,7 +420,7 @@ public class LibraryDAO {
     public static void updateBook(String isbn, Book book) {
         String sql = "UPDATE bookTable SET totalCopies = ?, availableCopies = ? WHERE isbn = ?";
 
-        try (Connection conn = DBInitializer.connect(); 
+        try (Connection conn = DBInitiailzer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, book.getTotalCopies());
                 pstmt.setInt(2, book.getAvailableCopies());
@@ -433,7 +434,7 @@ public class LibraryDAO {
 
     public static void removeBook(String isbn) {
         String sql = "DELETE FROM bookTable WHERE isbn = ?";
-        try (Connection conn = DBInitializer.connect();
+        try (Connection conn = DBInitiailzer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             int affectedRows = pstmt.executeUpdate();
