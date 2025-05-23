@@ -120,6 +120,72 @@ public class TestDB {
             System.out.println(member.toString());
             System.out.println("----------------------------");
         }
+
+        // test Book
+        System.out.println("Test addBook()");
+        LibraryDAO.addBook(
+            "2320321093", 
+            "Book 1",
+            "Person1", 
+            "publisher1", 
+            30);
+        LibraryDAO.addBook(
+            "4309340320", 
+            "Book 2",
+            "Person2", 
+            "publisher2", 
+            50);
+        LibraryDAO.addBook(
+            "0849323242", 
+            "Book 3",
+            "Person3", 
+            "publisher3", 
+            10);
+        
+        System.out.println();
+        
+        System.out.println("Test bookList()");
+        for (Book book : LibraryDAO.bookList()) {
+            System.out.println("----------------------------");
+            book.printBookInfo();
+            System.out.println("----------------------------");
+        }
+
+        System.out.println();
+        
+        System.out.println("Test getBook()");
+        System.out.println("get Member at isbn = 2320321093");
+        Book book = LibraryDAO.getBook("2320321093");
+        if (book != null) {
+        	book.printBookInfo();
+        }
+        
+        System.out.println("get Member at isbn = 832");
+        Book b3 = LibraryDAO.getBook("832");
+        if (b3 != null) {
+        	b3.printBookInfo();
+        }
+        
+        System.out.println();
+        
+        System.out.println("Test updateBook()");
+        System.out.println("update Book with isbn = 0849323242");
+        Book b1 = new Book();
+        b1.setTotalCopies(100);
+        b1.setAvailableCopies(96);
+        LibraryDAO.updateBook("0849323242", b1);
+        LibraryDAO.getBook("0849323242").printBookInfo();
+        
+        System.out.println();
+        
+        System.out.println("Test removeBook()");
+        System.out.println("remove Book with isbn = 0849323242");
+        LibraryDAO.removeBook("0849323242");
+        for (Book b2 : LibraryDAO.bookList()) {
+            System.out.println("----------------------------");
+            b2.printBookInfo();
+            System.out.println("----------------------------");
+        }
     }
 }
 
