@@ -48,4 +48,20 @@ public class DBInitiailzer {
     }
 
     // initialize book table 
+    private static void initializeBookTable(Statement stmt) throws SQLException {
+    	String sql = ("CREATE TABLE IF NOT EXISTS bookTable (" +
+	    "isbn TEXT UNIQUE PRIMARY KEY," +
+    	"title TEXT NOT NULL," + 
+	    "author TEXT NOT NULL," +
+    	"publisher TEXT NOT NULL," +
+    	"totalCopies INTEGER," +
+	    "availableCopies INTEGER)");
+    	
+    	try {
+            stmt.execute(sql);
+            System.out.println("bookTable table created or already exist.");
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }
