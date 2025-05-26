@@ -12,7 +12,7 @@ public class DBInitializer {
             initializeUserTable(stmt);
             initializeBookTable(stmt);
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 
