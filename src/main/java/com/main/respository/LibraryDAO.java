@@ -14,7 +14,7 @@ public class LibraryDAO {
     public static void addAdmin(String email, String password, String username, String name, double balance) {
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = DBInitiailzer.connect();
+        try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -32,7 +32,7 @@ public class LibraryDAO {
 
     public static Admin getAdminById(int id) {
         String sql = "SELECT * FROM users WHERE id = ? AND type = 'admin'";
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -58,7 +58,7 @@ public class LibraryDAO {
 
     public static Admin getAdminByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = ? AND type = 'admin'";
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
@@ -82,11 +82,38 @@ public class LibraryDAO {
         return null;
     }
 
+    public static Admin getAdminByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ? AND type = 'admin'";
+        try (Connection conn = DBInitializer.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Admin admin = new Admin();
+                admin.setId(rs.getInt("id"));
+                admin.setEmail(rs.getString("email"));
+                admin.setUsername(rs.getString("username"));
+                admin.setName(rs.getString("name"));
+                admin.setPassword(rs.getString("password"));
+                admin.setType(rs.getString("type"));
+                admin.setStatus(rs.getString("status"));
+                admin.setBalance(rs.getDouble("balance"));
+                return admin;
+            } else {
+                System.out.println("Admin not found");
+            }
+        } 
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    } 
+
     public static Admin[] getAdminList() {
         String sql = "SELECT * FROM users WHERE type = 'admin'";
         List<Admin> adminList = new ArrayList<>();
         
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -111,7 +138,7 @@ public class LibraryDAO {
     public static void updateAdmin(int id, Admin admin) {
         String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE id = ? AND type = 'admin'";
 
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
                 pstmt.setString(2, admin.getPassword());
@@ -129,7 +156,7 @@ public class LibraryDAO {
     public static void updateAdmin(String email, Admin admin) {
         String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE email = ? AND type = 'admin'";
 
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
                 pstmt.setString(2, admin.getPassword());
@@ -146,7 +173,7 @@ public class LibraryDAO {
 
     public static void removeAdmin(int id) {
         String sql = "DELETE FROM users WHERE id = ? AND type = 'admin'";
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             int affectedRows = pstmt.executeUpdate();
@@ -162,7 +189,7 @@ public class LibraryDAO {
 
     public static void removeAdmin(String email) {
         String sql = "DELETE FROM users WHERE email = ? AND type = 'admin'";
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             int affectedRows = pstmt.executeUpdate();
@@ -180,7 +207,7 @@ public class LibraryDAO {
     public static void addMember(String email, String password, String username, String name, double balance) {
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = DBInitiailzer.connect();
+        try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -198,7 +225,7 @@ public class LibraryDAO {
 
     public static Member getMemberById(int id) {
         String sql = "SELECT * FROM users WHERE id = ? AND type = 'member'";
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -224,7 +251,7 @@ public class LibraryDAO {
 
     public static Member getMemberByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = ? AND type = 'member'";
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
@@ -248,11 +275,38 @@ public class LibraryDAO {
         return null;
     }
 
+    public static Member getMemberByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ? AND type = 'member'";
+        try (Connection conn = DBInitializer.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Member member = new Member();
+                member.setId(rs.getInt("id"));
+                member.setEmail(rs.getString("email"));
+                member.setUsername(rs.getString("username"));
+                member.setName(rs.getString("name"));
+                member.setPassword(rs.getString("password"));
+                member.setType(rs.getString("type"));
+                member.setStatus(rs.getString("status"));
+                member.setBalance(rs.getDouble("balance"));
+                return member;
+            } else {
+                System.out.println("Member not found");
+            }
+        } 
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    } 
+
     public static Member[] getMemberList() {
         String sql = "SELECT * FROM users WHERE type = 'member'";
         List<Member> memberList = new ArrayList<>();
         
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -277,7 +331,7 @@ public class LibraryDAO {
     public static void updateMember(int id, Member member) {
         String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE id = ? AND type = 'member'";
 
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
                 pstmt.setString(2, member.getPassword());
@@ -297,7 +351,7 @@ public class LibraryDAO {
     public static void updateMember(String email, Member member) {
         String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE email = ? AND type = 'member'";
 
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
                 pstmt.setString(2, member.getPassword());
@@ -316,7 +370,7 @@ public class LibraryDAO {
 
     public static void removeMember(int id) {
         String sql = "DELETE FROM users WHERE id = ? AND type = 'member'";
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             int affectedRows = pstmt.executeUpdate();
@@ -332,7 +386,7 @@ public class LibraryDAO {
 
     public static void removeMember(String email) {
         String sql = "DELETE FROM users WHERE email = ? AND type = 'member'";
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             int affectedRows = pstmt.executeUpdate();
@@ -351,7 +405,7 @@ public class LibraryDAO {
     public static void addBook(String isbn, String title, String author, String publisher, int totalCopies) {
         String sql = "INSERT INTO bookTable (isbn, title, author, publisher, totalCopies, availableCopies) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = DBInitiailzer.connect();
+        try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             pstmt.setString(2, title);
@@ -368,7 +422,7 @@ public class LibraryDAO {
 
     public static Book getBook(String isbn) {
         String sql = "SELECT * FROM bookTable WHERE isbn = ?";
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             ResultSet rs = pstmt.executeQuery();
@@ -396,7 +450,7 @@ public class LibraryDAO {
         String sql = "SELECT * FROM bookTable";
         List<Book> bookList = new ArrayList<>();
         
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -420,7 +474,7 @@ public class LibraryDAO {
     public static void updateBook(String isbn, Book book) {
         String sql = "UPDATE bookTable SET totalCopies = ?, availableCopies = ? WHERE isbn = ?";
 
-        try (Connection conn = DBInitiailzer.connect(); 
+        try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, book.getTotalCopies());
                 pstmt.setInt(2, book.getAvailableCopies());
@@ -434,7 +488,7 @@ public class LibraryDAO {
 
     public static void removeBook(String isbn) {
         String sql = "DELETE FROM bookTable WHERE isbn = ?";
-        try (Connection conn = DBInitiailzer.connect();
+        try (Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isbn);
             int affectedRows = pstmt.executeUpdate();
