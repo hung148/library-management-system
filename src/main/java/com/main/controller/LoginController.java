@@ -21,10 +21,12 @@ package com.main.controller;
 
 
 import com.main.entity.Admin;
+import com.main.entity.Book;
 import com.main.entity.User;
-import com.main.respository.DBInitializer;
+
 import com.main.respository.LibraryDAO;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,10 +36,8 @@ import javafx.scene.Scene;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collections;
 
 import com.main.view.LibraryApplication;
 import javafx.scene.control.Label;
@@ -58,6 +58,7 @@ public class LoginController {
     private Scene scene;
     private Stage stage;
     public static User user;
+    public static final ObservableList<Book> books = FXCollections.observableArrayList();
 
     // method to open up Register page for new member
     @FXML
@@ -74,13 +75,15 @@ public class LoginController {
     //open either admin-page or member-page accordingly
     @FXML
     private void onSignInClick(ActionEvent event) throws IOException {
-        admin = loadAdmin();
+        String username = inputUsername.getText();
+        String password = inputPassword.getText();
+        admin = loadAdmin(username, password);
 
         if(admin != null) {
             user = admin;
+            Collections.addAll(books, LibraryDAO.bookList());
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
             root = loader.load();
-
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -91,9 +94,7 @@ public class LoginController {
         }
     }
 
-    private Admin loadAdmin() {
-        String username = inputUsername.getText();
-        String password = inputPassword.getText();
+    private Admin loadAdmin(String username, String password) {
         admin = LibraryDAO.getAdminByUsername(username);
         if(admin != null) {
             if(admin.getPassword().equals(password)) {

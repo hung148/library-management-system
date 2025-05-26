@@ -22,13 +22,13 @@ public class Book {
     }
     
     // Getters
-    public String getISBn() { return _ISBN; }
-    public String getTitle() { return _title; }
-    public String getAuthor() { return _author; }
-    public String getPublisher() { return _publisher; }
+    // getter method signature needs to be in the format get + PropertyName in order to use PropertyValueFactory
+    public String get_ISBN() { return _ISBN; }
+    public String get_title() { return _title; }
+    public String get_author() { return _author; }
+    public String get_publisher() { return _publisher; }
     public int getTotalCopies() { return _totalCopies; }
     public int getAvailableCopies() { return _availableCopies;}
-    
     // Setters
     public void setTotalCopies(int totalCopies ) {
     	_totalCopies = totalCopies;

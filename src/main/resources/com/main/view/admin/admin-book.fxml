@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="361.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.main.controller.admin.AdminBook">
-   <Label layoutX="19.0" layoutY="24.0" prefHeight="62.0" prefWidth="77.0" text="admin managing books page" wrapText="true" />
-   <Pane layoutX="118.0" layoutY="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.46" prefHeight="372.0" prefWidth="364.0">
-      <ImageView fitHeight="361.0" fitWidth="507.0" layoutY="4.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/vecteezy_colorful-books-background-seamless-pattern_6686218.jpg" />
-      </ImageView>
-   </Pane>
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.46" prefHeight="374.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminBook">
+     <Button layoutX="87.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
+     <Button layoutX="181.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
+     <Button layoutX="277.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
+      <TableView fx:id="viewBooks" layoutX="47.0" layoutY="24.0" prefHeight="293.0" prefWidth="445.0">
+          <columns>
+              <TableColumn fx:id="authorCol" prefWidth="134.00001525878906" text="Author"  />
+              <TableColumn fx:id="isbnCol" prefWidth="100.0" text="ISBN" />
+              <TableColumn fx:id="titleCol" prefWidth="165.99999237060547" text="Title" />
+          </columns>
+      </TableView>
+ </Pane>

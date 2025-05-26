@@ -10,7 +10,7 @@ public class AdminAccount {
     private Label adminEmail;
     @FXML
     private Label adminName;
-    public void displayAccount(String userName, String email, String name) {
+    public void displayAccount(String name, String email, String userName) {
         adminUserName.setText(userName);
         adminEmail.setText(email);
         adminName.setText(name);
