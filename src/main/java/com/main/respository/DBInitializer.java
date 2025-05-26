@@ -2,7 +2,7 @@ package com.main.respository;
 
 import java.sql.*;
 
-public class DBInitiailzer {
+public class DBInitializer {
     private static String url = "jdbc:sqlite:library.db";
     // set up and initialize database
     public static void initializeDB() {
@@ -10,6 +10,7 @@ public class DBInitiailzer {
         try (Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement()) {
             initializeUserTable(stmt);
+            initializeBookTable(stmt);
         } catch (Exception e) {
             e.printStackTrace();;
         }
@@ -34,7 +35,7 @@ public class DBInitiailzer {
         "id INTEGER PRIMARY KEY AUTOINCREMENT," + 
         "email TEXT NOT NULL UNIQUE," +
         "password TEXT NOT NULL," + 
-        "username TEXT NOT NULL," + 
+        "username TEXT NOT NULL UNIQUE," + 
         "name TEXT NOT NULL," +
         "type TEXT CHECK(type IN ('admin', 'member')) NOT NULL," +
         "status TEXT CHECK(status IN ('normal', 'suspended')) NOT NULL DEFAULT 'NORMAL'," +
