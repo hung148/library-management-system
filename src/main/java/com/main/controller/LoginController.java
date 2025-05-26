@@ -21,11 +21,15 @@ package com.main.controller;
 
 
 import com.main.entity.Admin;
+import com.main.entity.User;
 import com.main.respository.DBInitializer;
 import com.main.respository.LibraryDAO;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
@@ -36,67 +40,70 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.main.view.LibraryApplication;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class LoginController {
     @FXML
+    public Label alertLogin;
+    @FXML
     private PasswordField inputPassword;
     @FXML
     private TextField inputUsername;
-    private FXMLLoader loader;
-    //idk if it's okay to do this but need to create admin object to carries all current info
-    public static Admin staticAdmin;
-
+    private Admin admin;
+    private Parent root;
+    private Scene scene;
+    private Stage stage;
+    public static User user;
 
     // method to open up Register page for new member
     @FXML
-    private void onRegisterClick() throws IOException {
-        loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
-        LibraryApplication.stage.setScene(new Scene(loader.load()));
-        LibraryApplication.stage.show();
+    private void onRegisterClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     //open either admin-page or member-page accordingly
     @FXML
-    private void onSignInClick() throws IOException {
-        staticAdmin = loadAdmin();
-        if(staticAdmin != null) {
-            System.out.println("admin:" +staticAdmin.getId());
-            loader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
-            LibraryApplication.stage.setScene(new Scene(loader.load()));
-            LibraryApplication.stage.show();
+    private void onSignInClick(ActionEvent event) throws IOException {
+        admin = loadAdmin();
+
+        if(admin != null) {
+            user = admin;
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
+            root = loader.load();
+
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else {
+            alertLogin.setText("No Admin Found");
         }
     }
 
     private Admin loadAdmin() {
         String username = inputUsername.getText();
         String password = inputPassword.getText();
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        try (Connection conn = DBInitializer.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                Admin admin = new Admin();
-                admin.setId(rs.getInt("id"));
-                admin.setEmail(rs.getString("email"));
-                admin.setUsername(rs.getString("username"));
-                admin.setName(rs.getString("name"));
-                admin.setPassword(rs.getString("password"));
-                admin.setType(rs.getString("type"));
-                admin.setStatus(rs.getString("status"));
-                admin.setBalance(rs.getDouble("balance"));
+        admin = LibraryDAO.getAdminByUsername(username);
+        if(admin != null) {
+            if(admin.getPassword().equals(password)) {
                 return admin;
-            } else {
-                System.out.println("admin not found");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            else {
+                alertLogin.setText("Wrong Password");
+            }
         }
-        return null ;
+        return null;
     }
 
 }

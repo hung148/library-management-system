@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" stylesheets="@../pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" stylesheets="@../pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminAccount">
     <Pane layoutX="54.0" layoutY="-3.0" prefHeight="417.0" prefWidth="457.0">
         <GridPane layoutX="107.0" layoutY="147.0" prefHeight="105.0" prefWidth="216.0">
             <columnConstraints>
