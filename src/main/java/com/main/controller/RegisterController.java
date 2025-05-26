@@ -21,7 +21,7 @@ public class RegisterController {
     private Parent root;
     @FXML
     private void onRegisterClick() {
-
+    //need to add code here to create new member
     }
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {

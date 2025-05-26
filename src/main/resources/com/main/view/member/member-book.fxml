@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
-   <Pane layoutX="140.0" layoutY="-6.0" opacity="0.46" prefHeight="420.0" prefWidth="421.0">
-      <ImageView fitHeight="420.0" fitWidth="432.0" layoutY="4.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/vecteezy_colorful-books-background-seamless-pattern_6686218.jpg" />
-      </ImageView>
-   </Pane>
-   <Label layoutX="17.0" layoutY="30.0" text="user book page" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
+  
+      <TableView fx:id="currentBooks" layoutX="63.0" layoutY="168.0" prefHeight="121.0" prefWidth="403.0">
+         <columns>
+            <TableColumn fx:id="authorCol" prefWidth="134.00001525878906" text="Author" />
+            <TableColumn fx:id="isbnCol" prefWidth="100.0" text="ISBN" />
+            <TableColumn fx:id="titleCol" prefWidth="165.99999237060547" text="Title" />
+         </columns>
+      </TableView>
+      <TableView fx:id="pastBooks" layoutX="63.0" layoutY="334.0" prefHeight="121.0" prefWidth="403.0">
+         <columns>
+            <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
+            <TableColumn fx:id="titleCol1" prefWidth="165.99999237060547" text="Title" />
+            <TableColumn fx:id="authorCol1" prefWidth="134.00001525878906" text="Author" />
+         </columns>
+      </TableView>
+      <Label layoutX="63.0" layoutY="144.0" prefHeight="17.0" prefWidth="94.0" text="Current Borrows" />
+      <Label layoutX="63.0" layoutY="309.0" prefHeight="17.0" prefWidth="83.0" text="Past Borrows" />
+   <Label layoutX="63.0" layoutY="26.0" prefHeight="17.0" prefWidth="132.0" text="Search Book to Borrow:" />
+   <TextField fx:id="searchBook" layoutX="195.0" layoutY="22.0" prefHeight="25.0" prefWidth="185.0" />
+   <ListView fx:id="resultBook" layoutX="57.0" layoutY="57.0" prefHeight="48.0" prefWidth="403.0" />
+   <Button layoutX="477.0" layoutY="81.0" mnemonicParsing="false" onAction="#onClickBorrow" text="Borrow" />
+   <Button layoutX="397.0" layoutY="22.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
+   <Button layoutX="483.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClickReturn" text="Return" />
 </AnchorPane>
