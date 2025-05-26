@@ -17,3 +17,9 @@ VBox{
     -fx-background-color: rgba(216, 27, 27, 0.45);
     -fx-border-color: gray;
 }
+/* style for admin and member account*/
+.accountLabels {
+    -fx-font-family: "Nirmala UI";
+    -fx-font-weight: bold;
+}
+

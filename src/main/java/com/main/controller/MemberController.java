@@ -1,22 +1,25 @@
 package com.main.controller;
 
+import com.main.view.LibraryApplication;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
+
+
+import java.io.IOException;
 
 public class MemberController {
-    @FXML
-    private Pane userDisplay;
-    public void setUserDisplay(Node node) {
-        userDisplay.getChildren().setAll(node);
-    }
+    public BorderPane memberPage;
+    private FXMLLoader loader;
 
     @FXML
-    private void clickBook() {
-        MemberNavigator.navigateUser(MemberNavigator.memberBooks);
+    private void clickBook() throws IOException {
+        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-book.fxml"));
+        memberPage.setCenter(loader.load());
     }
     @FXML
-    private void clickAccount() {
-        MemberNavigator.navigateUser(MemberNavigator.memberAccount);
+    private void clickAccount() throws IOException {
+        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-account.fxml"));
+        memberPage.setCenter(loader.load());
     }
 }
