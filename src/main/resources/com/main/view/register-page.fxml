@@ -13,7 +13,7 @@
         
         <Button fx:id="register" layoutX="125.0" layoutY="318.0" mnemonicParsing="false" onAction="#onRegisterClick"
                 text="Register!"/>
-        <Button fx:id="cancel" contentDisplay="CENTER" layoutX="209.0" layoutY="367.0" mnemonicParsing="false"
+        <Button contentDisplay="CENTER" layoutX="209.0" layoutY="367.0" mnemonicParsing="false"
                 onAction="#onCancelClick" text="Cancel"/>
         <Label alignment="TOP_LEFT" layoutX="78.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity"
                minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="158.0" styleClass="header"

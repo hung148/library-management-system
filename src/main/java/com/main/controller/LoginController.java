@@ -20,11 +20,8 @@
 package com.main.controller;
 
 
-import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.User;
-
-import com.main.respository.LibraryDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,12 +33,13 @@ import javafx.scene.Scene;
 
 
 import java.io.IOException;
-import java.util.Collections;
+
 
 import com.main.view.LibraryApplication;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
@@ -52,7 +50,8 @@ public class LoginController {
     private PasswordField inputPassword;
     @FXML
     private TextField inputUsername;
-    private Admin admin;
+
+
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -66,9 +65,19 @@ public class LoginController {
         root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        LibraryApplication.addCSS(scene);
         stage.setScene(scene);
         stage.show();
+    }
 
+    //click Back to go back to Start-page with the 2 options
+    @FXML
+    private void backToStart(MouseEvent event) throws IOException {
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = LibraryApplication.loadStartPage();
+        LibraryApplication.addCSS(scene);
+        stage.setScene(scene);
+        stage.show();
     }
 
     //open either admin-page or member-page accordingly
@@ -76,34 +85,7 @@ public class LoginController {
     private void onSignInClick(ActionEvent event) throws IOException {
         String username = inputUsername.getText();
         String password = inputPassword.getText();
-        admin = loadAdmin(username, password);
-
-        if(admin != null) {
-            user = admin;
-            Collections.addAll(books, LibraryDAO.bookList());
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
-            root = loader.load();
-            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            alertLogin.setText("No Admin Found");
-        }
     }
 
-    private Admin loadAdmin(String username, String password) {
-        admin = LibraryDAO.getAdminByUsername(username);
-        if(admin != null) {
-            if(admin.getPassword().equals(password)) {
-                return admin;
-            }
-            else {
-                alertLogin.setText("Wrong Password");
-            }
-        }
-        return null;
-    }
-    //
+
 }

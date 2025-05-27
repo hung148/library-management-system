@@ -23,3 +23,7 @@ VBox{
     -fx-font-weight: bold;
 }
 
+.startLabels:hover {
+    -fx-underline: true;
+}
+

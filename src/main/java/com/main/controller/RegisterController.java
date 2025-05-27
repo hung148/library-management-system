@@ -16,20 +16,21 @@ import com.main.view.LibraryApplication;
 
 public class RegisterController {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     private void onRegisterClick() {
     //need to add code here to create new member
     }
+
+
+    //Cancel click goes back to Member login page
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {
         //fxml files are all under LibraryApplication.class?
         FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        LibraryApplication.addCSS(scene);
         stage.setScene(scene);
         stage.show();
 
