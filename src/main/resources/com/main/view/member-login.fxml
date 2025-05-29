@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@pageStyle.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.main.controller.MemberLoginController">
+
+    <ImageView blendMode="SRC_ATOP" fitHeight="374.0" fitWidth="255.0" layoutX="-12.0" layoutY="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+        <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash%20(1).jpg" />
+    </ImageView>
+    <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="241.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="374.0" prefWidth="359.0">
+
+        <GridPane alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="128.0" minWidth="-Infinity" prefHeight="151.0" prefWidth="192.0" vgap="2.0">
+            <columnConstraints>
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <padding>
+                <Insets bottom="1.0" left="5.0" right="5.0" top="2.0" />
+            </padding>
+            <Label styleClass="subLabels" text="username:" />
+            <TextField fx:id="inputUsername" GridPane.rowIndex="1" />
+            <Label styleClass="subLabels" text="password:" GridPane.rowIndex="2">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            </Label>
+            <PasswordField fx:id="inputPassword" prefHeight="26.0" prefWidth="145.0" GridPane.rowIndex="3" />
+            <Label fx:id="alertLogin" GridPane.rowIndex="4" />
+        </GridPane>
+        <Label layoutX="65.0" layoutY="7.0" prefHeight="106.0" prefWidth="174.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true">
+            <effect>
+                <Blend mode="HARD_LIGHT" />
+            </effect>
+        </Label>
+        <Button fx:id="SignInButton" onAction="#onSignInClick" />
+        <Label onMouseClicked="#backToStart" layoutX="308.0" layoutY="356.0" text="Back" underline="true" />
+    </AnchorPane>
+
+</AnchorPane>
