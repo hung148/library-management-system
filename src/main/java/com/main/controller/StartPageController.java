@@ -30,7 +30,7 @@ public class StartPageController {
     //click Member to login page for Member with register
     @FXML
     private void clickMember(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("login-page.fxml"));
+        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
         root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
