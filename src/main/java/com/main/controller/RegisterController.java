@@ -11,16 +11,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import com.main.view.LibraryApplication;
 
 public class RegisterController {
 
     @FXML
-    private void onRegisterClick() {
-    //need to add code here to create new member
+    public void onRegisterClick(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("register-page.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-
 
     //Cancel click goes back to Member login page
     @FXML

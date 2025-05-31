@@ -13,7 +13,7 @@
             fx:controller="com.main.controller.MemberLoginController">
 
     <ImageView blendMode="SRC_ATOP" fitHeight="374.0" fitWidth="255.0" layoutX="-12.0" layoutY="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-        <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash%20(1).jpg" />
+        <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash (1).jpg" />
     </ImageView>
     <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="241.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="374.0" prefWidth="359.0">
 
@@ -46,8 +46,9 @@
                 <Blend mode="HARD_LIGHT" />
             </effect>
         </Label>
-        <Button fx:id="SignInButton" onAction="#onSignInClick" />
-        <Label onMouseClicked="#backToStart" layoutX="308.0" layoutY="356.0" text="Back" underline="true" />
+        <Button layoutX="130.0" layoutY="272.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />        <Label onMouseClicked="#backToStart" layoutX="308.0" layoutY="356.0" text="Back" underline="true" />
+        <Button layoutX="125.0" layoutY="318.0" mnemonicParsing="false" onAction="#onRegisterClick"
+                text="Register!"/>
     </AnchorPane>
 
 </AnchorPane>

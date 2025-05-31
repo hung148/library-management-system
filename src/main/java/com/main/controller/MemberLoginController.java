@@ -25,11 +25,10 @@ import java.net.URL;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 public class MemberLoginController {
 
-    public Button BackButton;
-    public Button SignInButton;
     @FXML
     private TextField inputUsername;
     @FXML
@@ -45,7 +44,6 @@ public class MemberLoginController {
 
     @FXML
     private void onSignInClick(ActionEvent event) {
-        System.out.println("Sign In clicked");
 
         String username = inputUsername.getText();
         String password = inputPassword.getText();
@@ -82,24 +80,21 @@ public class MemberLoginController {
         }
     }
 
-    private Member loadMember(String username, String password) {
-        member = LibraryDAO.getMemberByUsername(username);
-        if (member != null) {
-            if (member.getPassword().equals(password)) {
-                return member;
-            } else {
-                alertLogin.setText("Wrong Password");
-            }
-        }
-        return null;
-    }
-
     // Click Back to go back to Start-page with the 2 options
     @FXML
     private void backToStart(MouseEvent event) throws IOException {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = LibraryApplication.loadStartPage();
         LibraryApplication.addCSS(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void onRegisterClick(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/main/view/register-page.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
