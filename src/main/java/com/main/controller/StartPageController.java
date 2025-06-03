@@ -93,7 +93,7 @@ public class StartPageController implements Initializable {
             animateToCenter(width, height);
         } 
         else {
-            rightPane.setStyle("-fx-background-color: rgba(244, 236, 236, 0.9); -fx-background-radius: 0;"); 
+            rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 0;"); 
             AnchorPane.setTopAnchor(rightPane, 0.0);
             AnchorPane.setRightAnchor(rightPane, 0.0);
             AnchorPane.setBottomAnchor(rightPane, 0.0);
@@ -110,8 +110,8 @@ public class StartPageController implements Initializable {
         double targetX = (rootWidth - targetWidth) / 2;
         double targetY = (rootHeight - targetHeight) / 2;
 
-        // Optional: make it resizable and round corners
-        rightPane.setStyle("-fx-background-color: rgba(244, 236, 236, 0.9); -fx-background-radius: 20;"); 
+        // Optional: make it resizable and round corners 45, 90, 39 244, 236, 236
+        rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 20;"); 
 
         KeyValue widthKV = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
         KeyValue heightKV = new KeyValue(rightPane.prefHeightProperty(), targetHeight, Interpolator.EASE_BOTH);

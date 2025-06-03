@@ -9,7 +9,7 @@
 
 .leftBG{
     -fx-background-image: url(images/marc-yusufu-zF-QWye2vNQ-unsplash.jpg);
-    -fx-background-size: contain;
+    -fx-background-size: cover;
 }
 
 .header{

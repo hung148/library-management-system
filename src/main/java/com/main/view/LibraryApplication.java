@@ -21,8 +21,8 @@ public class LibraryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException  {
         LibraryApplication.stage = stage;
-        stage.setWidth(800);
-        stage.setHeight(600);
+        stage.setWidth(650.0);
+        stage.setHeight(544.0);
         Scene scene = loadStartPage();
         addCSS(scene);
         stage.setScene(scene);
