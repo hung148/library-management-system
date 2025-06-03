@@ -65,4 +65,6 @@ public class DBInitializer {
             throw e;
         }
     }
+
+    // initialize borrowed book table
 }
