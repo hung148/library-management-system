@@ -3,6 +3,7 @@ module com.main {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires jbcrypt;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -19,4 +20,5 @@ module com.main {
     exports com.main.controller.member;
     opens com.main.controller.admin to javafx.fxml;
     opens com.main.controller.member to javafx.fxml;
+    exports com.main.services;
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.Member;
-
+import com.main.services.AuthServices;
 public class LibraryDAO {
     
     // add, remove, get, update admin
@@ -17,7 +17,7 @@ public class LibraryDAO {
         try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
-            pstmt.setString(2, password);
+            pstmt.setString(2, AuthServices.generateHashedPassword(password));
             pstmt.setString(3, username);
             pstmt.setString(4, name);
             pstmt.setString(5, "admin");
@@ -141,7 +141,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
-                pstmt.setString(2, admin.getPassword());
+                pstmt.setString(2, AuthServices.generateHashedPassword(admin.getPassword()));
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
@@ -159,7 +159,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
-                pstmt.setString(2, admin.getPassword());
+                pstmt.setString(2, AuthServices.generateHashedPassword(admin.getPassword()));
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
@@ -210,7 +210,7 @@ public class LibraryDAO {
         try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
-            pstmt.setString(2, password);
+            pstmt.setString(2, AuthServices.generateHashedPassword(password));
             pstmt.setString(3, username);
             pstmt.setString(4, name);
             pstmt.setString(5, "member");
@@ -334,7 +334,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
-                pstmt.setString(2, member.getPassword());
+                pstmt.setString(2, AuthServices.generateHashedPassword(member.getPassword()));
                 pstmt.setString(3, member.getUsername());
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());
@@ -354,7 +354,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
-                pstmt.setString(2, member.getPassword());
+                pstmt.setString(2, AuthServices.generateHashedPassword(member.getPassword()));
                 pstmt.setString(3, member.getUsername());
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());
