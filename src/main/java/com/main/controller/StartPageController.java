@@ -19,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 
 import java.io.IOException;
@@ -53,6 +55,14 @@ public class StartPageController implements Initializable {
     // this automatically run when fxml load
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Create drop shadow effect
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);             // Blur radius
+        dropShadow.setOffsetX(5);             // Horizontal offset
+        dropShadow.setOffsetY(5);             // Vertical offset
+        dropShadow.setColor(Color.rgb(0, 0, 0, 0.7));  // Shadow color with opacity
+        rightPane.setEffect(dropShadow);
+        
         Platform.runLater(() -> {
             stage.setMinWidth(310);
             stage.setMinHeight(400);
