@@ -9,4 +9,5 @@ public class AuthServices {
     public static Boolean checkPassword(String inputPass, String storedHash) {
         return BCrypt.checkpw(inputPass, storedHash);
     }
+
 }

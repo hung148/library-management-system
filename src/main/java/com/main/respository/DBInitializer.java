@@ -11,19 +11,9 @@ public class DBInitializer {
             Statement stmt = conn.createStatement()) {
             initializeUserTable(stmt);
             initializeBookTable(stmt);
-
-            // add first admin
-            if (LibraryDAO.getAdminList().length == 0) {
-                LibraryDAO.addAdmin(
-                    "firstAdmin@gmail.com", 
-                    "firstAdminpass", 
-                    "firstAdminUsername", 
-                    "firstAdminname", 
-                    0);
-            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }        
     }
 
     // get connection
