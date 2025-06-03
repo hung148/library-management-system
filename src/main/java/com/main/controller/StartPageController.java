@@ -28,7 +28,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StartPageController implements Initializable {
+    @FXML
     public Label member;
+    @FXML
     public Label admin;
     private Stage stage;
     private Scene scene;
@@ -55,6 +57,11 @@ public class StartPageController implements Initializable {
     // this automatically run when fxml load
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        addHoverEffect(memberSignin, member);
+        addHoverEffect(adminSignin, admin);
+        addClickEffect(memberSignin, member);
+        addClickEffect(adminSignin, admin);
+
         // Create drop shadow effect
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);             // Blur radius
@@ -92,6 +99,30 @@ public class StartPageController implements Initializable {
                     System.out.println(rightPane.getLayoutX() + " " + rightPane.getLayoutY()); // this is still update right
                 }
             });
+        });
+    }
+
+    private void addHoverEffect(Rectangle rect, Label lbl) {
+        lbl.setOnMouseEntered(e -> {
+            rect.setStyle(
+                "-fx-scale-x: 1.05; " +
+                "-fx-scale-y: 1.05; ");
+        });
+
+        lbl.setOnMouseExited(e -> {
+            rect.setStyle("");
+        });
+    }
+
+    private void addClickEffect(Rectangle rect, Label lbl) {
+        lbl.setOnMousePressed(e -> {
+            lbl.setStyle("-fx-translate-y: 2px; ");
+            rect.setStyle("-fx-translate-y: 2px; ");
+        });
+
+        lbl.setOnMouseReleased(e -> {
+            lbl.setStyle("");
+            rect.setStyle("");
         });
     }
 

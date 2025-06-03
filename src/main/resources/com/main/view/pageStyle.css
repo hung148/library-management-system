@@ -12,6 +12,7 @@
     -fx-background-size: cover;
 }
 
+
 .header{
     -fx-font-family: "Century Schoolbook";
     -fx-font-size: 25;
@@ -30,9 +31,18 @@ VBox{
     -fx-font-weight: bold;
 }
 
+.startLabels {
+    -fx-alignment: center;            /* centers text inside the Label */
+    -fx-text-alignment: center;       /* useful for multiline text */
+}
+
 .startLabels:hover {
     -fx-underline: true;
+    -fx-scale-x: 1.05;                     /* Slightly scale up */
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 3);
 }
+
 @media only screen and (max-width: 600px){
 
     

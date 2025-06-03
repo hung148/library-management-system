@@ -39,9 +39,10 @@
                     <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" 
                         fill="#ffdbdb96" height="34.0" layoutX="0" 
                         layoutY="200.0" stroke="BLACK" strokeType="INSIDE" 
-                        width="95.0" />
-                    <Label layoutX="25.0" layoutY="208.0" onMouseClicked="#clickMember" 
-                    onMouseDragged="#showMember" styleClass="startLabels" text="Member" />
+                        width="95.0"/>
+                    <Label fx:id="member" layoutX="0" layoutY="200.0" prefHeight="34.0" prefWidth="95.0" 
+                           onMouseDragged="#showMember" styleClass="startLabels" 
+                           text="Member" onMouseClicked="#clickMember" />
                 </Pane>
                 <Pane>
                     <Label layoutX="0" layoutY="208.0" text="Or" />
@@ -50,9 +51,10 @@
                     <Rectangle fx:id="adminSignin" arcHeight="5.0" arcWidth="5.0" 
                             fill="#ffdbdb82" height="34.0" layoutX="0" 
                             layoutY="200.0" stroke="BLACK" strokeType="INSIDE" 
-                            width="95.0" />
-                    <Label layoutX="30.0" layoutY="208.0" onMouseClicked="#clickAdmin" 
-                        onMouseDragged="#showAdmin" styleClass="startLabels" text="Admin" />
+                            width="95.0"/>
+                    <Label fx:id="admin" layoutX="0" layoutY="200.0" prefHeight="34.0" prefWidth="95.0" 
+                           onMouseClicked="#clickAdmin" onMouseDragged="#showAdmin" 
+                           styleClass="startLabels" text="Admin" />
                 </Pane>
             </HBox>
         </AnchorPane>
