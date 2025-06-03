@@ -1,10 +1,29 @@
+/* Example of opening a second scene (window) on button click on the first scene
+---this is method in the controller class of the first scene----
+
+    public void openScene2(ActionEvent event) throws IOException
+    // Load the FXML file for the second scene
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
+    // Create a new stage for the second scene
+    Stage stage = new Stage();
+    stage.setScene(new Scene(loader.load()));
+    // Set the title for the second scene
+    stage.setTitle("Scene 2");
+    // Show the second scene
+    stage.show();
+
+    To connect properties and methods from this class to the fxml file, add these to the Label in the fxml
+    <Button fx:id="btnOpenScene2" text="Open Scene 2" onAction="#openScene2"/>
+
+* */
+
 package com.main.controller;
+
 
 import com.main.entity.Book;
 import com.main.entity.Member;
 import com.main.entity.User;
 import com.main.respository.LibraryDAO;
-import com.main.view.LibraryApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,37 +32,61 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+
+
+import java.io.IOException;
+import java.net.URL;
+
+
+import com.main.view.LibraryApplication;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import java.net.URL;
-import java.net.URL;
 
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Objects;
 
 public class MemberLoginController {
-
     @FXML
-    private TextField inputUsername;
+    public Label alertLogin;
     @FXML
     private PasswordField inputPassword;
     @FXML
-    private Label alertLogin;
+    private TextField inputUsername;
 
-    private Member member;
-    private Stage stage;
+
+    private Parent root;
     private Scene scene;
+    private Stage stage;
     public static User user;
+    public static Member member;
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
 
+    // method to open up Register page for new member
     @FXML
-    private void onSignInClick(ActionEvent event) {
+    private void onRegisterClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        LibraryApplication.addCSS(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //click Back to go back to Start-page with the 2 options
+    @FXML
+    private void backToStart(MouseEvent event) throws IOException {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = LibraryApplication.loadStartPage();
+        LibraryApplication.addCSS(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void onSignInClick(ActionEvent event) throws IOException {
+        System.out.println("Sign In clicked");
 
         String username = inputUsername.getText();
         String password = inputPassword.getText();
@@ -53,7 +96,7 @@ public class MemberLoginController {
             return;
         }
 
-        member = LibraryDAO.getMemberByUsername(username);
+        member = loadMember(username, password);
         if (member != null && member.getPassword().equals(password)) {
             alertLogin.setText("Login successful!");
             try {
@@ -80,22 +123,16 @@ public class MemberLoginController {
         }
     }
 
-    // Click Back to go back to Start-page with the 2 options
-    @FXML
-    private void backToStart(MouseEvent event) throws IOException {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = LibraryApplication.loadStartPage();
-        LibraryApplication.addCSS(scene);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void onRegisterClick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/main/view/register-page.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private Member loadMember(String username, String password) {
+        member = LibraryDAO.getMemberByUsername(username);
+        if (member != null) {
+            if (member.getPassword().equals(password)) {
+                return member;
+            } else {
+                alertLogin.setText("Wrong Password");
+            }
+        }
+        return null;
     }
 }
+

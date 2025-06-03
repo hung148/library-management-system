@@ -1,59 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="560.0" styleClass="loginBG" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.RegisterController">
-    <ImageView blendMode="SRC_ATOP" fitHeight="521.0" fitWidth="270.0" layoutX="-30.0" layoutY="9.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash%20(1).jpg"/>
-      </image></ImageView>
-    <Pane layoutX="238.0" layoutY="9.0" prefHeight="406.0" prefWidth="322.0" styleClass="loginBG">
+<AnchorPane styleClass="loginBG" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.RegisterController">
+    <Pane layoutX="-11.0" layoutY="13.0" opacity="0.77" prefHeight="406.0" prefWidth="283.0" styleClass="leftBG" />
+    <Pane layoutX="238.0" layoutY="9.0" styleClass="loginBG">
         
-        <Button fx:id="register" layoutX="125.0" layoutY="318.0" mnemonicParsing="false" onAction="#onRegisterClick"
-                text="Register!"/>
-        <Button contentDisplay="CENTER" layoutX="209.0" layoutY="367.0" mnemonicParsing="false"
-                onAction="#onCancelClick" text="Cancel"/>
-        <Label alignment="TOP_LEFT" layoutX="78.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity"
-               minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="158.0" styleClass="header"
-               text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true"/>
+        <Button fx:id="register" layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register!" />
+        <Button contentDisplay="CENTER" layoutX="218.0" layoutY="372.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
+        <Label alignment="TOP_LEFT" layoutX="78.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="158.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true" />
         
-        <GridPane layoutX="52.0" layoutY="122.0" prefHeight="180.0" prefWidth="200.0" vgap="5.0">
+        <GridPane layoutX="41.0" layoutY="122.0" prefHeight="178.0" prefWidth="199.0" vgap="3.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.33333333333333" minWidth="10.0"
-                                   prefWidth="74.33333333333333"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.33333333333337" minWidth="10.0"
-                                   prefWidth="126.33333333333333"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.33333333333333" minWidth="10.0" prefWidth="74.33333333333333" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.33333333333337" minWidth="10.0" prefWidth="126.33333333333333" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <Label styleClass="subLabels" text="first name:"/>
-            <Label styleClass="subLabels" text="last name:" GridPane.rowIndex="1"/>
-            <Label styleClass="subLabels" text="email:" GridPane.rowIndex="2"/>
-            <Label styleClass="subLabels" text="library ID:" GridPane.rowIndex="3"/>
-            <Label styleClass="subLabels" text="username:" GridPane.rowIndex="4"/>
-            <Label styleClass="subLabels" text="password:" GridPane.rowIndex="5"/>
+            <Label styleClass="subLabels" text="first name:" />
+            <Label styleClass="subLabels" text="last name:" GridPane.rowIndex="1" />
+            <Label styleClass="subLabels" text="email:" GridPane.rowIndex="2" />
+            <Label styleClass="subLabels" text="library ID:" GridPane.rowIndex="3" />
+            <Label styleClass="subLabels" text="username:" GridPane.rowIndex="4" />
+            <Label styleClass="subLabels" text="password:" GridPane.rowIndex="5" />
             
-            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="164.0" scaleShape="false"
-                       GridPane.columnIndex="1"/>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0"
-                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0"
-                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0"
-                       GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="163.0" GridPane.columnIndex="1"
-                       GridPane.rowIndex="4"/>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0"
-                       GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="164.0" scaleShape="false" GridPane.columnIndex="1" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         </GridPane>
+      <padding>
+         <Insets bottom="25.0" right="50.0" />
+      </padding>
     </Pane>
    
 

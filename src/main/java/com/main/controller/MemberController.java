@@ -1,5 +1,6 @@
 package com.main.controller;
 
+import com.main.controller.member.MemberAccount;
 import com.main.view.LibraryApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 
 
 import java.io.IOException;
+
+import static com.main.controller.MemberLoginController.member;
 
 public class MemberController {
     public BorderPane memberPage;
@@ -21,5 +24,7 @@ public class MemberController {
     private void clickAccount() throws IOException {
         loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-account.fxml"));
         memberPage.setCenter(loader.load());
+        MemberAccount account = loader.getController();
+        account.setMemberData(member.getName(), member.getEmail(), member.getUsername());
     }
 }

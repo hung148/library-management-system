@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
     <Pane layoutX="27.0" layoutY="-3.0" prefHeight="420.0" prefWidth="470.0">
-        <Label prefHeight="77.0" prefWidth="87.0" text="admin managing members page" wrapText="true"/>
+        <Label prefHeight="77.0" prefWidth="87.0" text="admin managing members page" wrapText="true" />
     </Pane>
 </AnchorPane>

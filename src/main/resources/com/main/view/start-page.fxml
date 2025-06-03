@@ -2,14 +2,11 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.StartPageController">
-    <ImageView blendMode="SRC_ATOP" fitHeight="374.0" fitWidth="255.0" layoutX="-10.0" layoutY="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-        <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash%20(1).jpg" />
-    </ImageView>
+<AnchorPane stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.StartPageController">
+    <Pane layoutX="-12.0" layoutY="4.0" opacity="0.77" prefHeight="374.0" prefWidth="249.0" styleClass="leftBG" />
     <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="239.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="374.0" prefWidth="357.0">
         <Label layoutX="65.0" layoutY="7.0" prefHeight="106.0" prefWidth="174.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true">
             <effect>
@@ -19,7 +16,7 @@
       <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb96" height="34.0" layoutX="65.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
       <Rectangle fx:id="adminSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb82" height="34.0" layoutX="198.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
       <Label layoutX="65.0" layoutY="161.0" prefHeight="25.0" prefWidth="118.0" text="welcome, sign in as..." />
-      <Label styleClass="startLabels" onMouseClicked="#clickMember" onMouseDragged="#showMember" layoutX="223.0" layoutY="208.0" text="Member" />
-      <Label styleClass="startLabels" onMouseClicked="#clickAdmin" onMouseDragged="#showAdmin" layoutX="95.0" layoutY="208.0" text="Admin" />
+      <Label layoutX="223.0" layoutY="208.0" onMouseClicked="#clickMember" onMouseDragged="#showMember" styleClass="startLabels" text="Member" />
+      <Label layoutX="95.0" layoutY="208.0" onMouseClicked="#clickAdmin" onMouseDragged="#showAdmin" styleClass="startLabels" text="Admin" />
     </AnchorPane>
 </AnchorPane>

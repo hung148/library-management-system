@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="adminPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
+<BorderPane fx:id="adminPage" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
    <left>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="95.0">
          <padding>
@@ -14,7 +14,7 @@
          </padding>
          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="89.0" prefWidth="104.0" styleClass="subLabels" text="What would you like to manage?" textAlignment="CENTER" wrapText="true" />
          
-         <Button  accessibleText="add or remove books" contentDisplay="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#clickBook" prefHeight="65.0" prefWidth="126.0" style="-fx-background-color: pink; -fx-border-color: white;" styleClass="subLabels" text="Books" VBox.vgrow="SOMETIMES">
+         <Button accessibleText="add or remove books" contentDisplay="BOTTOM" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#clickBook" prefHeight="65.0" prefWidth="126.0" style="-fx-background-color: pink; -fx-border-color: white;" styleClass="subLabels" text="Books" VBox.vgrow="SOMETIMES">
             <effect>
                <Blend mode="SCREEN" />
             </effect>
@@ -22,12 +22,12 @@
                <Insets />
             </opaqueInsets>
          </Button>
-         <Button  alignment="CENTER" onAction="#clickMembers" prefHeight="55.0" prefWidth="162.0" style="-fx-background-color: pink; -fx-border-color: white;" styleClass="subLabels" text="Library's Members" textAlignment="CENTER" wrapText="true">
+         <Button alignment="CENTER" onAction="#clickMembers" prefHeight="55.0" prefWidth="162.0" style="-fx-background-color: pink; -fx-border-color: white;" styleClass="subLabels" text="Library's Members" textAlignment="CENTER" wrapText="true">
             <effect>
                <Blend mode="SCREEN" />
             </effect>
          </Button>
-         <Button  mnemonicParsing="false" onAction="#clickAccount" prefHeight="55.0" prefWidth="109.0" style="-fx-border-color: white; -fx-background-color: pink;" styleClass="subLabels" text="My Account">
+         <Button mnemonicParsing="false" onAction="#clickAccount" prefHeight="55.0" prefWidth="109.0" style="-fx-border-color: white; -fx-background-color: pink;" styleClass="subLabels" text="My Account">
             <effect>
                <Blend mode="SCREEN" />
             </effect>

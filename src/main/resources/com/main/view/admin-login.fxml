@@ -3,13 +3,10 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminLoginController">
-    <ImageView blendMode="SRC_ATOP" fitHeight="374.0" fitWidth="255.0" layoutX="-12.0" layoutY="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-        <Image url="@images/marc-yusufu-zF-QWye2vNQ-unsplash%20(1).jpg" />
-    </ImageView>
+<AnchorPane stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminLoginController">
+    <Pane layoutX="-14.0" layoutY="5.0" opacity="0.77" prefHeight="387.0" prefWidth="258.0" styleClass="leftBG" />
     <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="241.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="374.0" prefWidth="359.0">
         
         <GridPane alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="128.0" minWidth="-Infinity" prefHeight="151.0" prefWidth="192.0" vgap="2.0">
@@ -42,7 +39,7 @@
             </effect>
         </Label>
         <Button layoutX="130.0" layoutY="272.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />
-        <Label onMouseClicked="#backToStart" layoutX="308.0" layoutY="356.0" text="Back" underline="true" />
+        <Label layoutX="308.0" layoutY="356.0" onMouseClicked="#backToStart" text="Back" underline="true" />
     </AnchorPane>
 
 </AnchorPane>
