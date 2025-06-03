@@ -4,6 +4,7 @@ import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.User;
 import com.main.respository.LibraryDAO;
+import com.main.services.AuthServices;
 import com.main.view.LibraryApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,7 +62,7 @@ public class AdminLoginController {
     private Admin loadAdmin(String username, String password) {
         admin = LibraryDAO.getAdminByUsername(username);
         if(admin != null) {
-            if(admin.getPassword().equals(password)) {
+            if(AuthServices.checkPassword(password, admin.getPassword())) {
                 return admin;
             }
             else {
