@@ -1,30 +1,137 @@
 package com.main.controller;
 
 import com.main.view.LibraryApplication;
+
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class StartPageController {
+public class StartPageController implements Initializable {
     public Label member;
     public Label admin;
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private AnchorPane leftPane;
+
+    @FXML 
+    private AnchorPane rightPane;
 
     @FXML
     private Rectangle memberSignin;
     @FXML
     private Rectangle adminSignin;
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    // this automatically run when fxml load
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> {
+            stage.setMinWidth(310);
+            stage.setMinHeight(400);
+        });
+
+        AnchorPane.setTopAnchor(rightPane, 0.0);
+        AnchorPane.setRightAnchor(rightPane, 0.0);
+        AnchorPane.setBottomAnchor(rightPane, 0.0);
+
+        rootPane.widthProperty().addListener((obs, oldW, newW) -> {
+            updateLayout(newW.doubleValue(), rootPane.getHeight());
+        });
+
+        rootPane.heightProperty().addListener((obs, oldH, newH) -> {
+            updateLayout(rootPane.getWidth(), newH.doubleValue());
+        });
+
+        Platform.runLater(() -> {
+            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+                if (isNowFullScreen) {
+                    System.out.println("Entered full screen mode.");
+                    updateLayout(rootPane.getWidth(), rootPane.getHeight());
+                    System.out.println(rightPane.getLayoutX() + " " + rightPane.getLayoutY());
+                } else {
+                    System.out.println("Exited full screen mode.");
+                    updateLayout(rootPane.getWidth(), rootPane.getHeight());
+                    System.out.println(rightPane.getLayoutX() + " " + rightPane.getLayoutY()); // this is still update right
+                }
+            });
+        });
+    }
+
+    private void updateLayout(double width, double height) {
+        // Adjust layout based on width and height
+        System.out.println("Width: " + width + ", Height: " + height);
+        if (width < 650) {
+            AnchorPane.clearConstraints(rightPane);
+            animateToCenter(width, height);
+        } 
+        else {
+            rightPane.setStyle("-fx-background-color: rgba(244, 236, 236, 0.9); -fx-background-radius: 0;"); 
+            AnchorPane.setTopAnchor(rightPane, 0.0);
+            AnchorPane.setRightAnchor(rightPane, 0.0);
+            AnchorPane.setBottomAnchor(rightPane, 0.0);
+        }
+    }
+
+    private void animateToCenter(double width, double height) {
+        double rootWidth = width;
+        double rootHeight = height;
+
+        double targetWidth = Math.max(300, rootWidth * 0.5);  // prevent too small width
+        double targetHeight = Math.max(200, rootHeight * 0.7); // prevent too small height
+
+        double targetX = (rootWidth - targetWidth) / 2;
+        double targetY = (rootHeight - targetHeight) / 2;
+
+        // Optional: make it resizable and round corners
+        rightPane.setStyle("-fx-background-color: rgba(244, 236, 236, 0.9); -fx-background-radius: 20;"); 
+
+        KeyValue widthKV = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
+        KeyValue heightKV = new KeyValue(rightPane.prefHeightProperty(), targetHeight, Interpolator.EASE_BOTH);
+        KeyValue xKV = new KeyValue(rightPane.layoutXProperty(), targetX, Interpolator.EASE_BOTH);
+        KeyValue yKV = new KeyValue(rightPane.layoutYProperty(), targetY, Interpolator.EASE_BOTH);
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(500), widthKV, heightKV, xKV, yKV);
+        Timeline timeline = new Timeline(keyFrame);
+
+        // Wait for layout to be ready
+        timeline.setOnFinished(e -> {
+            Platform.runLater(() -> {
+                // Force a re-layout to finalize the animation effect
+                rightPane.requestLayout();
+            });
+        });
+        
+        timeline.setDelay(Duration.millis(100)); // Delay before animation starts
+        timeline.play();
+    }
 
 
     //click Member to login page for Member with register

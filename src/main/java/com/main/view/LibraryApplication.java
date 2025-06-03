@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import com.main.controller.StartPageController;
+
 
 public class LibraryApplication extends Application {
 
@@ -19,6 +21,8 @@ public class LibraryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException  {
         LibraryApplication.stage = stage;
+        stage.setWidth(800);
+        stage.setHeight(600);
         Scene scene = loadStartPage();
         addCSS(scene);
         stage.setScene(scene);
@@ -29,8 +33,11 @@ public class LibraryApplication extends Application {
     //static so can re-use when using back or cancel button
     public static Scene loadStartPage() throws IOException {
         FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("start-page.fxml"));
-        return new Scene(loader.load());
+        Scene scene = new Scene(loader.load());
+        StartPageController controller = loader.getController();
+        controller.setStage(stage); // Pass the stage to controller
 
+        return scene;
     }
 
     public static void addCSS(Scene scene) {

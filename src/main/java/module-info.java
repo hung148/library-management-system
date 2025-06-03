@@ -10,6 +10,7 @@ module com.main {
     requires javafx.graphics;
     requires java.desktop;
     requires annotations;
+    requires javafx.base;
 
     opens com.main.view to javafx.fxml;
     opens com.main.controller to javafx.fxml;

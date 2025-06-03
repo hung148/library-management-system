@@ -2,13 +2,16 @@
     -fx-font-family: "Nirmala UI";
     -fx-font-size: 13;
 }
+
 .loginBG {
     -fx-background-color: rgb(244, 236, 236);
 }
+
 .leftBG{
     -fx-background-image: url(images/marc-yusufu-zF-QWye2vNQ-unsplash.jpg);
     -fx-background-size: contain;
 }
+
 .header{
     -fx-font-family: "Century Schoolbook";
     -fx-font-size: 25;
