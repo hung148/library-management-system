@@ -17,14 +17,14 @@ public class Member extends User {
     }
 
     @Override
-    public String getPassword() {
-        return password;
+    public String getHashPassword() {
+        return hashpassword;
     }
 
     @Override
-    public void setPassword(String password) {
+    public void setHashPassword(String password) {
         if (!(password == null) && !(password.trim().isEmpty())) {
-            this.password = password;
+            this.hashpassword = password;
         } else {
             System.out.println("Invalid password!");
         }

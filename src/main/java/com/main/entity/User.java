@@ -2,7 +2,7 @@ package com.main.entity;
 
 public abstract class User {
     protected String email; // unique
-    protected String password;
+    protected String hashpassword;
     protected String username;
     protected String name;
     protected String type; // admin or member 
@@ -14,9 +14,9 @@ public abstract class User {
 
     public abstract void setEmail(String email); 
 
-    public abstract String getPassword();
+    public abstract String getHashPassword();
 
-    public abstract void setPassword(String password);
+    public abstract void setHashPassword(String hashpassword);
 
     public abstract String getUsername();
 
@@ -50,7 +50,7 @@ public abstract class User {
     public String toString() {
         return ("User name: " + name + "\n" +
                 "User username: " + username + "\n" +
-                "User password: " + password + "\n" + 
+                "User password: " + hashpassword + "\n" + 
                 "User email: " + email + "\n" +
                 "User type: " + type + "\n" +
                 "User status: " + status + "\n" + 

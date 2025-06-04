@@ -42,7 +42,7 @@ public class LibraryDAO {
                 admin.setEmail(rs.getString("email"));
                 admin.setUsername(rs.getString("username"));
                 admin.setName(rs.getString("name"));
-                admin.setPassword(rs.getString("password"));
+                admin.setHashPassword(rs.getString("password"));
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
@@ -68,7 +68,7 @@ public class LibraryDAO {
                 admin.setEmail(rs.getString("email"));
                 admin.setUsername(rs.getString("username"));
                 admin.setName(rs.getString("name"));
-                admin.setPassword(rs.getString("password"));
+                admin.setHashPassword(rs.getString("password"));
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
@@ -94,7 +94,7 @@ public class LibraryDAO {
                 admin.setEmail(rs.getString("email"));
                 admin.setUsername(rs.getString("username"));
                 admin.setName(rs.getString("name"));
-                admin.setPassword(rs.getString("password"));
+                admin.setHashPassword(rs.getString("password"));
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
@@ -122,7 +122,7 @@ public class LibraryDAO {
                 admin.setEmail(rs.getString("email"));
                 admin.setUsername(rs.getString("username"));
                 admin.setName(rs.getString("name"));
-                admin.setPassword(rs.getString("password"));
+                admin.setHashPassword(rs.getString("password"));
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
@@ -141,7 +141,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
-                pstmt.setString(2, AuthServices.generateHashedPassword(admin.getPassword()));
+                pstmt.setString(2, admin.getHashPassword());
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
@@ -159,7 +159,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, admin.getEmail());
-                pstmt.setString(2, AuthServices.generateHashedPassword(admin.getPassword()));
+                pstmt.setString(2, admin.getHashPassword());
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
@@ -235,7 +235,7 @@ public class LibraryDAO {
                 member.setEmail(rs.getString("email"));
                 member.setUsername(rs.getString("username"));
                 member.setName(rs.getString("name"));
-                member.setPassword(rs.getString("password"));
+                member.setHashPassword(rs.getString("password"));
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
@@ -261,7 +261,7 @@ public class LibraryDAO {
                 member.setEmail(rs.getString("email"));
                 member.setUsername(rs.getString("username"));
                 member.setName(rs.getString("name"));
-                member.setPassword(rs.getString("password"));
+                member.setHashPassword(rs.getString("password"));
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
@@ -287,7 +287,7 @@ public class LibraryDAO {
                 member.setEmail(rs.getString("email"));
                 member.setUsername(rs.getString("username"));
                 member.setName(rs.getString("name"));
-                member.setPassword(rs.getString("password"));
+                member.setHashPassword(rs.getString("password"));
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
@@ -315,7 +315,7 @@ public class LibraryDAO {
                 member.setEmail(rs.getString("email"));
                 member.setUsername(rs.getString("username"));
                 member.setName(rs.getString("name"));
-                member.setPassword(rs.getString("password"));
+                member.setHashPassword(rs.getString("password"));
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
@@ -334,7 +334,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
-                pstmt.setString(2, AuthServices.generateHashedPassword(member.getPassword()));
+                pstmt.setString(2, member.getHashPassword());
                 pstmt.setString(3, member.getUsername());
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());
@@ -354,7 +354,7 @@ public class LibraryDAO {
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, member.getEmail());
-                pstmt.setString(2, AuthServices.generateHashedPassword(member.getPassword()));
+                pstmt.setString(2, member.getHashPassword());
                 pstmt.setString(3, member.getUsername());
                 pstmt.setString(4, member.getName());
                 pstmt.setString(5, member.getType());

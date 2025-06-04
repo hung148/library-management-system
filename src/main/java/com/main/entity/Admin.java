@@ -17,14 +17,14 @@ public class Admin extends User {
     }
 
     @Override
-    public String getPassword() {
-        return password;
+    public String getHashPassword() {
+        return hashpassword;
     }
 
     @Override
-    public void setPassword(String password) {
-        if (!(password == null) && !(password.trim().isEmpty())) {
-            this.password = password;
+    public void setHashPassword(String hashpassword) {
+        if (!(hashpassword == null) && !(hashpassword.trim().isEmpty())) {
+            this.hashpassword = hashpassword;
         } else {
             System.out.println("Invalid password!");
         }

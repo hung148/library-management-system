@@ -60,16 +60,7 @@ public class AdminLoginController {
     }
 
     private Admin loadAdmin(String username, String password) {
-        admin = LibraryDAO.getAdminByUsername(username);
-        if(admin != null) {
-            if(AuthServices.checkPassword(password, admin.getPassword())) {
-                return admin;
-            }
-            else {
-                alertLogin.setText("Wrong Password");
-            }
-        }
-        return null;
+        return AuthServices.adminLogin(username, password);
     }
 
 

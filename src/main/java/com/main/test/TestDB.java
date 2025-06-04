@@ -5,6 +5,7 @@ import com.main.entity.Book;
 import com.main.entity.Member;
 import com.main.respository.DBInitializer;
 import com.main.respository.LibraryDAO;
+import com.main.services.AuthServices;
 
 public class TestDB {
     public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class TestDB {
         Admin newadmin = new Admin();
         newadmin.setName("newAdmin");
         newadmin.setEmail("newAdminEmail");
-        newadmin.setPassword("newAdminPassword");
+        newadmin.setHashPassword(AuthServices.generateHashedPassword("newAdminPassword"));
         newadmin.setUsername("newAdminUsername");
         newadmin.setBalance(2300);
         LibraryDAO.updateAdmin("test2@gmail.com", newadmin);

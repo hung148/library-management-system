@@ -24,6 +24,8 @@ import com.main.entity.Book;
 import com.main.entity.Member;
 import com.main.entity.User;
 import com.main.respository.LibraryDAO;
+import com.main.services.AuthServices;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,7 +99,7 @@ public class MemberLoginController {
         }
 
         member = loadMember(username, password);
-        if (member != null && member.getPassword().equals(password)) {
+        if (member != null) {
             alertLogin.setText("Login successful!");
             try {
                 URL fxmlPath = getClass().getResource("/com/main/view/member-page.fxml");
@@ -124,15 +126,7 @@ public class MemberLoginController {
     }
 
     private Member loadMember(String username, String password) {
-        member = LibraryDAO.getMemberByUsername(username);
-        if (member != null) {
-            if (member.getPassword().equals(password)) {
-                return member;
-            } else {
-                alertLogin.setText("Wrong Password");
-            }
-        }
-        return null;
+        return AuthServices.memberLogin(username, password);
     }
 }
 
