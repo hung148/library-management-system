@@ -5,56 +5,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="rootPane" stylesheets="@pageStyle.css" 
-            xmlns="http://javafx.com/javafx/17.0.12" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.main.controller.StartPageController" 
-            AnchorPane.topAnchor="0" 
-            AnchorPane.bottomAnchor="0" 
-            AnchorPane.leftAnchor="0" 
-            AnchorPane.rightAnchor="0">
-    <AnchorPane fx:id="leftPane" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" 
-                AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" 
-                opacity="0.77" prefHeight="374.0" 
-                prefWidth="249.0" styleClass="leftBG" />
-    <AnchorPane fx:id="rightPane" blendMode="SRC_ATOP" 
-                focusTraversable="true" pickOnBounds="false" styleClass="rightBG">
-        <AnchorPane 
-            AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" 
-            AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="10" >
-            <Label layoutX="0" layoutY="0" prefHeight="106.0" prefWidth="174.0" 
-            styleClass="header" text="the bookkeepers' library" textFill="#374660e5" 
-            underline="true" wrapText="true">
+<AnchorPane fx:id="rootPane" stylesheets="@pageStyle.css" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.StartPageController">
+    <AnchorPane fx:id="leftPane" opacity="0.77" prefHeight="374.0" prefWidth="249.0" styleClass="leftBG" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+    <AnchorPane fx:id="rightPane" blendMode="SRC_ATOP" focusTraversable="true" pickOnBounds="false" styleClass="rightBG">
+        <AnchorPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+            <Label layoutX="14.0" prefHeight="106.0" prefWidth="174.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true">
                 <effect>
                     <Blend mode="HARD_LIGHT" />
                 </effect>
             </Label>
         </AnchorPane>
-        <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.topAnchor="0" 
-            AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10">
-            <Label layoutX="0" layoutY="161.0" prefHeight="25.0" prefWidth="118.0" 
-                   text="welcome, sign in as..." />
-            <HBox alignment="CENTER" spacing="35">
+        <AnchorPane AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="0">
+            <Label styleClass="subLabels" layoutX="10" layoutY="161.0" prefHeight="25.0" prefWidth="118.0" text="welcome, sign in as..."  />
+            <HBox alignment="CENTER" layoutX="6.0" spacing="35">
                 <Pane>
-                    <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" 
-                        fill="#ffdbdb96" height="34.0" layoutX="0" 
-                        layoutY="200.0" stroke="BLACK" strokeType="INSIDE" 
-                        width="95.0"/>
-                    <Label fx:id="member" layoutX="0" layoutY="200.0" prefHeight="34.0" prefWidth="95.0" 
-                           onMouseDragged="#showMember" styleClass="startLabels" 
-                           text="Member" onMouseClicked="#clickMember" />
+                    <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb96" height="34.0" layoutX="14" layoutY="200.0" stroke="dimgray" strokeType="INSIDE" width="95.0"/>
+                    <Label fx:id="member" layoutX="14" layoutY="200.0" onMouseClicked="#clickMember" prefHeight="34.0" prefWidth="95.0" styleClass="startLabels" text="Member"/>
                 </Pane>
                 <Pane>
                     <Label layoutX="0" layoutY="208.0" text="Or" />
                 </Pane>
                 <Pane>
-                    <Rectangle fx:id="adminSignin" arcHeight="5.0" arcWidth="5.0" 
-                            fill="#ffdbdb82" height="34.0" layoutX="0" 
-                            layoutY="200.0" stroke="BLACK" strokeType="INSIDE" 
-                            width="95.0"/>
-                    <Label fx:id="admin" layoutX="0" layoutY="200.0" prefHeight="34.0" prefWidth="95.0" 
-                           onMouseClicked="#clickAdmin" onMouseDragged="#showAdmin" 
-                           styleClass="startLabels" text="Admin" />
+                    <Rectangle fx:id="adminSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb82" height="34.0"
+                               layoutX="0" layoutY="200.0" stroke="dimgray" strokeType="INSIDE" width="95.0"/>
+                    <Label fx:id="admin" layoutX="0" layoutY="200.0" onMouseClicked="#clickAdmin" prefHeight="34.0" prefWidth="95.0" styleClass="startLabels" text="Admin" />
                 </Pane>
             </HBox>
         </AnchorPane>

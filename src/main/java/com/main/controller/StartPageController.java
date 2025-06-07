@@ -196,11 +196,4 @@ public class StartPageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-    public void showMember(MouseEvent event) {
-        member.translateXProperty().bind(memberSignin.translateXProperty());
-    }
-
-    public void showAdmin(MouseEvent event) {
-    }
 }
