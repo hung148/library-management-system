@@ -15,12 +15,13 @@
                 </effect>
             </Label>
         </AnchorPane>
-        <AnchorPane AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="0">
+        <AnchorPane AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <Label styleClass="subLabels" layoutX="10" layoutY="161.0" prefHeight="25.0" prefWidth="118.0" text="welcome, sign in as..."  />
-            <HBox alignment="CENTER" layoutX="6.0" spacing="35">
+            <HBox alignment="CENTER" layoutX="0" spacing="10" 
+                  AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" layoutY="0">
                 <Pane>
-                    <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb96" height="34.0" layoutX="14" layoutY="200.0" stroke="dimgray" strokeType="INSIDE" width="95.0"/>
-                    <Label fx:id="member" layoutX="14" layoutY="200.0" onMouseClicked="#clickMember" prefHeight="34.0" prefWidth="95.0" styleClass="startLabels" text="Member"/>
+                    <Rectangle fx:id="memberSignin" arcHeight="5.0" arcWidth="5.0" fill="#ffdbdb96" height="34.0" layoutX="0" layoutY="200.0" stroke="dimgray" strokeType="INSIDE" width="95.0"/>
+                    <Label fx:id="member" layoutX="0" layoutY="200.0" onMouseClicked="#clickMember" prefHeight="34.0" prefWidth="95.0" styleClass="startLabels" text="Member"/>
                 </Pane>
                 <Pane>
                     <Label layoutX="0" layoutY="208.0" text="Or" />

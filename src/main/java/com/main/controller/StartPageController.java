@@ -71,7 +71,7 @@ public class StartPageController implements Initializable {
         rightPane.setEffect(dropShadow);
         
         Platform.runLater(() -> {
-            stage.setMinWidth(310);
+            stage.setMinWidth(280);
             stage.setMinHeight(400);
         });
 
@@ -134,23 +134,30 @@ public class StartPageController implements Initializable {
             animateToCenter(width, height);
         } 
         else {
-            rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 0;"); 
-            AnchorPane.setTopAnchor(rightPane, 0.0);
-            AnchorPane.setRightAnchor(rightPane, 0.0);
-            AnchorPane.setBottomAnchor(rightPane, 0.0);
+            animateToSide();
         }
+    }
+    private void animateToSide() {
+        rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 0;"); 
+        AnchorPane.setTopAnchor(rightPane, 0.0);
+        AnchorPane.setRightAnchor(rightPane, 0.0);
+        AnchorPane.setBottomAnchor(rightPane, 0.0);
+        double targetWidth = 280;
+
+        KeyValue kv = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
+        KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
+        Timeline timeline = new Timeline(kf);
+        timeline.play();
     }
 
     private void animateToCenter(double width, double height) {
         double rootWidth = width;
         double rootHeight = height;
 
-        double targetWidth = Math.max(300, rootWidth * 0.5);  // prevent too small width
+        double targetWidth = Math.max(256.5, rootWidth * 0.5); // prevent too small width
         double targetHeight = Math.max(200, rootHeight * 0.7); // prevent too small height
-
         double targetX = (rootWidth - targetWidth) / 2;
         double targetY = (rootHeight - targetHeight) / 2;
-
         // Optional: make it resizable and round corners 45, 90, 39 244, 236, 236
         rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 20;"); 
 
