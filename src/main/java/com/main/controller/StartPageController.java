@@ -181,7 +181,7 @@ public class StartPageController implements Initializable {
                 rightPane.requestLayout();
             });
         });
-        
+        centerAnimation.setDelay(Duration.millis(100));
         centerAnimation.play();
     }
 
