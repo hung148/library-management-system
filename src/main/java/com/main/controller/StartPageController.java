@@ -5,6 +5,7 @@ import com.main.view.LibraryApplication;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -49,7 +50,11 @@ public class StartPageController implements Initializable {
     private Rectangle memberSignin;
     @FXML
     private Rectangle adminSignin;
+
+    private Timeline centerAnimation;
     
+    private PauseTransition debounce = new PauseTransition(Duration.millis(120));
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -80,11 +85,13 @@ public class StartPageController implements Initializable {
         AnchorPane.setBottomAnchor(rightPane, 0.0);
 
         rootPane.widthProperty().addListener((obs, oldW, newW) -> {
-            updateLayout(newW.doubleValue(), rootPane.getHeight());
+            debounce.setOnFinished(e -> updateLayout(newW.doubleValue(), rootPane.getHeight()));
+            debounce.playFromStart();
         });
 
         rootPane.heightProperty().addListener((obs, oldH, newH) -> {
-            updateLayout(rootPane.getWidth(), newH.doubleValue());
+            debounce.setOnFinished(e -> updateLayout(rootPane.getWidth(), newH.doubleValue()));
+            debounce.playFromStart();
         });
 
         Platform.runLater(() -> {
@@ -129,33 +136,31 @@ public class StartPageController implements Initializable {
     private void updateLayout(double width, double height) {
         // Adjust layout based on width and height
         System.out.println("Width: " + width + ", Height: " + height);
-        if (width < 650) {
-            AnchorPane.clearConstraints(rightPane);
-            animateToCenter(width, height);
-        } 
-        else {
-            animateToSide();
-        }
-    }
-    private void animateToSide() {
-        rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 0;"); 
-        AnchorPane.setTopAnchor(rightPane, 0.0);
-        AnchorPane.setRightAnchor(rightPane, 0.0);
-        AnchorPane.setBottomAnchor(rightPane, 0.0);
-        double targetWidth = 280;
-
-        KeyValue kv = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
-        KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
-        Timeline timeline = new Timeline(kf);
-        timeline.play();
+        AnchorPane.clearConstraints(rightPane);
+        animateToCenter(width, height);
     }
 
     private void animateToCenter(double width, double height) {
+        // Cancel any previous animation
+        if (centerAnimation != null) {
+            centerAnimation.stop();
+        }
+
+        rightPane.applyCss();
+        rightPane.layout();
+
         double rootWidth = width;
         double rootHeight = height;
 
         double targetWidth = Math.max(256.5, rootWidth * 0.5); // prevent too small width
         double targetHeight = Math.max(200, rootHeight * 0.7); // prevent too small height
+        if (targetWidth > 325.0) {
+            targetWidth = 325.0; // prevent too big
+        } 
+        if (targetHeight > 391) {
+            targetHeight = 391.0; // prvent too big
+        }
+        System.out.println(targetHeight);
         double targetX = (rootWidth - targetWidth) / 2;
         double targetY = (rootHeight - targetHeight) / 2;
         // Optional: make it resizable and round corners 45, 90, 39 244, 236, 236
@@ -167,18 +172,17 @@ public class StartPageController implements Initializable {
         KeyValue yKV = new KeyValue(rightPane.layoutYProperty(), targetY, Interpolator.EASE_BOTH);
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(500), widthKV, heightKV, xKV, yKV);
-        Timeline timeline = new Timeline(keyFrame);
+        centerAnimation = new Timeline(keyFrame);
 
         // Wait for layout to be ready
-        timeline.setOnFinished(e -> {
+        centerAnimation.setOnFinished(e -> {
             Platform.runLater(() -> {
                 // Force a re-layout to finalize the animation effect
                 rightPane.requestLayout();
             });
         });
         
-        timeline.setDelay(Duration.millis(100)); // Delay before animation starts
-        timeline.play();
+        centerAnimation.play();
     }
 
 

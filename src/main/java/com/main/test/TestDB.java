@@ -6,12 +6,53 @@ import com.main.entity.Member;
 import com.main.respository.DBInitializer;
 import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
+import com.main.services.LibraryServices;
 
 public class TestDB {
     public static void main(String[] args) {
-        testAdminAndUser();
+        //testAdminAndUser();
+        testSearchFunction();
     }
+    public static void testSearchFunction() {
+        String searchKeyword = "Book 1"; // test with book title, you can change to author, ...
+        System.out.println("Sort from the closet to the search keyword: " + searchKeyword);
+        try {
+            int i = 1;
+            for (Book book : LibraryServices.searchBook(searchKeyword, null, null, null)) {
+                System.out.print(i + ": ");
+                book.printBookInfo();
+                System.out.println();
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        /*
+        Sort from the closet to the search keyword: Book 1
+        WARNING: A restricted method in java.lang.System has been called
+        WARNING: java.lang.System::load has been called by org.sqlite.SQLiteJDBCLoader in an unnamed module (file:/Users/Tom/.m2/repository/org/xerial/sqlite-jdbc/3.49.1.0/sqlite-jdbc-3.49.1.0.jar)
+        WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+        WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
+        User table created or already exist.
+        bookTable table created or already exist.
+        Connection established.
+        Successfully retrieved book list.
+        1: Book's title: Book 1
+        Book's author: Person1
+        Book's publisher: publisher1
+        Book's ISBN: 2320321093
+        Book's total copies: 30
+        Book's available copies: 30
+
+        2: Book's title: Book 2
+        Book's author: Person2
+        Book's publisher: publisher2
+        Book's ISBN: 4309340320
+        Book's total copies: 50
+        Book's available copies: 50
+        */
+    }
     public static void testAdminAndUser() {
         DBInitializer.initializeDB();
         System.out.println("Test addAdmin()");

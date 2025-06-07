@@ -4,7 +4,7 @@ module com.main {
     requires javafx.fxml;
     requires javafx.web;
     requires jbcrypt;
-
+    requires org.apache.commons.text;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires javafx.graphics;
