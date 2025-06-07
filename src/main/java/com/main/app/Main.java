@@ -12,7 +12,7 @@ public class Main {
         if (LibraryDAO.getAdminList().length == 0) {
             LibraryDAO.addAdmin(
                 "firstAdmin@gmail.com", 
-                "firstAdminpass", // this may be bad for sercurity 
+                "firstAdminpass", // this may be bad for sercurity so require admin to change password on first log in
                 "firstAdminUsername", 
                 "firstAdminname", 
                 0);
