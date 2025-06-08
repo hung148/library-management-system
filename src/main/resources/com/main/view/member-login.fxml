@@ -49,11 +49,6 @@
         </effect>
       </Label>
     </AnchorPane>
-    <Label layoutX="71.0" layoutY="105.0" styleClass="member-label" text= "MEMBER" textFill="#374660e5">
-      <effect>
-        <Blend mode="HARD_LIGHT" />
-      </effect>
-    </Label>
     <Label graphicTextGap="2.0" layoutX="42.0" layoutY="323.0" styleClass="subLabels" text="Not a member, yet?" />
     <Button styleClass="memberloginpagebutton" layoutX="175.0" layoutY="320.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
     <Button styleClass="memberloginpagebutton" layoutX="124.0" layoutY="271.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />

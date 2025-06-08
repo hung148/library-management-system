@@ -91,11 +91,6 @@ VBox{
     -fx-padding: 5px 0 0 0;
 }
 
-.member-label {
-    -fx-font-family: "Century Schoolbook";
-    -fx-font-size: 18px;            /* Slightly smaller than header */
-}
-
 @media only screen and (max-width: 600px){
 
     
