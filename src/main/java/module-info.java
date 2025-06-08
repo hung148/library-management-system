@@ -1,16 +1,17 @@
 module com.main {  
     requires java.sql;  
+    requires java.desktop;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.graphics;
+    requires javafx.base;
     requires jbcrypt;
     requires org.apache.commons.text;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    requires javafx.graphics;
-    requires java.desktop;
     requires annotations;
-    requires javafx.base;
+    
 
     opens com.main.view to javafx.fxml;
     opens com.main.controller to javafx.fxml;

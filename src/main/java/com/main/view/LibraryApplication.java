@@ -2,120 +2,143 @@
 // scene.getStylesheets().add(cssURL.toExternalForm());
 package com.main.view;
 
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class LibraryApplication extends Application {
 
+    // The main application stage and scene
     public static Stage stage;
     public static Scene scene;
+
+    // Loaders for different FXML pages
     public static FXMLLoader startPageloader = new FXMLLoader(LibraryApplication.class.getResource("start-page.fxml"));
-    public static Parent startPageroot;
     public static FXMLLoader memberPageloader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
-    public static Parent memberPageroot;
     public static FXMLLoader adminPageloader = new FXMLLoader(LibraryApplication.class.getResource("admin-login.fxml"));
-    public static Parent adminPageroot;
     public static FXMLLoader registerPageloader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
+    
+    // Root nodes (Parent) for each page
+    public static Parent startPageroot;
+    public static Parent memberPageroot;
+    public static Parent adminPageroot;
     public static Parent registerPageroot;
+
+    // A single StackPane used to hold all pages for fast switching
+    public static StackPane root; 
+
+    // List to keep track of all loaded pages
+    public static ArrayList<Parent> pages = new ArrayList<>(); 
 
     @Override
     public void start(Stage stage) throws IOException  {
-        LibraryApplication.stage = stage;
+        LibraryApplication.stage = stage; // Save reference to the main stage
+        root = new StackPane(); // Create the shared root pane
+
         try {
+            // Load and store all pages only once at startup for faster switching
             startPageroot = startPageloader.load();
+            pages.add(startPageroot);
             memberPageroot = memberPageloader.load();
+            pages.add(memberPageroot);
             adminPageroot = adminPageloader.load();
+            pages.add(adminPageroot);
             registerPageroot = registerPageloader.load();
+            pages.add(registerPageroot);
+
+            // Set all pages to invisible initially
+            setVisible(false);
+
+            // Add all pages to the StackPane root
+            for (Parent page : pages) {
+                root.getChildren().add(page);
+            }
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        scene = new Scene(startPageroot);
+
+        // Show the start page
+        startPageroot.toFront();
+        startPageroot.setVisible(true);
+
+        // Set the scene using the root StackPane and apply CSS
+        scene = new Scene(root);
         addCSS(scene);
+
+        // Set initial stage dimensions and show
         stage.setWidth(650.0);
         stage.setHeight(544.0);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Set all pages' visibility to the given condition
+     */
+    private static void setVisible(boolean con) {
+        for (Parent page : pages) {
+            page.setVisible(con);
+        }
+    }
+
     //static so can re-use 
-    public static void loadStartPage() throws IOException {
+    /**
+     * Load the start page: hide all others, then show this
+     */
+    public static void loadStartPage() {
         long before = System.currentTimeMillis();
-        // transition to new page animation
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(50), scene.getRoot());
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.7);
-        fadeOut.setOnFinished(e -> {
-            scene.setRoot(startPageroot);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(50), startPageroot);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-        });
-        fadeOut.play();
+        setVisible(false);
+        startPageroot.toFront();
+        startPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
         // if more than 100ms mean lag
     }
 
-    public static void loadAdminPage() throws IOException {
+    /**
+     * Load the admin login page
+     */
+    public static void loadAdminPage() {
         long before = System.currentTimeMillis();
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(50), scene.getRoot());
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.7);
-        fadeOut.setOnFinished(e -> {
-            scene.setRoot(adminPageroot);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(50), adminPageroot);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-        });
-        fadeOut.play();
+        setVisible(false);
+        adminPageroot.toFront();
+        adminPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
-        // if more than 100ms mean lag
     }
 
-    public static void loadMemberPage() throws IOException {
+    /**
+     * Load the member login page
+     */
+    public static void loadMemberPage() {
         long before = System.currentTimeMillis();
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(50), scene.getRoot());
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.7);
-        fadeOut.setOnFinished(e -> {
-            scene.setRoot(memberPageroot);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(50), memberPageroot);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-        });
-        fadeOut.play();
+        setVisible(false);
+        memberPageroot.toFront();
+        memberPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
-        // if more than 100ms mean lag
     }
 
-    public static void loadRegisterPage() throws IOException {
+    /**
+     * Load the register page
+     */
+    public static void loadRegisterPage() {
         long before = System.currentTimeMillis();
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(50), scene.getRoot());
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.7);
-        fadeOut.setOnFinished(e -> {
-            scene.setRoot(registerPageroot);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(50), registerPageroot);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-        });
-        fadeOut.play();
+        setVisible(false);
+        registerPageroot.toFront();
+        registerPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
-        // if more than 100ms mean lag
     }
 
+    /**
+     * Apply CSS stylesheet to the scene
+     */
     public static void addCSS(Scene scene) {
         final URL cssURL = LibraryApplication.class.getResource("pageStyle.css");
         assert cssURL != null;

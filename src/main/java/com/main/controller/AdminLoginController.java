@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.util.Collections;
 
 public class AdminLoginController {
@@ -34,7 +33,7 @@ public class AdminLoginController {
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
 
     @FXML
-    private void onSignInClick(ActionEvent event) throws IOException {
+    private void onSignInClick(ActionEvent event) {
         String username = inputUsername.getText();
         String password = inputPassword.getText();
         admin = loadAdmin(username, password);
@@ -56,7 +55,7 @@ public class AdminLoginController {
 
     // click Back to go back to Start-page with the 2 options
     @FXML
-    private void backToStart(MouseEvent event) throws IOException {
+    private void backToStart(MouseEvent event) {
         LibraryApplication.loadStartPage();
     }
 }

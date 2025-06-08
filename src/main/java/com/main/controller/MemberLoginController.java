@@ -23,7 +23,6 @@ package com.main.controller;
 import com.main.entity.Book;
 import com.main.entity.Member;
 import com.main.entity.User;
-import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
 
 import javafx.animation.Interpolator;
@@ -38,8 +37,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,7 +48,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -159,18 +155,18 @@ public class MemberLoginController implements Initializable {
 
     // method to open up Register page for new member
     @FXML
-    private void onRegisterClick(ActionEvent event) throws IOException {
+    private void onRegisterClick(ActionEvent event) {
         LibraryApplication.loadRegisterPage();
     }
 
     //click Back to go back to Start-page with the 2 options
     @FXML
-    private void backToStart(MouseEvent event) throws IOException {
+    private void backToStart(MouseEvent event) {
         LibraryApplication.loadStartPage();
     }
 
     @FXML
-    private void onSignInClick(ActionEvent event) throws IOException {
+    private void onSignInClick(ActionEvent event) {
         System.out.println("Sign In clicked");
 
         String username = inputUsername.getText();

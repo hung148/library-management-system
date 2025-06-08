@@ -9,22 +9,15 @@ import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -176,13 +169,13 @@ public class StartPageController implements Initializable {
 
     //click Member to login page for Member with register
     @FXML
-    private void clickMember(MouseEvent event) throws IOException {
+    private void clickMember(MouseEvent event) {
         LibraryApplication.loadMemberPage();
     }
 
     //click Admin to login as Admin
     @FXML
-    private void clickAdmin(MouseEvent event) throws IOException {
+    private void clickAdmin(MouseEvent event) {
         LibraryApplication.loadAdminPage();
     }
 }
