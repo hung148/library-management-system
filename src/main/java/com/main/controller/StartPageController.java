@@ -33,9 +33,6 @@ public class StartPageController implements Initializable {
     public Label member;
     @FXML
     public Label admin;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     private AnchorPane rootPane;
@@ -55,10 +52,6 @@ public class StartPageController implements Initializable {
     
     private PauseTransition debounce = new PauseTransition(Duration.millis(120));
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     // this automatically run when fxml load
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,8 +69,8 @@ public class StartPageController implements Initializable {
         rightPane.setEffect(dropShadow);
         
         Platform.runLater(() -> {
-            stage.setMinWidth(280);
-            stage.setMinHeight(400);
+            LibraryApplication.stage.setMinWidth(280);
+            LibraryApplication.stage.setMinHeight(400);
         });
 
         AnchorPane.setTopAnchor(rightPane, 0.0);
@@ -95,7 +88,7 @@ public class StartPageController implements Initializable {
         });
 
         Platform.runLater(() -> {
-            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+            LibraryApplication.stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
                 if (isNowFullScreen) {
                     System.out.println("Entered full screen mode.");
                     updateLayout(rootPane.getWidth(), rootPane.getHeight());
@@ -145,8 +138,6 @@ public class StartPageController implements Initializable {
         if (centerAnimation != null) {
             centerAnimation.stop();
         }
-
-        rightPane.applyCss();
         rightPane.layout();
 
         double rootWidth = width;
@@ -160,11 +151,8 @@ public class StartPageController implements Initializable {
         if (targetHeight > 391) {
             targetHeight = 391.0; // prvent too big
         }
-        System.out.println(targetHeight);
         double targetX = (rootWidth - targetWidth) / 2;
         double targetY = (rootHeight - targetHeight) / 2;
-        // Optional: make it resizable and round corners 45, 90, 39 244, 236, 236
-        rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 20;"); 
 
         KeyValue widthKV = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
         KeyValue heightKV = new KeyValue(rightPane.prefHeightProperty(), targetHeight, Interpolator.EASE_BOTH);
@@ -189,22 +177,12 @@ public class StartPageController implements Initializable {
     //click Member to login page for Member with register
     @FXML
     private void clickMember(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        LibraryApplication.loadMemberPage();
     }
 
     //click Admin to login as Admin
     @FXML
     private void clickAdmin(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-login.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        LibraryApplication.loadAdminPage();
     }
 }

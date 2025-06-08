@@ -10,15 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -30,10 +26,10 @@ public class AdminLoginController {
     private PasswordField inputPassword;
     @FXML
     private Label alertLogin;
+    @FXML
+    private AnchorPane rootPane;
 
     private Admin admin;
-    private Stage stage;
-    private Scene scene;
     public static User user;
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
 
@@ -46,13 +42,7 @@ public class AdminLoginController {
         if(admin != null) {
             user = admin;
             Collections.addAll(books, LibraryDAO.bookList());
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
-            Parent root = loader.load();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            LibraryApplication.addCSS(scene);
-            stage.setScene(scene);
-            stage.show();
+            LibraryApplication.loadAdminPage();
         }
         else {
             alertLogin.setText("No Admin Found");
@@ -67,10 +57,6 @@ public class AdminLoginController {
     // click Back to go back to Start-page with the 2 options
     @FXML
     private void backToStart(MouseEvent event) throws IOException {
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = LibraryApplication.loadStartPage();
-        LibraryApplication.addCSS(scene);
-        stage.setScene(scene);
-        stage.show();
+        LibraryApplication.loadStartPage();
     }
 }

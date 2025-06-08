@@ -5,40 +5,58 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane blendMode="DARKEN" cacheShape="false" styleClass="loginBG" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.MemberLoginController">
-      <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="241.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="380.0" prefWidth="360.0">
-       
-       <GridPane alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="119.0" minWidth="-Infinity" prefHeight="146.0" prefWidth="274.0" vgap="2.0">
-           <columnConstraints>
-               <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-           </columnConstraints>
-           <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
-           </rowConstraints>
-           <padding>
-               <Insets bottom="1.0" left="5.0" right="5.0" top="2.0" />
-           </padding>
-           <Label styleClass="subLabels" text="username:" />
-           <TextField fx:id="inputUsername" GridPane.rowIndex="1" />
-           <Label styleClass="subLabels" text="password:" GridPane.rowIndex="2">
-            <opaqueInsets>
-               <Insets />
-            </opaqueInsets></Label>
-           <PasswordField fx:id="inputPassword" prefHeight="26.0" prefWidth="145.0" GridPane.rowIndex="3" />
-         <Label fx:id="alertLogin" GridPane.rowIndex="4" />
-       </GridPane>
-          <Label layoutX="65.0" layoutY="7.0" prefHeight="106.0" prefWidth="174.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true">
-         <effect>
-            <Blend mode="HARD_LIGHT" />
-         </effect></Label>
-          <Label graphicTextGap="2.0" layoutX="42.0" layoutY="323.0" styleClass="subLabels" text="Not a member, yet?" />
-          <Button layoutX="175.0" layoutY="320.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
-        <Button layoutX="124.0" layoutY="271.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />
-      <Label layoutX="308.0" layoutY="356.0" onMouseClicked="#backToStart" text="Back" underline="true" />
-      </AnchorPane>
-   <Pane layoutX="-14.0" layoutY="5.0" opacity="0.77" prefHeight="387.0" prefWidth="258.0" styleClass="leftBG" />
+<AnchorPane fx:id="rootPane" blendMode="DARKEN" cacheShape="false" styleClass="loginBG" 
+            stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.MemberLoginController">
+  <AnchorPane fx:id="leftPane" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" 
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" opacity="0.77" 
+              styleClass="leftBG" />
+  <AnchorPane fx:id="rightPane" blendMode="SRC_ATOP" focusTraversable="true" 
+              layoutX="241.0" layoutY="10.0" maxHeight="-Infinity" 
+              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+              pickOnBounds="false" prefHeight="380.0" prefWidth="360.0"
+              styleClass="rightBG">
+    <GridPane alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="119.0" minWidth="-Infinity" 
+              prefHeight="146.0" prefWidth="274.0" vgap="2.0" focusTraversable="true">
+      <columnConstraints>
+        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" 
+                          prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <padding>
+        <Insets bottom="1.0" left="5.0" right="5.0" top="2.0" />
+      </padding>
+        <Label styleClass="subLabels" text="username:" />
+        <TextField fx:id="inputUsername" GridPane.rowIndex="1" />
+        <Label styleClass="subLabels" text="password:" GridPane.rowIndex="2">
+          <opaqueInsets>
+            <Insets />
+          </opaqueInsets>
+        </Label>
+        <PasswordField fx:id="inputPassword" prefHeight="26.0" prefWidth="145.0" GridPane.rowIndex="3" />
+        <Label fx:id="alertLogin" GridPane.rowIndex="4" />
+    </GridPane>
+    <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+      <Label layoutX="14.0" prefHeight="106.0" prefWidth="174.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true">
+        <effect>
+          <Blend mode="HARD_LIGHT" />
+        </effect>
+      </Label>
+    </AnchorPane>
+    <Label layoutX="71.0" layoutY="105.0" styleClass="member-label" text= "MEMBER" textFill="#374660e5">
+      <effect>
+        <Blend mode="HARD_LIGHT" />
+      </effect>
+    </Label>
+    <Label graphicTextGap="2.0" layoutX="42.0" layoutY="323.0" styleClass="subLabels" text="Not a member, yet?" />
+    <Button styleClass="memberloginpagebutton" layoutX="175.0" layoutY="320.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
+    <Button styleClass="memberloginpagebutton" layoutX="124.0" layoutY="271.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />
+    <Label layoutX="300.0" layoutY="356.0" onMouseClicked="#backToStart" text="Back" underline="true" />
+  </AnchorPane>
 </AnchorPane>

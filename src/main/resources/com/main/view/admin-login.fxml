@@ -5,7 +5,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminLoginController">
+<AnchorPane fx:id="rootPane" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminLoginController">
     <Pane layoutX="-14.0" layoutY="5.0" opacity="0.77" prefHeight="387.0" prefWidth="258.0" styleClass="leftBG" />
     <AnchorPane blendMode="SRC_ATOP" focusTraversable="true" layoutX="241.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="374.0" prefWidth="359.0">
         

@@ -12,11 +12,16 @@
     -fx-background-size: cover;
 }
 
+.rightBG {
+    -fx-background-color: rgb(244, 236, 236);
+    -fx-background-radius: 20;
+}
 
 .header{
     -fx-font-family: "Century Schoolbook";
     -fx-font-size: 25;
 }
+
 VBox{
     -fx-background-color: rgb(251, 234, 234);
 }
@@ -41,6 +46,35 @@ VBox{
     -fx-scale-x: 1.05;                     /* Slightly scale up */
     -fx-scale-y: 1.05;
     /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 3);*/
+}
+
+.memberloginpagebutton {
+    -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
+    -fx-border-color: dimgray;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-text-alignment: center;
+    -fx-alignment: center;          /* center text horizontally and vertically */
+    -fx-pref-height: 20px;          /* fixed height */
+    -fx-pref-width: 70px;           /* fixed width */
+    -fx-cursor: hand;               /* cursor pointer on hover */
+    -fx-font-size: 14px;            /* adjust font size if needed */
+}
+
+.memberloginpagebutton:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.alertLogin {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 0 0 0;
+}
+
+.member-label {
+    -fx-font-family: "Century Schoolbook";
+    -fx-font-size: 18px;            /* Slightly smaller than header */
 }
 
 @media only screen and (max-width: 600px){
