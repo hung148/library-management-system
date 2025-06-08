@@ -45,7 +45,7 @@ public class AuthServices {
                 }
             }
         }
-         System.out.println("member not exist in database");
+         System.out.println("admin not exist in database");
         return null;
     }
     // register 
