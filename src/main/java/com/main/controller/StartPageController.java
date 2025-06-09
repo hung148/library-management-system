@@ -5,25 +5,19 @@ import com.main.view.LibraryApplication;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,9 +26,6 @@ public class StartPageController implements Initializable {
     public Label member;
     @FXML
     public Label admin;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     private AnchorPane rootPane;
@@ -49,10 +40,10 @@ public class StartPageController implements Initializable {
     private Rectangle memberSignin;
     @FXML
     private Rectangle adminSignin;
+
+    private Timeline centerAnimation;
     
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+    private PauseTransition debounce = new PauseTransition(Duration.millis(120));
 
     // this automatically run when fxml load
     @Override
@@ -71,8 +62,8 @@ public class StartPageController implements Initializable {
         rightPane.setEffect(dropShadow);
         
         Platform.runLater(() -> {
-            stage.setMinWidth(310);
-            stage.setMinHeight(400);
+            LibraryApplication.stage.setMinWidth(280);
+            LibraryApplication.stage.setMinHeight(400);
         });
 
         AnchorPane.setTopAnchor(rightPane, 0.0);
@@ -80,15 +71,17 @@ public class StartPageController implements Initializable {
         AnchorPane.setBottomAnchor(rightPane, 0.0);
 
         rootPane.widthProperty().addListener((obs, oldW, newW) -> {
-            updateLayout(newW.doubleValue(), rootPane.getHeight());
+            debounce.setOnFinished(e -> updateLayout(newW.doubleValue(), rootPane.getHeight()));
+            debounce.playFromStart();
         });
 
         rootPane.heightProperty().addListener((obs, oldH, newH) -> {
-            updateLayout(rootPane.getWidth(), newH.doubleValue());
+            debounce.setOnFinished(e -> updateLayout(rootPane.getWidth(), newH.doubleValue()));
+            debounce.playFromStart();
         });
 
         Platform.runLater(() -> {
-            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+            LibraryApplication.stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
                 if (isNowFullScreen) {
                     System.out.println("Entered full screen mode.");
                     updateLayout(rootPane.getWidth(), rootPane.getHeight());
@@ -129,30 +122,30 @@ public class StartPageController implements Initializable {
     private void updateLayout(double width, double height) {
         // Adjust layout based on width and height
         System.out.println("Width: " + width + ", Height: " + height);
-        if (width < 650) {
-            AnchorPane.clearConstraints(rightPane);
-            animateToCenter(width, height);
-        } 
-        else {
-            rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 0;"); 
-            AnchorPane.setTopAnchor(rightPane, 0.0);
-            AnchorPane.setRightAnchor(rightPane, 0.0);
-            AnchorPane.setBottomAnchor(rightPane, 0.0);
-        }
+        AnchorPane.clearConstraints(rightPane);
+        animateToCenter(width, height);
     }
 
     private void animateToCenter(double width, double height) {
+        // Cancel any previous animation
+        if (centerAnimation != null) {
+            centerAnimation.stop();
+        }
+        rightPane.layout();
+
         double rootWidth = width;
         double rootHeight = height;
 
-        double targetWidth = Math.max(300, rootWidth * 0.5);  // prevent too small width
+        double targetWidth = Math.max(256.5, rootWidth * 0.5); // prevent too small width
         double targetHeight = Math.max(200, rootHeight * 0.7); // prevent too small height
-
+        if (targetWidth > 325.0) {
+            targetWidth = 325.0; // prevent too big
+        } 
+        if (targetHeight > 391) {
+            targetHeight = 391.0; // prvent too big
+        }
         double targetX = (rootWidth - targetWidth) / 2;
         double targetY = (rootHeight - targetHeight) / 2;
-
-        // Optional: make it resizable and round corners 45, 90, 39 244, 236, 236
-        rightPane.setStyle("-fx-background-color: rgb(244, 236, 236); -fx-background-radius: 20;"); 
 
         KeyValue widthKV = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
         KeyValue heightKV = new KeyValue(rightPane.prefHeightProperty(), targetHeight, Interpolator.EASE_BOTH);
@@ -160,47 +153,29 @@ public class StartPageController implements Initializable {
         KeyValue yKV = new KeyValue(rightPane.layoutYProperty(), targetY, Interpolator.EASE_BOTH);
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(500), widthKV, heightKV, xKV, yKV);
-        Timeline timeline = new Timeline(keyFrame);
+        centerAnimation = new Timeline(keyFrame);
 
         // Wait for layout to be ready
-        timeline.setOnFinished(e -> {
+        centerAnimation.setOnFinished(e -> {
             Platform.runLater(() -> {
                 // Force a re-layout to finalize the animation effect
                 rightPane.requestLayout();
             });
         });
-        
-        timeline.setDelay(Duration.millis(100)); // Delay before animation starts
-        timeline.play();
+        centerAnimation.setDelay(Duration.millis(100));
+        centerAnimation.play();
     }
 
 
     //click Member to login page for Member with register
     @FXML
-    private void clickMember(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private void clickMember(MouseEvent event) {
+        LibraryApplication.loadLoginMemberPage();
     }
 
     //click Admin to login as Admin
     @FXML
-    private void clickAdmin(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("admin-login.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void showMember(MouseEvent event) {
-        member.translateXProperty().bind(memberSignin.translateXProperty());
-    }
-
-    public void showAdmin(MouseEvent event) {
+    private void clickAdmin(MouseEvent event) {
+        LibraryApplication.loadLoginAdminPage();
     }
 }

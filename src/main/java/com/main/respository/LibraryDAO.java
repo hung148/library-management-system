@@ -333,7 +333,7 @@ public class LibraryDAO {
                 member.setBalance(rs.getDouble("balance"));
                 memberList.add(member);
             }
-            System.out.println("Retrieve meber list sucessfully");
+            System.out.println("Retrieve member list sucessfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

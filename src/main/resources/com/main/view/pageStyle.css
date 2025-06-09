@@ -12,19 +12,18 @@
     -fx-background-size: cover;
 }
 
+.rightBG {
+    -fx-background-color: rgb(244, 236, 236);
+    -fx-background-radius: 20;
+}
 
 .header{
     -fx-font-family: "Century Schoolbook";
     -fx-font-size: 25;
 }
-VBox{
-    -fx-background-color: rgb(251, 234, 234);
-}
 
-.conerHeader {
-    -fx-background-color: rgba(216, 27, 27, 0.45);
-    -fx-border-color: gray;
-}
+
+
 /* style for admin and member account*/
 .accountLabels {
     -fx-font-family: "Nirmala UI";
@@ -33,18 +32,119 @@ VBox{
 
 .startLabels {
     -fx-alignment: center;            /* centers text inside the Label */
-    -fx-text-alignment: center;       /* useful for multiline text */
+    -fx-text-alignment: center; 
+    /* useful for multiline text */
+    -fx-transition: all 0.2s ease-in-out;
 }
 
 .startLabels:hover {
-    -fx-underline: true;
+    /*-fx-underline: true;*/
     -fx-scale-x: 1.05;                     /* Slightly scale up */
     -fx-scale-y: 1.05;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 3);
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 3);*/
+}
+
+.memberloginpagebutton {
+    -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
+    -fx-border-color: dimgray;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-text-alignment: center;
+    -fx-alignment: center;          /* center text horizontally and vertically */
+    -fx-pref-height: 20px;          /* fixed height */
+    -fx-pref-width: 70px;           /* fixed width */
+    -fx-cursor: hand;               /* cursor pointer on hover */
+    -fx-font-size: 14px;            /* adjust font size if needed */
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.memberloginpagebutton:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.back {
+    -fx-transition: all 0.2s ease-in-out; /* Smoothness for using effects */
+}
+
+.back:hover {
+    -fx-text-fill: #0078D7;              /* Hover color */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.back:pressed {
+    -fx-text-fill: #004c99;              /* Clicked color */
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.alertLogin {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 0 0 0;
 }
 
 @media only screen and (max-width: 600px){
 
     
 }
+
+VBox{
+    -fx-background-color: rgba(255, 219, 219, 0.38);
+    -fx-spacing: 5;
+    -fx-pref-width: 102;
+}
+
+.member-page-buttons {
+    -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
+    -fx-border-style: hidden;
+    -fx-border-color: dimgray;
+    -fx-border-width: 0.7;
+    -fx-border-radius: 2;           /*radius of each corner of border*/
+    -fx-text-alignment: center;
+    -fx-alignment: center;          /* center text horizontally and vertically */
+    -fx-pref-height: 55;          /* fixed height */
+    -fx-pref-width: 100;           /* fixed width */
+    -fx-cursor: hand;               /* cursor pointer on hover */
+    -fx-font-size: 13;
+    /*-fx-transition: all 0.5s ease-in;*/
+    -fx-effect: dropshadow(gaussian, rgba(255, 219, 219, 0.51), 5, 0, 0, 2);
+
+}
+.member-page-buttons:hover, member-page-buttons:focused{
+    -fx-float: left;
+    -fx-text-fill: rgba(255, 255, 255, 0.99);
+    -fx-background-color: rgba(0, 0, 0, 0.36) ;
+}
+
+.corner-header {
+    -fx-font-family: "Century Schoolbook";
+    -fx-font-size: 13;
+    -fx-wrap-text: true;
+    -fx-text-overrun: clip;
+    -fx-underline: true;
+}
+
+.corner-box {
+    -fx-background-color: rgba(216, 27, 27, 0.45);
+    -fx-border-color: gray;
+}
+
+.scroll-container-book {
+    -fx-pref-width: 340;
+    -fx-pref-height: 400;
+    -fx-background-color: rgba(255, 219, 219, 0.51);
+    -fx-scroll-behavior: smooth;
+    -fx-overflow-y: scroll;
+}
+.scroll-container-book:horizontal, scorll-container-book:vertical{
+    -fx-background-color: transparent;
+}
+.scroll-container-book .thumb{
+    -fx-background-color: #b1aeae;
+}
+
+
+
 

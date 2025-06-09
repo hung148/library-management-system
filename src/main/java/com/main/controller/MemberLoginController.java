@@ -23,106 +23,190 @@ package com.main.controller;
 import com.main.entity.Book;
 import com.main.entity.Member;
 import com.main.entity.User;
-import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 
-
-import java.io.IOException;
 import java.net.URL;
-
+import java.util.ResourceBundle;
 
 import com.main.view.LibraryApplication;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 
-public class MemberLoginController {
+public class MemberLoginController implements Initializable {
     @FXML
     public Label alertLogin;
     @FXML
     private PasswordField inputPassword;
     @FXML
     private TextField inputUsername;
+    @FXML
+    private AnchorPane rightPane;
+    @FXML
+    private AnchorPane leftPane;
+    @FXML
+    private AnchorPane rootPane;
 
-
-    private Parent root;
-    private Scene scene;
-    private Stage stage;
     public static User user;
     public static Member member;
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
+    private PauseTransition debounce = new PauseTransition(Duration.millis(120));
+    private Timeline centerAnimation;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resuorces) {
+        alertLogin.getStyleClass().add("alertLogin");
+        // add drop shadow effect
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setOffsetX(5);
+        dropShadow.setOffsetY(5);
+        dropShadow.setColor(Color.rgb(0, 0, 0, 0.7));
+        rightPane.setEffect(dropShadow);
+
+        Platform.runLater(() -> {
+            LibraryApplication.stage.setMinWidth(400);
+            LibraryApplication.stage.setMinHeight(570);
+        });
+
+        rootPane.widthProperty().addListener((obs, oldW, newW) -> {
+            debounce.setOnFinished(e -> updateLayout(newW.doubleValue(), rootPane.getHeight()));
+            debounce.playFromStart();
+        });
+
+        rootPane.heightProperty().addListener((obs, oldH, newH) -> {
+            debounce.setOnFinished(e -> updateLayout(rootPane.getWidth(), newH.doubleValue()));
+            debounce.playFromStart();
+        });
+
+        Platform.runLater(() -> {
+            LibraryApplication.stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+                if (isNowFullScreen) {
+                    System.out.println("Entered full screen mode.");
+                    updateLayout(rootPane.getWidth(), rootPane.getHeight());
+                    System.out.println(rightPane.getLayoutX() + " " + rightPane.getLayoutY());
+                } else {
+                    System.out.println("Exited full screen mode.");
+                    updateLayout(rootPane.getWidth(), rootPane.getHeight());
+                    System.out.println(rightPane.getLayoutX() + " " + rightPane.getLayoutY()); // this is still update right
+                }
+            });
+        });
+    }
+
+    private void updateLayout(double width, double height) {
+        // Adjust layout based on width and height
+        System.out.println("Width: " + width + ", Height: " + height);
+        AnchorPane.clearConstraints(rightPane);
+        animateToCenter(width, height);
+    }
+
+    private void animateToCenter(double width, double height) {
+        // Cancel any previous animation
+        if (centerAnimation != null) {
+            centerAnimation.stop();
+        }
+        rightPane.layout();
+
+        double rootWidth = width;
+        double rootHeight = height;
+
+        double targetWidth = 350;
+        double targetHeight = 400;
+        double targetX = (rootWidth - targetWidth) / 2;
+        double targetY = (rootHeight - targetHeight) / 2;
+
+        KeyValue widthKV = new KeyValue(rightPane.prefWidthProperty(), targetWidth, Interpolator.EASE_BOTH);
+        KeyValue heightKV = new KeyValue(rightPane.prefHeightProperty(), targetHeight, Interpolator.EASE_BOTH);
+        KeyValue xKV = new KeyValue(rightPane.layoutXProperty(), targetX, Interpolator.EASE_BOTH);
+        KeyValue yKV = new KeyValue(rightPane.layoutYProperty(), targetY, Interpolator.EASE_BOTH);
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(500), widthKV, heightKV, xKV, yKV);
+        centerAnimation = new Timeline(keyFrame);
+
+        // Wait for layout to be ready
+        centerAnimation.setOnFinished(e -> {
+            Platform.runLater(() -> {
+                // Force a re-layout to finalize the animation effect
+                rightPane.requestLayout();
+            });
+        });
+        centerAnimation.setDelay(Duration.millis(100));
+        centerAnimation.play();
+    }
 
     // method to open up Register page for new member
     @FXML
-    private void onRegisterClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        LibraryApplication.addCSS(scene);
-        stage.setScene(scene);
-        stage.show();
+    private void onRegisterClick(ActionEvent event) {
+        LibraryApplication.loadRegisterPage();
     }
 
     //click Back to go back to Start-page with the 2 options
     @FXML
-    private void backToStart(MouseEvent event) throws IOException {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = LibraryApplication.loadStartPage();
-        LibraryApplication.addCSS(scene);
-        stage.setScene(scene);
-        stage.show();
+    private void backToStart(MouseEvent event) {
+        LibraryApplication.loadStartPage();
     }
 
     @FXML
-    private void onSignInClick(ActionEvent event) throws IOException {
+    private void onSignInClick(ActionEvent event) {
         System.out.println("Sign In clicked");
 
         String username = inputUsername.getText();
         String password = inputPassword.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            alertLogin.setText("Please enter both username and password.");
+            alertLogin.setText("* Please enter both username and password.");
+            setAlertLoginToEmpty();
             return;
         }
 
         member = loadMember(username, password);
         if (member != null) {
-            alertLogin.setText("Login successful!");
-            try {
-                URL fxmlPath = getClass().getResource("/com/main/view/member-page.fxml");
-                if (fxmlPath == null) {
-                    alertLogin.setText("FXML file not found.");
-                    return;
+            LibraryApplication.loadMemberPage();
+        } else {
+            alertLogin.setText("* Invalid username or password.");
+            setAlertLoginToEmpty();
+        }
+    }
+
+    private void setAlertLoginToEmpty() {
+        Thread stop = new Thread() {
+            @Override
+            public void run() {
+                // wait for 1 minute then set alertLogin text to empty
+                try {
+                    Thread.sleep(60_000); // wait 1 minute (60,000 ms)
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
-                FXMLLoader loader = new FXMLLoader(fxmlPath);
-                Parent root = loader.load();
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                LibraryApplication.addCSS(scene);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                alertLogin.setText("Failed to load member page.");
+                // Update UI on JavaFX thread
+                Platform.runLater(() -> {
+                    alertLogin.setText("");
+                    System.out.println("Set alertLogin to empty");
+                });
             }
-        } else {
-            alertLogin.setText("Invalid username or password.");
-        }
+        };
+        stop.setDaemon(true); // Optional: stops thread when app exits
+        stop.start();
     }
 
     private Member loadMember(String username, String password) {
