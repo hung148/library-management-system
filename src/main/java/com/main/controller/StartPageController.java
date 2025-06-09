@@ -176,6 +176,6 @@ public class StartPageController implements Initializable {
     //click Admin to login as Admin
     @FXML
     private void clickAdmin(MouseEvent event) {
-        LibraryApplication.loadLoginMemberPage();
+        LibraryApplication.loadLoginAdminPage();
     }
 }
