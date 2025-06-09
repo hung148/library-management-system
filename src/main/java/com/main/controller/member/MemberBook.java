@@ -29,6 +29,8 @@ public class MemberBook {
     private TableColumn<Book,String> isbnCol;
     @FXML
     private TableColumn<Book,String> titleCol;
+    @FXML
+    private TableColumn<Book,String> publisherCol;
 
     //Second table: Past Borrow
     @FXML
@@ -39,6 +41,8 @@ public class MemberBook {
     private TableColumn<Book,String> titleCol1;
     @FXML
     private TableColumn<Book,String> authorCol1;
+    @FXML
+    private TableColumn<Book,String> publisherCol1;
 
     // Book lists
     private ObservableList<Book> allBooks = FXCollections.observableArrayList();
@@ -51,10 +55,12 @@ public class MemberBook {
         titleCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_title()));
         isbnCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_ISBN()));
         authorCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_author()));
+        publisherCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_publisher()));
 
         titleCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_title()));
         isbnCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_ISBN()));
         authorCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_author()));
+        publisherCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_publisher()));
 
         // Sample data
         allBooks.addAll(

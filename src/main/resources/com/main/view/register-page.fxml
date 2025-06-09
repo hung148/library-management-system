@@ -8,7 +8,7 @@
     <Pane layoutX="-11.0" layoutY="13.0" opacity="0.77" prefHeight="406.0" prefWidth="283.0" styleClass="leftBG" />
     <Pane layoutX="238.0" layoutY="9.0" styleClass="loginBG">
         
-        <Button fx:id="register" layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register!" />
+        <Button fx:id="register" layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleRegister" text="Register!" />
         <Button contentDisplay="CENTER" layoutX="218.0" layoutY="372.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
         <Label alignment="TOP_LEFT" layoutX="78.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="158.0" styleClass="header" text="the bookkeepers' library" textFill="#374660e5" underline="true" wrapText="true" />
         
@@ -31,13 +31,26 @@
             <Label styleClass="subLabels" text="library ID:" GridPane.rowIndex="3" />
             <Label styleClass="subLabels" text="username:" GridPane.rowIndex="4" />
             <Label styleClass="subLabels" text="password:" GridPane.rowIndex="5" />
-            
-            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="164.0" scaleShape="false" GridPane.columnIndex="1" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxWidth="-Infinity" prefHeight="25.0" prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            <TextField fx:id="nameField" maxWidth="-Infinity" prefHeight="25.0"
+                       prefWidth="164.0" GridPane.columnIndex="1" />
+
+            <TextField fx:id="lastNameField" maxWidth="-Infinity" prefHeight="25.0"
+                       prefWidth="164.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <TextField fx:id="emailField" maxHeight="-Infinity" maxWidth="-Infinity"
+                       prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1"
+                       GridPane.rowIndex="2" />
+
+            <TextField fx:id="libraryIdField" maxWidth="-Infinity" prefHeight="25.0"
+                       prefWidth="164.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <TextField fx:id="usernameField" maxWidth="-Infinity" prefHeight="25.0"
+                       prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity"
+                           prefHeight="25.0" prefWidth="135.0" GridPane.columnIndex="1"
+                           GridPane.rowIndex="5" />
         </GridPane>
       <padding>
          <Insets bottom="25.0" right="50.0" />

@@ -46,4 +46,9 @@ public class Book {
     	System.out.println("Book's total copies: " + _totalCopies);
     	System.out.println("Book's available copies: " + _availableCopies);
     }
+
+    @Override
+    public String toString() {
+        return get_title() + " - " + get_author() + " (ISBN: " + get_ISBN() + ")";
+    }
 }

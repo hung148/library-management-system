@@ -205,10 +205,14 @@ public class LibraryDAO {
 
     // add, remove, get, update member
     public static void addMember(String email, String password, String username, String name, double balance) {
+        System.out.println("Attempting to add member: " + email);
+
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            System.out.println("Executing SQL: " + sql);
+
             pstmt.setString(1, email);
             pstmt.setString(2, AuthServices.generateHashedPassword(password));
             pstmt.setString(3, username);
@@ -216,9 +220,17 @@ public class LibraryDAO {
             pstmt.setString(5, "member");
             pstmt.setString(6, "normal");
             pstmt.setDouble(7, balance);
-            pstmt.executeUpdate();
-            System.out.println("Member added successfully");
+
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected); // Debug log
+
+            if (rowsAffected > 0) {
+                System.out.println("Member added successfully");
+            } else {
+                System.out.println("No rows affected - member not added");
+            }
         } catch (SQLException e) {
+            System.err.println("SQL Error adding member: " + e.getMessage()); // Better error logging
             e.printStackTrace();
         }
     }

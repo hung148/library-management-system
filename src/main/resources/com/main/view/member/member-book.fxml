@@ -13,13 +13,15 @@
                   <TableColumn fx:id="authorCol" prefWidth="87.66667175292969" text="Author" />
                   <TableColumn fx:id="isbnCol" prefWidth="132.33331298828125" text="ISBN" />
                   <TableColumn fx:id="titleCol" maxWidth="105.33333333333331" prefWidth="105.33333333333331" text="Title" />
+                  <TableColumn fx:id="publisherCol" prefWidth="87.66667175292969" text="Publisher" />
                </columns>
             </TableView>
             <TableView fx:id="pastBooks" layoutX="63.0" layoutY="334.0" prefHeight="121.0" prefWidth="327.0">
                <columns>
-                  <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
-                  <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
-                  <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
+                   <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
+                   <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
+                   <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
+                   <TableColumn fx:id="publisherCol1" prefWidth="87.66667175292969" text="Publisher" />
                </columns>
             </TableView>
             <Label layoutX="63.0" layoutY="144.0" prefHeight="17.0" prefWidth="94.0" text="Current Borrows" />
