@@ -4,35 +4,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToWidth="true" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
-   <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0">
-        
+<AnchorPane stylesheets="@../pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
+    <ScrollPane fitToWidth="true" hvalue="0.59" minHeight="-Infinity" minWidth="-Infinity" pannable="true" styleClass="scroll-container-book" vvalue="0.47">
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="499.0">
+            
             <TableView fx:id="currentBooks" layoutX="63.0" layoutY="168.0" prefHeight="121.0" prefWidth="327.0">
-               <columns>
-                  <TableColumn fx:id="authorCol" prefWidth="87.66667175292969" text="Author" />
-                  <TableColumn fx:id="isbnCol" prefWidth="132.33331298828125" text="ISBN" />
-                  <TableColumn fx:id="titleCol" maxWidth="105.33333333333331" prefWidth="105.33333333333331" text="Title" />
-               </columns>
+                <columns>
+                    <TableColumn fx:id="authorCol" prefWidth="87.66667175292969" text="Author" />
+                    <TableColumn fx:id="isbnCol" prefWidth="132.33331298828125" text="ISBN" />
+                    <TableColumn fx:id="titleCol" maxWidth="105.33333333333331" prefWidth="105.33333333333331" text="Title" />
+                </columns>
             </TableView>
             <TableView fx:id="pastBooks" layoutX="63.0" layoutY="334.0" prefHeight="121.0" prefWidth="327.0">
-               <columns>
-                  <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
-                  <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
-                  <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
-               </columns>
+                <columns>
+                    <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
+                    <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
+                    <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
+                </columns>
             </TableView>
             <Label layoutX="63.0" layoutY="144.0" prefHeight="17.0" prefWidth="94.0" text="Current Borrows" />
             <Label layoutX="63.0" layoutY="309.0" prefHeight="17.0" prefWidth="83.0" text="Past Borrows" />
-         <Label layoutX="63.0" layoutY="26.0" prefHeight="17.0" prefWidth="132.0" text="Search Book to Borrow:" />
-         <TextField fx:id="searchBook" layoutX="195.0" layoutY="22.0" prefHeight="25.0" prefWidth="175.0" />
-         <ListView fx:id="resultBook" layoutX="63.0" layoutY="57.0" prefHeight="48.0" prefWidth="327.0" />
-         <Button layoutX="408.0" layoutY="81.0" mnemonicParsing="false" onAction="#onClickBorrow" text="Borrow" />
-         <Button layoutX="382.0" layoutY="22.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
-         <Button layoutX="408.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClickReturn" text="Return" />
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </AnchorPane>
-   </content>
-</ScrollPane>
+            <Label layoutX="63.0" layoutY="26.0" prefHeight="17.0" prefWidth="132.0" text="Search Book to Borrow:" />
+            <TextField fx:id="searchBook" layoutX="195.0" layoutY="22.0" prefHeight="25.0" prefWidth="175.0" />
+            <ListView fx:id="resultBook" layoutX="63.0" layoutY="57.0" prefHeight="48.0" prefWidth="327.0" />
+            <Button layoutX="408.0" layoutY="81.0" mnemonicParsing="false" onAction="#onClickBorrow" text="Borrow" />
+            <Button layoutX="382.0" layoutY="22.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
+            <Button layoutX="408.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClickReturn" text="Return" />
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </AnchorPane>
+    </ScrollPane>
+</AnchorPane>
