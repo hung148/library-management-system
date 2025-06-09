@@ -180,8 +180,6 @@ public class MemberLoginController implements Initializable {
 
         member = loadMember(username, password);
         if (member != null) {
-            alertLogin.setText("Login successful!");
-            setAlertLoginToEmpty();
             LibraryApplication.loadMemberPage();
         } else {
             alertLogin.setText("* Invalid username or password.");
