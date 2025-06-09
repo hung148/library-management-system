@@ -26,7 +26,7 @@ public class RegisterController {
     //Cancel click goes back to Member login page
     @FXML
     private void onCancelClick(ActionEvent event) {
-        LibraryApplication.loadMemberPage();
+        LibraryApplication.loadLoginMemberPage();
 
     }
 }

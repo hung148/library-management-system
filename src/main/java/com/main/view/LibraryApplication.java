@@ -22,15 +22,19 @@ public class LibraryApplication extends Application {
 
     // Loaders for different FXML pages
     public static FXMLLoader startPageloader = new FXMLLoader(LibraryApplication.class.getResource("start-page.fxml"));
-    public static FXMLLoader memberPageloader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
-    public static FXMLLoader adminPageloader = new FXMLLoader(LibraryApplication.class.getResource("admin-login.fxml"));
+    public static FXMLLoader memberLoginPageloader = new FXMLLoader(LibraryApplication.class.getResource("/com/main/view/member-login.fxml"));
+    public static FXMLLoader adminLoginPageloader = new FXMLLoader(LibraryApplication.class.getResource("admin-login.fxml"));
     public static FXMLLoader registerPageloader = new FXMLLoader(LibraryApplication.class.getResource("register-page.fxml"));
+    public static FXMLLoader memberPageloader = new FXMLLoader(LibraryApplication.class.getResource("member-page.fxml"));
+    public static FXMLLoader adminPageloader = new FXMLLoader(LibraryApplication.class.getResource("admin-page.fxml"));
     
     // Root nodes (Parent) for each page
     public static Parent startPageroot;
+    public static Parent memberLoginPageroot;
+    public static Parent adminLoginPageroot;
+    public static Parent registerPageroot;
     public static Parent memberPageroot;
     public static Parent adminPageroot;
-    public static Parent registerPageroot;
 
     // A single StackPane used to hold all pages for fast switching
     public static StackPane root; 
@@ -47,12 +51,16 @@ public class LibraryApplication extends Application {
             // Load and store all pages only once at startup for faster switching
             startPageroot = startPageloader.load();
             pages.add(startPageroot);
+            memberLoginPageroot = memberLoginPageloader.load();
+            pages.add(memberLoginPageroot);
+            adminLoginPageroot = adminLoginPageloader.load();
+            pages.add(adminLoginPageroot);
+            registerPageroot = registerPageloader.load();
+            pages.add(registerPageroot);
             memberPageroot = memberPageloader.load();
             pages.add(memberPageroot);
             adminPageroot = adminPageloader.load();
             pages.add(adminPageroot);
-            registerPageroot = registerPageloader.load();
-            pages.add(registerPageroot);
 
             // Set all pages to invisible initially
             setVisible(false);
@@ -104,7 +112,18 @@ public class LibraryApplication extends Application {
     }
 
     /**
-     * Load the admin login page
+     * Load the member page
+     */
+    public static void loadMemberPage() {
+        long before = System.currentTimeMillis();
+        setVisible(false);
+        memberPageroot.toFront();
+        memberPageroot.setVisible(true);
+        System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
+    }
+
+    /**
+     * Load the admin page
      */
     public static void loadAdminPage() {
         long before = System.currentTimeMillis();
@@ -115,13 +134,24 @@ public class LibraryApplication extends Application {
     }
 
     /**
-     * Load the member login page
+     * Load the admin login page
      */
-    public static void loadMemberPage() {
+    public static void loadLoginAdminPage() {
         long before = System.currentTimeMillis();
         setVisible(false);
-        memberPageroot.toFront();
-        memberPageroot.setVisible(true);
+        adminLoginPageroot.toFront();
+        adminLoginPageroot.setVisible(true);
+        System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
+    }
+
+    /**
+     * Load the member login page
+     */
+    public static void loadLoginMemberPage() {
+        long before = System.currentTimeMillis();
+        setVisible(false);
+        memberLoginPageroot.toFront();
+        memberLoginPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
     }
 

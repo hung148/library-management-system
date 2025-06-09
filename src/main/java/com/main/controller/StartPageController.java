@@ -170,12 +170,12 @@ public class StartPageController implements Initializable {
     //click Member to login page for Member with register
     @FXML
     private void clickMember(MouseEvent event) {
-        LibraryApplication.loadMemberPage();
+        LibraryApplication.loadLoginMemberPage();
     }
 
     //click Admin to login as Admin
     @FXML
     private void clickAdmin(MouseEvent event) {
-        LibraryApplication.loadAdminPage();
+        LibraryApplication.loadLoginMemberPage();
     }
 }
