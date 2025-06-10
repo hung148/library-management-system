@@ -11,6 +11,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -182,15 +183,10 @@ public class LibraryApplication extends Application {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
+        alert.setContentText(message);
 
-        // Optional: apply custom style to dialog
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(LibraryApplication.class.getResource("pageStyle.css").toExternalForm());
-        dialogPane.getStyleClass().add("custom-alert");
-        Label content = new Label(message);
-        content.setWrapText(true);
-        alert.getDialogPane().setContent(content);
-
+        alert.initOwner(stage); // Set the owner to prevent full screen inheritance
+        alert.setResizable(false); // Disable resizing to maintain fixed size
         alert.showAndWait();
     }
 

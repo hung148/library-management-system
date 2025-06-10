@@ -1,7 +1,18 @@
 package com.main.entity;
 
 public class Admin extends User {
+    public Admin() {}
 
+    public Admin(Admin admin) {
+        this.id = admin.getId();
+        this.name = admin.getName();
+        this.username = admin.getUsername();
+        this.hashpassword = admin.getHashPassword();
+        this.email = admin.getEmail();
+        this.status = admin.getStatus();
+        this.type = admin.getType();
+        this.balance = admin.getBalance();
+    }
     @Override
     public String getEmail() {
         return email;

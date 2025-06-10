@@ -11,7 +11,7 @@ import com.main.services.AuthServices;
 public class LibraryDAO {
     
     // add, remove, get, update admin
-    public static void addAdmin(String email, String password, String username, String name, double balance) {
+    public static void addAdmin(String email, String password, String username, String name, double balance) throws SQLException {
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = DBInitializer.connect();
@@ -27,6 +27,7 @@ public class LibraryDAO {
             System.out.println("Admin added successfully");
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -204,7 +205,7 @@ public class LibraryDAO {
     }
 
     // add, remove, get, update member
-    public static void addMember(String email, String password, String username, String name, double balance) {
+    public static void addMember(String email, String password, String username, String name, double balance) throws SQLException {
         System.out.println("Attempting to add member: " + email);
 
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -232,6 +233,7 @@ public class LibraryDAO {
         } catch (SQLException e) {
             System.err.println("SQL Error adding member: " + e.getMessage()); // Better error logging
             e.printStackTrace();
+            throw e;
         }
     }
 

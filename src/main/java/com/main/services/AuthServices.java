@@ -1,5 +1,7 @@
 package com.main.services;
 
+import java.sql.SQLException;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.main.entity.Admin;
@@ -48,6 +50,33 @@ public class AuthServices {
          System.out.println("admin not exist in database");
         return null;
     }
-    // register 
 
+    // register email, password, username, name, balance
+    public static boolean memberRegister(String email, String password, 
+        String username, String name, double balance) {
+            try {
+                LibraryDAO.addMember(email, password, username, name, balance);
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+    }
+
+    // only admin can register another admin
+    public static boolean adminRegister(Admin admin, String email, String password, 
+        String username, String name, double balance) {
+        for (Admin adminInDB : LibraryDAO.getAdminList()) {
+            if (admin.getId() == adminInDB.getId()) {
+                try {
+                    LibraryDAO.addAdmin(email, password, username, name, balance);
+                    return true;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }
+        return false; 
+    }
 }

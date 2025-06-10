@@ -9,8 +9,8 @@ import com.main.services.AuthServices;
 import com.main.services.LibraryServices;
 
 public class TestDB {
-    public static void main(String[] args) {
-        //testAdminAndUser();
+    public static void main(String[] args) throws Exception {
+        testAdminAndUser();
         testSearchFunction();
     }
     public static void testSearchFunction() {
@@ -53,70 +53,70 @@ public class TestDB {
         Book's available copies: 50
         */
     }
-    public static void testAdminAndUser() {
+    public static void testAdminAndUser() throws Exception {
         DBInitializer.initializeDB();
-        System.out.println("Test addAdmin()");
-        LibraryDAO.addAdmin(
-            "trinhhungqt2004@gmail.com", 
-            "NguyenHungSky123@", 
-            "hung123", 
-            "Trinh Dinh Nguyen Hung", 
-            1000);
-        LibraryDAO.addAdmin(
-            "test1@gmail.com", 
-            "pass1", 
-            "adminname1", 
-            "name1", 
-            2000);
-        LibraryDAO.addAdmin(
-            "test2@gmail.com", 
-            "pass2", 
-            "adminname2", 
-            "name2", 
-            3000);
-        System.out.println("Test getAdminList()");
-        for (Admin admin : LibraryDAO.getAdminList()) {
-            System.out.println("----------------------------");
-            System.out.println(admin.toString());
-            System.out.println("----------------------------");
-        }
-        System.out.println("Test getAdminByUsername()");
-        System.out.println((LibraryDAO.getAdminByUsername("adminname2") != null) ? LibraryDAO.getAdminByUsername("adminname2").toString() : "");
-        System.out.println("Test getAdminById()");
-        System.out.println("get Admin at id = 1");
-        System.out.println((LibraryDAO.getAdminById(1) != null) ? LibraryDAO.getAdminById(1).toString() : "");
-        System.out.println("Test getAdminByEmail()");
-        System.out.println("get Admin at email = trinhhungqt2004@gmail.com");
-        System.out.println((LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com") != null) ? LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com").toString() : "");
-        System.out.println("Test removeAdmin() by id");
-        System.out.println("remove Admin by id = 2");
-        LibraryDAO.removeAdmin(2);
-        for (Admin admin : LibraryDAO.getAdminList()) {
-            System.out.println("----------------------------");
-            System.out.println(admin.toString());
-            System.out.println("----------------------------");
-        }
-        System.out.println("Test removeAdmin() by email");
-        System.out.println("remove Admin by email = test1@gmail.com");
-        LibraryDAO.removeAdmin("test1@gmail.com");
-        for (Admin admin : LibraryDAO.getAdminList()) {
-            System.out.println("----------------------------");
-            System.out.println(admin.toString());
-            System.out.println("----------------------------");
-        }
-        System.out.println("Test updateAdmin()");
-        Admin newadmin = new Admin();
-        newadmin.setName("newAdmin");
-        newadmin.setEmail("newAdminEmail");
-        newadmin.setHashPassword(AuthServices.generateHashedPassword("newAdminPassword"));
-        newadmin.setUsername("newAdminUsername");
-        newadmin.setBalance(2300);
-        LibraryDAO.updateAdmin("test2@gmail.com", newadmin);
-        for (Admin admin : LibraryDAO.getAdminList()) {
-            System.out.println("----------------------------");
-            System.out.println(admin.toString());
-            System.out.println("----------------------------");
-        }
+        // System.out.println("Test addAdmin()");
+        // LibraryDAO.addAdmin(
+        //     "trinhhungqt2004@gmail.com", 
+        //     "NguyenHungSky123@", 
+        //     "hung123", 
+        //     "Trinh Dinh Nguyen Hung", 
+        //     1000);
+        // LibraryDAO.addAdmin(
+        //     "test1@gmail.com", 
+        //     "pass1", 
+        //     "adminname1", 
+        //     "name1", 
+        //     2000);
+        // LibraryDAO.addAdmin(
+        //     "test2@gmail.com", 
+        //     "pass2", 
+        //     "adminname2", 
+        //     "name2", 
+        //     3000);
+        // System.out.println("Test getAdminList()");
+        // for (Admin admin : LibraryDAO.getAdminList()) {
+        //     System.out.println("----------------------------");
+        //     System.out.println(admin.toString());
+        //     System.out.println("----------------------------");
+        // }
+        // System.out.println("Test getAdminByUsername()");
+        // System.out.println((LibraryDAO.getAdminByUsername("adminname2") != null) ? LibraryDAO.getAdminByUsername("adminname2").toString() : "");
+        // System.out.println("Test getAdminById()");
+        // System.out.println("get Admin at id = 1");
+        // System.out.println((LibraryDAO.getAdminById(1) != null) ? LibraryDAO.getAdminById(1).toString() : "");
+        // System.out.println("Test getAdminByEmail()");
+        // System.out.println("get Admin at email = trinhhungqt2004@gmail.com");
+        // System.out.println((LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com") != null) ? LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com").toString() : "");
+        // System.out.println("Test removeAdmin() by id");
+        // System.out.println("remove Admin by id = 2");
+        // LibraryDAO.removeAdmin(2);
+        // for (Admin admin : LibraryDAO.getAdminList()) {
+        //     System.out.println("----------------------------");
+        //     System.out.println(admin.toString());
+        //     System.out.println("----------------------------");
+        // }
+        // System.out.println("Test removeAdmin() by email");
+        // System.out.println("remove Admin by email = test1@gmail.com");
+        // LibraryDAO.removeAdmin("test1@gmail.com");
+        // for (Admin admin : LibraryDAO.getAdminList()) {
+        //     System.out.println("----------------------------");
+        //     System.out.println(admin.toString());
+        //     System.out.println("----------------------------");
+        // }
+        // System.out.println("Test updateAdmin()");
+        // Admin newadmin = new Admin();
+        // newadmin.setName("newAdmin");
+        // newadmin.setEmail("newAdminEmail");
+        // newadmin.setHashPassword(AuthServices.generateHashedPassword("newAdminPassword"));
+        // newadmin.setUsername("newAdminUsername");
+        // newadmin.setBalance(2300);
+        // LibraryDAO.updateAdmin("test2@gmail.com", newadmin);
+        // for (Admin admin : LibraryDAO.getAdminList()) {
+        //     System.out.println("----------------------------");
+        //     System.out.println(admin.toString());
+        //     System.out.println("----------------------------");
+        // }
         // test member 
         System.out.println("Test addMember()");
         LibraryDAO.addMember(

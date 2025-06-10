@@ -18,13 +18,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -150,6 +156,12 @@ public class AdminLoginController implements Initializable {
 
         if(admin != null) {
             user = admin;
+            if (admin.getEmail().equals("firstAdmin@gmail.com")) {
+                if (password.equals("firstAdminpass")) {
+                    // require to change password
+                    showChangePasswordDialog(LibraryApplication.stage, username);
+                }
+            }
             Collections.addAll(books, LibraryDAO.bookList());
             LibraryApplication.loadAdminPage();
         }
@@ -158,6 +170,46 @@ public class AdminLoginController implements Initializable {
             setAlertLoginToEmpty();
         }
     }
+
+    public void showChangePasswordDialog(Stage owner, String username) {
+        Stage dialog = new Stage();
+        dialog.initOwner(owner);
+        dialog.initStyle(StageStyle.UTILITY);
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.setTitle("Change Password");
+        dialog.setResizable(false);
+
+        PasswordField newPass = new PasswordField();
+        newPass.setPromptText("New password");
+        PasswordField confirmPass = new PasswordField();
+        confirmPass.setPromptText("Confirm password");
+
+        Label errorLabel = new Label();
+        errorLabel.setStyle("-fx-text-fill: red;");
+
+        Button submit = new Button("Change");
+        submit.setOnAction(e -> {
+            String pass = newPass.getText();
+            String confirm = confirmPass.getText();
+
+            if (pass.isEmpty() || confirm.isEmpty()) {
+                errorLabel.setText("Fields cannot be empty.");
+            } else if (!pass.equals(confirm)) {
+                errorLabel.setText("Passwords do not match.");
+            } else {
+                Admin newAdmin = new Admin(admin);
+                newAdmin.setHashPassword(AuthServices.generateHashedPassword(newPass.getText()));
+                LibraryDAO.updateAdmin(admin.getId(), newAdmin);
+                dialog.close();
+            }
+        });
+
+        VBox layout = new VBox(10, new Label("Change your password:"), newPass, confirmPass, errorLabel, submit);
+        layout.setStyle("-fx-padding: 15; -fx-background-color: white;");
+        dialog.setScene(new Scene(layout, 300, 200));
+        dialog.showAndWait(); // block until closed
+    }
+
 
     private void setAlertLoginToEmpty() {
         Thread stop = new Thread() {
