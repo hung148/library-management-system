@@ -18,7 +18,7 @@ public class LibraryServices {
     public static Book[] searchBook(String bookTitle, String bookISBN, String author, String publisher) throws Exception {
         Book[] bookList = LibraryDAO.bookList();
         int maxResult = 10;
-        LevenshteinDistance distance = new LevenshteinDistance(null);
+        LevenshteinDistance distance = new LevenshteinDistance(10);
         if (bookTitle != null) {
             return searchBookHelper(distance, bookTitle, bookList, maxResult, "get_title");
         } else if (bookISBN != null) {
