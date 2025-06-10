@@ -89,7 +89,11 @@ public class MemberBook {
         }
 
         try {
+            
             Book[] bookList = searchBook(keyword, keyword, keyword, keyword);
+            for(Book book : bookList) {
+                book.printBookInfo();
+            }
             ObservableList<Book> results = bookList != null && bookList.length > 0
                     ? FXCollections.observableArrayList(bookList)
                     : FXCollections.observableArrayList();
