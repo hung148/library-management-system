@@ -39,7 +39,8 @@ public class DBInitializer {
         "name TEXT NOT NULL," +
         "type TEXT CHECK(type IN ('admin', 'member')) NOT NULL," +
         "status TEXT CHECK(status IN ('normal', 'suspended')) NOT NULL DEFAULT 'NORMAL'," +
-        "balance REAL NOT NULL DEFAULT 0.0)");
+        "balance REAL NOT NULL DEFAULT 0.0," +
+        "libraryID TEXT UNIQUE)");
         try {
             stmt.execute(sql);
             System.out.println("User table created or already exist.");

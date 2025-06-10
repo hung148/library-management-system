@@ -53,8 +53,8 @@ public class AuthServices {
 
     // register email, password, username, name, balance
     public static boolean memberRegister(String email, String password, 
-        String username, String name, double balance) {
-            return LibraryDAO.addMember(email, password, username, name, balance);
+        String username, String name, double balance, String libraryID) {
+            return LibraryDAO.addMember(email, password, username, name, balance, libraryID);
     }
 
     // only admin can register another admin

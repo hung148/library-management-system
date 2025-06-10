@@ -124,19 +124,19 @@ public class TestDB {
             "pass1", 
             "membername1", 
             "name1", 
-            1000);
+            1000, "123456");
         LibraryDAO.addMember(
             "member2@gmail.com", 
             "pass2", 
             "membername2", 
             "name2", 
-            2000);
+            2000, "12345");
         LibraryDAO.addMember(
             "member3@gmail.com", 
             "pass3", 
             "membername3", 
             "name3", 
-            3000);
+            3000, "1234");
         System.out.println("Test getMemberList()");
         for (Member member : LibraryDAO.getMemberList()) {
             System.out.println("----------------------------");

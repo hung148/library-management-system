@@ -100,4 +100,16 @@ public class Member extends User {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String getLibraryID() {
+        return libraryID;
+    }
+
+    @Override
+    public void setLibraryID(String libraryID) {
+        if (libraryID != null && !libraryID.equals("")) {
+            this.libraryID = libraryID.trim();
+        }
+    }
 }

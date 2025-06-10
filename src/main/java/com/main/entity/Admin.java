@@ -1,6 +1,17 @@
 package com.main.entity;
 
 public class Admin extends User {
+    
+    public Admin(String email, String username, String name, String hashedpassword, double balance) {
+        this.name = name;
+        this.username = username;
+        this.hashpassword = hashedpassword;
+        this.email = email;
+        this.status = "normal";
+        this.type = "admin";
+        this.balance = balance;
+    }
+
     public Admin() {}
 
     public Admin(Admin admin) {
@@ -106,5 +117,15 @@ public class Admin extends User {
     @Override
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String getLibraryID() {
+        return null;
+    }
+
+    @Override
+    public void setLibraryID(String libraryID) {
+        // do nothing
     }
 }

@@ -9,6 +9,11 @@ public abstract class User {
     protected int id; // unique used for identify user in database
     protected String status; // normal, suspended
     protected double balance; // money 
+    protected String libraryID;
+
+    public abstract String getLibraryID();
+
+    public abstract void setLibraryID(String libraryID);
 
     public abstract String getEmail();
 

@@ -149,13 +149,14 @@ public class RegisterController implements Initializable {
         String password = passwordField.getText();
         String name = nameField.getText();
         String email = emailField.getText();
+        String libraryID = libraryIdField.getText();
 
-        if (username.isEmpty() || password.isEmpty() || name.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || email.isEmpty() || libraryID.isEmpty()) {
             LibraryApplication.showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill in all fields.");
             return;
         }
 
-        if (AuthServices.memberRegister(email, password, username, name, 0.0)) {
+        if (AuthServices.memberRegister(email, password, username, name, 0.0, libraryID)) {
             LibraryApplication.showAlert(Alert.AlertType.INFORMATION, "Success", "Member registered successfully.");
             // redirect back to member login page for user to login
             LibraryApplication.loadLoginMemberPage();

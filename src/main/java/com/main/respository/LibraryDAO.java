@@ -205,10 +205,10 @@ public class LibraryDAO {
     }
 
     // add, remove, get, update member
-    public static Boolean addMember(String email, String password, String username, String name, double balance) {
+    public static Boolean addMember(String email, String password, String username, String name, double balance, String libraryID) {
         System.out.println("Attempting to add member: " + email);
 
-        String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (email, password, username, name, type, status, balance, libraryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = DBInitializer.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -221,6 +221,7 @@ public class LibraryDAO {
             pstmt.setString(5, "member");
             pstmt.setString(6, "normal");
             pstmt.setDouble(7, balance);
+            pstmt.setString(8, libraryID);
 
             int rowsAffected = pstmt.executeUpdate();
             System.out.println("Rows affected: " + rowsAffected); // Debug log
