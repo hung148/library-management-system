@@ -6,6 +6,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -173,6 +176,22 @@ public class LibraryApplication extends Application {
         final URL cssURL = LibraryApplication.class.getResource("pageStyle.css");
         assert cssURL != null;
         scene.getStylesheets().add(cssURL.toExternalForm());
+    }
+
+    public static void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+
+        // Optional: apply custom style to dialog
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(LibraryApplication.class.getResource("pageStyle.css").toExternalForm());
+        dialogPane.getStyleClass().add("custom-alert");
+        Label content = new Label(message);
+        content.setWrapText(true);
+        alert.getDialogPane().setContent(content);
+
+        alert.showAndWait();
     }
 
 }

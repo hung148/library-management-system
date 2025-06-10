@@ -55,14 +55,15 @@ public class RegisterController {
         String email = emailField.getText();
 
         if (username.isEmpty() || password.isEmpty() || name.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill in all fields.");
+            LibraryApplication.showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill in all fields.");
             return;
         }
 
         try {
             libraryDAO.addMember(email, password, username, name, 0.0);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Member registered successfully.");
-
+            LibraryApplication.showAlert(Alert.AlertType.INFORMATION, "Success", "Member registered successfully.");
+            // redirect back to member login page for user to login
+            LibraryApplication.loadLoginMemberPage();
             // Optional: Clear the form
             usernameField.clear();
             passwordField.clear();
@@ -72,27 +73,14 @@ public class RegisterController {
             libraryIdField.clear();
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Could not register member.");
+            LibraryApplication.showAlert(Alert.AlertType.ERROR, "Database Error", "Could not register member.");
         }
     }
 
     // Cancel click goes back to Member login page
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("member-login.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        LibraryApplication.addCSS(scene);
-        stage.setScene(scene);
-        stage.show();
+        LibraryApplication.loadLoginMemberPage();
     }
 
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

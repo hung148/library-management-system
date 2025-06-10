@@ -12,9 +12,7 @@
               AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" opacity="0.77" 
               styleClass="leftBG" />
   <AnchorPane fx:id="rightPane" blendMode="SRC_ATOP" focusTraversable="true" 
-              layoutX="241.0" layoutY="10.0" maxHeight="-Infinity" 
-              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
-              pickOnBounds="false" prefHeight="380.0" prefWidth="360.0"
+              maxHeight="-Infinity" maxWidth="-Infinity"  pickOnBounds="false" 
               styleClass="rightBG">
     <GridPane alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="119.0" minWidth="-Infinity" 
               prefHeight="146.0" prefWidth="274.0" vgap="2.0" focusTraversable="true">
@@ -50,8 +48,8 @@
       </Label>
     </AnchorPane>
     <Label graphicTextGap="2.0" layoutX="42.0" layoutY="323.0" styleClass="subLabels" text="Not a member, yet?" />
-    <Button styleClass="memberloginpagebutton" layoutX="175.0" layoutY="320.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
-    <Button styleClass="memberloginpagebutton" layoutX="124.0" layoutY="271.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />
+    <Button styleClass="signinPagebutton" layoutX="175.0" layoutY="320.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
+    <Button styleClass="signinPagebutton" layoutX="124.0" layoutY="271.0" onAction="#onSignInClick" text="Sign in" textFill="000000d4" />
     <Label styleClass="back" layoutX="300.0" layoutY="356.0" onMouseClicked="#backToStart" text="Back" underline="true" />
   </AnchorPane>
 </AnchorPane>

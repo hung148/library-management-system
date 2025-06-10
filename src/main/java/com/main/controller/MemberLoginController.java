@@ -72,7 +72,7 @@ public class MemberLoginController implements Initializable {
     private Timeline centerAnimation;
 
     @Override
-    public void initialize(URL location, ResourceBundle resuorces) {
+    public void initialize(URL location, ResourceBundle resources) {
         alertLogin.getStyleClass().add("alertLogin");
         // add drop shadow effect
         DropShadow dropShadow = new DropShadow();

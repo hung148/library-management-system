@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane styleClass="loginBG" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.RegisterController">
-    <Pane layoutX="-11.0" layoutY="13.0" opacity="0.77" prefHeight="406.0" prefWidth="283.0" styleClass="leftBG" />
-    <Pane layoutX="238.0" layoutY="9.0" styleClass="loginBG">
+<AnchorPane fx:id="rootPane" styleClass="loginBG" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.RegisterController">
+    <AnchorPane fx:id="leftPane" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"  opacity="0.77" styleClass="leftBG" />
+    <AnchorPane fx:id="rightPane" layoutX="238.0" layoutY="9.0" styleClass="rightBG">
         
         <Button fx:id="register" layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleRegister" text="Register!" />
         <Button contentDisplay="CENTER" layoutX="218.0" layoutY="372.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />

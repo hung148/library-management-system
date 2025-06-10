@@ -44,7 +44,7 @@
     /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6, 0, 0, 3);*/
 }
 
-.memberloginpagebutton {
+.signinPagebutton {
     -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
     -fx-border-color: dimgray;
     -fx-border-width: 1;
@@ -58,7 +58,7 @@
     -fx-transition: all 0.2s ease-in-out;
 }
 
-.memberloginpagebutton:hover {
+.signinPagebutton:hover {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
@@ -143,6 +143,28 @@ VBox{
 }
 .scroll-container-book .thumb{
     -fx-background-color: #b1aeae;
+}
+
+/*alert-style*/
+.custom-alert {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f4f8;
+    -fx-padding: 20px;
+}
+
+.custom-alert .content {
+    -fx-text-fill: #333333;
+}
+
+.custom-alert .button-bar .button {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.custom-alert .button-bar .button:hover {
+    -fx-background-color: #005a9e;
 }
 
 
