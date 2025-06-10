@@ -205,7 +205,7 @@ public class LibraryDAO {
     }
 
     // add, remove, get, update member
-    public static void addMember(String email, String password, String username, String name, double balance) throws SQLException {
+    public static Boolean addMember(String email, String password, String username, String name, double balance) {
         System.out.println("Attempting to add member: " + email);
 
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -227,13 +227,15 @@ public class LibraryDAO {
 
             if (rowsAffected > 0) {
                 System.out.println("Member added successfully");
+                return true;
             } else {
                 System.out.println("No rows affected - member not added");
             }
+            return false;
         } catch (SQLException e) {
             System.err.println("SQL Error adding member: " + e.getMessage()); // Better error logging
             e.printStackTrace();
-            throw e;
+            return false;
         }
     }
 

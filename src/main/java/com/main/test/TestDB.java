@@ -188,7 +188,11 @@ public class TestDB {
             "Person3", 
             "publisher3", 
             10);
-        
+        // Sample data
+        LibraryDAO.addBook("1234567890", "Java Basics", "John Doe", "Tech Press", 3);
+        LibraryDAO.addBook("9876543210", "Effective Java", "Joshua Bloch", "Pearson", 5);
+        LibraryDAO.addBook("5555555555", "Clean Code", "Robert Martin", "Prentice Hall", 4);
+
         System.out.println();
         
         System.out.println("Test bookList()");

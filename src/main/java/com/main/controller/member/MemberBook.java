@@ -66,12 +66,29 @@ public class MemberBook {
         authorCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_author()));
         publisherCol1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get_publisher()));
 
-        // Sample data
+        // local book
         allBooks.addAll(
-                new Book("1234567890", "Java Basics", "John Doe", "Tech Press", 3),
-                new Book("9876543210", "Effective Java", "Joshua Bloch", "Pearson", 5),
-                new Book("5555555555", "Clean Code", "Robert Martin", "Prentice Hall", 4)
+                LibraryDAO.bookList() 
         );
+        // update local book if there is new book added
+        Thread update = new Thread() {
+            @Override
+            public void run() {
+                if (allBooks.size() != LibraryDAO.bookList().length) {
+                    allBooks.clear();
+                    allBooks.addAll(
+                            LibraryDAO.bookList() 
+                    );
+                }
+                try {
+                    sleep((long)1000); // update every one second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        update.setDaemon(true); // stop when app exit have to do this before start thread
+        update.start();
 
         // Set initial table contents
         currentBooks.setItems(currentBorrowed);
