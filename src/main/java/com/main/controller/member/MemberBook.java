@@ -1,6 +1,8 @@
 package com.main.controller.member;
 
 import com.main.entity.Book;
+import com.main.respository.LibraryDAO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.beans.property.SimpleStringProperty;
+
+import static com.main.services.LibraryServices.searchBook;
 
 
 public class MemberBook {
@@ -77,18 +81,33 @@ public class MemberBook {
     //type a book name/author/isbn in searchBook and then click Search button then search results will show in resultBook
     @FXML
     private void onClickSearch(ActionEvent event) {
-        String keyword = searchBook.getText().toLowerCase();
-        ObservableList<Book> results = FXCollections.observableArrayList();
+        String keyword = searchBook.getText().trim();
 
-        for (Book book : allBooks) {
-            if (book.get_title().toLowerCase().contains(keyword) ||
-                    book.get_author().toLowerCase().contains(keyword) ||
-                    book.get_ISBN().toLowerCase().contains(keyword)) {
-                results.add(book);
-            }
+        if (keyword.isEmpty()) {
+            resultBook.setItems(FXCollections.observableArrayList(allBooks));
+            return;
         }
 
-        resultBook.setItems(results);
+        try {
+            Book[] bookList = searchBook(keyword, keyword, keyword, keyword);
+            ObservableList<Book> results = bookList != null && bookList.length > 0
+                    ? FXCollections.observableArrayList(bookList)
+                    : FXCollections.observableArrayList();
+
+            resultBook.setItems(results);
+
+            // Fallback to local data if no results from DAO
+            if (results.isEmpty()) {
+                ObservableList<Book> localResults = allBooks.filtered(book ->
+                        book.get_title().toLowerCase().contains(keyword.toLowerCase()) ||
+                                book.get_author().toLowerCase().contains(keyword.toLowerCase()) ||
+                                book.get_ISBN().toLowerCase().contains(keyword.toLowerCase()));
+                resultBook.setItems(localResults);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultBook.setItems(FXCollections.observableArrayList());
+        }
     }
 
     //select book in resultBook and then click Borrow button then book will show up in currentBook
@@ -125,4 +144,6 @@ public class MemberBook {
         pastBooks.setItems(null);
         pastBooks.setItems(pastBorrowed);
     }
+
+
 }

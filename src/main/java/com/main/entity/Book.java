@@ -49,6 +49,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return get_title() + " - " + get_author() + " (ISBN: " + get_ISBN() + ")";
+        return String.format("%s by %s (ISBN: %s)",
+                get_title(), get_author(), get_ISBN());
     }
 }
