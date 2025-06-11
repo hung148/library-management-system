@@ -1,5 +1,6 @@
 package com.main.controller;
 
+import com.main.app.Main;
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.User;
@@ -156,8 +157,8 @@ public class AdminLoginController implements Initializable {
 
         if(admin != null) {
             user = admin;
-            if (admin.getEmail().equals("firstAdmin@gmail.com")) {
-                if (password.equals("firstAdminpass")) {
+            if (admin.getEmail().equals(Main.firstAdminGmail)) {
+                if (password.equals(Main.firstAdminPass)) {
                     // require to change password
                     showChangePasswordDialog(LibraryApplication.stage, username);
                 }
