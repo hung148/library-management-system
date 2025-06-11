@@ -2,6 +2,7 @@ package com.main.controller.admin;
 
 import com.main.entity.Book;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,5 +29,17 @@ public class AdminBook {
         isbnCol.setCellValueFactory(new PropertyValueFactory<>("_ISBN"));
         viewBooks.getItems().addAll(books);
 
+    }
+
+
+    public void clickAdd(ActionEvent event) {
+        
+    }
+
+    public void clickRemove(ActionEvent event) {
+        
+    }
+
+    public void clickEdit(ActionEvent event) {
     }
 }

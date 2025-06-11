@@ -96,7 +96,7 @@ VBox{
     -fx-pref-width: 102;
 }
 
-.member-page-buttons {
+.user-page-buttons {
     -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
     -fx-border-style: hidden;
     -fx-border-color: dimgray;
@@ -112,7 +112,7 @@ VBox{
     -fx-effect: dropshadow(gaussian, rgba(255, 219, 219, 0.51), 5, 0, 0, 2);
 
 }
-.member-page-buttons:hover, member-page-buttons:focused{
+.user-page-buttons:hover, user-page-buttons:focused{
     -fx-float: left;
     -fx-text-fill: rgba(255, 255, 255, 0.99);
     -fx-background-color: rgba(0, 0, 0, 0.36) ;

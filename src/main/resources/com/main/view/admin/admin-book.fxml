@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 
 <Pane opacity="0.87" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminBook">
-     <Button layoutX="98.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
-     <Button layoutX="197.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
-     <Button layoutX="308.0" layoutY="325.0" mnemonicParsing="false" text="Button" />
+     <Button onAction="#clickAdd" layoutX="98.0" layoutY="325.0" text="Add" />
+     <Button onAction="#clickRemove" layoutX="197.0" layoutY="325.0" text="Remove" />
+     <Button onAction="#clickEdit" layoutX="308.0" layoutY="325.0" text="Edit" />
       <TableView fx:id="viewBooks" layoutX="20.0" layoutY="14.0" prefHeight="293.0">
           <columns>
               <TableColumn fx:id="authorCol" prefWidth="134.00001525878906" text="Author" />

@@ -46,7 +46,7 @@ public class MemberController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-homepage.fxml"));
+        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-home.fxml"));
         try {
             memberPage.setCenter(loader.load());
         } catch (IOException e) {
@@ -57,7 +57,7 @@ public class MemberController implements Initializable {
 
     @FXML
     private void clickHomepage(ActionEvent event) throws IOException {
-        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-homepage.fxml"));
+        loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-home.fxml"));
         memberPage.setCenter(loader.load());
     }
 }
