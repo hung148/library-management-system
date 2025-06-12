@@ -67,7 +67,6 @@ public class MemberLoginController implements Initializable {
 
     public static User user;
     public static Member member;
-    public static final ObservableList<Book> books = FXCollections.observableArrayList();
     private PauseTransition debounce = new PauseTransition(Duration.millis(120));
     private Timeline centerAnimation;
 

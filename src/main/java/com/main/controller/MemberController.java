@@ -30,8 +30,6 @@ public class MemberController implements Initializable {
     private void clickBook() throws IOException {
         if(!currentBorrowed.isEmpty()){
             currentBorrowed = FXCollections.observableArrayList();
-
-
         }
         loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-book.fxml"));
         memberPage.setCenter(loader.load());

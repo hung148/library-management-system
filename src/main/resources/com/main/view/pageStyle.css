@@ -90,7 +90,7 @@
     
 }
 
-VBox{
+.user-left-layout{
     -fx-background-color: rgba(255, 219, 219, 0.38);
     -fx-spacing: 5;
     -fx-pref-width: 102;
@@ -108,15 +108,20 @@ VBox{
     -fx-pref-width: 100;           /* fixed width */
     -fx-cursor: hand;               /* cursor pointer on hover */
     -fx-font-size: 13;
-    /*-fx-transition: all 0.5s ease-in;*/
+    -fx-transition: all 0.5s ease-in-out;
     -fx-effect: dropshadow(gaussian, rgba(255, 219, 219, 0.51), 5, 0, 0, 2);
 
 }
-.user-page-buttons:hover, user-page-buttons:focused{
+.user-page-buttons:hover {
     -fx-float: left;
     -fx-text-fill: rgba(255, 255, 255, 0.99);
-    -fx-background-color: rgba(0, 0, 0, 0.36) ;
+    -fx-background-color: rgba(0, 0, 0, 0.36);
 }
+.user-page-buttons:focused{
+     -fx-text-fill: rgba(255, 255, 255, 0.99);
+     -fx-background-color: rgba(0, 0, 0, 0.36);
+}
+
 
 .corner-header {
     -fx-font-family: "Century Schoolbook";
@@ -168,5 +173,10 @@ VBox{
 }
 
 
+.pop-up-labels {
+    -fx-font-family: "Nirmala UI Semilight";
+    -fx-font-size: 18;
+    -fx-background-color: rgb(244, 236, 236);
+    -fx-alignment: center;
 
-
+}

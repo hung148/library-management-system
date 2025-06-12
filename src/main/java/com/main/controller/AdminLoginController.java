@@ -1,6 +1,11 @@
 package com.main.controller;
 
+
+
 import com.main.app.Main;
+
+import com.main.controller.admin.*;
+
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.User;
@@ -163,7 +168,19 @@ public class AdminLoginController implements Initializable {
                     showChangePasswordDialog(LibraryApplication.stage, username);
                 }
             }
-            Collections.addAll(books, LibraryDAO.bookList());
+            //load books and admin's info using Thread bc it is a one-time action
+            //Thread runs once login successfully
+            Thread loadInfoForAdminThread = new Thread(() -> {
+                AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
+                adminAccount.displayAccount(admin.getName(),admin.getEmail(),admin.getUsername());
+
+                Collections.addAll(books, LibraryDAO.bookList());
+                AdminBook adminBook = AdminController.adminBookLoader.getController();
+                adminBook.displayBooks(books);
+
+            });
+            loadInfoForAdminThread.start();
+
             LibraryApplication.loadAdminPage();
         }
         else {

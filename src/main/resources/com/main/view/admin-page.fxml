@@ -5,7 +5,7 @@
 
 <BorderPane fx:id="adminPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
    <left>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="95.0">
+      <VBox styleClass="user-left-layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="95.0">
          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="89.0" prefWidth="104.0" styleClass="subLabels" text="What would you like to manage?" textAlignment="CENTER" wrapText="true" />
          <Button styleClass="user-page-buttons" alignment="CENTER" contentDisplay="CENTER" onAction="#clickHomepage" text="Home" />
          <Button styleClass="user-page-buttons" accessibleText="add or remove books" contentDisplay="BOTTOM" onAction="#clickBook" text="Books" />
