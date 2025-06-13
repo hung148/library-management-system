@@ -535,4 +535,214 @@ public class LibraryDAO {
             e.printStackTrace();
         }
     }
+
+    /*===================================================================================================================================*/
+    // add, remove, get, update borrowedBook table
+    
+    public static void addBorrowedBook(int memberID, Book book) {
+        String sql = "INSERT INTO borrowedBook (status, dateIssued, deadline, returnedDate, "
+        		+ "lateFine, lostFine, isbn, memberId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try(Connection conn = DBInitializer.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        	LocalDate today = LocalDate.now();
+        	
+        	pstmt.setString(1, "pending");
+            pstmt.setString(2, today.toString());
+            pstmt.setString(3, today.plusWeeks(2).toString());
+            pstmt.setNull(4, java.sql.Types.VARCHAR);
+            pstmt.setDouble(5, 0.0);
+            pstmt.setDouble(6, 0.0);
+            pstmt.setString(7, book.get_ISBN());
+            pstmt.setInt(8, memberID);
+            
+            pstmt.executeUpdate();
+            System.out.println("Successfully added borrowed book.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public static void returnBorrowedBook(int memberID, BorrowedBook book, LocalDate returnedDate) {
+    	String sql = "UPDATE borrowedBook SET status = ?, returnedDate = ?, lateFine = ?, lostFine = ? WHERE memberID = ? AND isbn = ?";
+    	try (Connection conn = DBInitializer.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    			BorrowedBook b1 = book;
+    			b1.setReturnedDate(returnedDate);
+    			b1.updateStatusAndFine();
+    			
+    			pstmt.setString(1, b1.getStatus());
+    			pstmt.setString(2, returnedDate.toString());
+    			pstmt.setDouble(3, b1.getLateFine());
+                pstmt.setInt(5, memberID);
+                pstmt.setString(6, book.getBook().get_ISBN());
+
+                int affectedRows = pstmt.executeUpdate();
+                if (affectedRows > 0) {
+                    System.out.println("Borrowed Book is removed.");
+                } else {
+                    System.out.println("No borrowed book found with isbn " + book.getBook().get_ISBN() + ".");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+    
+    public static void removeBorrowedBook(BorrowedBook book) {
+    	String sql = "DELETE FROM borrowedBook WHERE isbn = ?";
+    	try (Connection conn = DBInitializer.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, book.getBook().get_ISBN());
+                int affectedRows = pstmt.executeUpdate();
+                if (affectedRows > 0) {
+                    System.out.println("Borrowed Book is removed.");
+                } else {
+                    System.out.println("No borrowed book found with isbn " + book.getBook().get_ISBN() + ".");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+    
+    public static BorrowedBook searchBorrowedBookByMember(int memberID) {
+    	String sql = "SELECT * FROM borrowedBook WHERE memberId = ?";
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, memberID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+            	BorrowedBook borrowedBook = new BorrowedBook(
+            			rs.getInt("memberId"),
+            			getBook(rs.getString("isbn")),
+                		LocalDate.parse(rs.getString("dateIssued"))
+                		);
+                return borrowedBook;
+            } else {
+                System.out.println("No borrowed book found under memberID: " + memberID);
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static BorrowedBook[] borrowedBookList() {
+        String sql = "SELECT * FROM borrowedBook";
+        List<BorrowedBook> borrowedBookList = new ArrayList<>();
+        
+        try (Connection conn = DBInitializer.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+            	BorrowedBook borrowedBook = new BorrowedBook(
+            			rs.getInt("memberId"),
+                		getBook(rs.getString("isbn")),
+                		LocalDate.parse(rs.getString("dateIssued"))
+                		);
+            	borrowedBookList.add(borrowedBook);
+            }
+            System.out.println("Successfully retrieved borrowed book list.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return borrowedBookList.toArray(new BorrowedBook[0]);
+    }
+    
+    public static double getLostFine(int memberID) {
+    	String sql = "SELECT * FROM borrowedBook WHERE memberId = ?";
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, memberID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("lostFine");
+            } else {
+                System.out.println("There is no lost fine for memberID: " + memberID);
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+    
+    public static double getLateFine(int memberID) {
+    	String sql = "SELECT * FROM borrowedBook WHERE memberId = ?";
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, memberID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("lateFine");
+            } else {
+                System.out.println("There is no late fine for memberID: " + memberID);
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+    
+    public static void payFine(int memberID, double amount, int fineChoice) {
+    	String sql; 
+    	String fineType;
+    	double fine;
+    	if (fineChoice == 1) { // if fineChoice == 1, pay lateFine
+    		sql = "UPDATE borrowedBook SET lateFine = ? WHERE memberId = ?";
+    		fineType = "late fine";
+    		fine = getLateFine(memberID);
+    	} else { // pay lostFine
+    		sql = "UPDATE borrowedBook SET lostFine = ? WHERE memberId = ?";
+    		fineType = "lost fine";
+    		fine = getLostFine(memberID);
+    	}
+    	
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        	double balance = fine - amount;
+        	if (balance >= 0.0) {
+        		pstmt.setDouble(1, balance);
+        		pstmt.setInt(2, memberID);
+        	}
+            
+        	int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+            	System.out.println("New " + fineType + "'s balance for memberID: " + balance);
+            } else {
+                System.out.println("No " + fineType + " found for memberID: " + memberID);
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public static void updateFine(int memberID, double fine, int fineChoice) {
+    	String sql;
+    	String fineType;
+    	if (fineChoice == 1) { // if fineChoice == 1, update lateFine
+    		sql = "UPDATE borrowedBook SET lateFine = ? WHERE memberId = ?";
+    		fineType = "Late fine";
+    	} else { // update lostFine
+    		sql = "UPDATE borrowedBook SET lostFine = ? WHERE memberId = ?";
+    		fineType = "Lost fine";
+    	}
+    	
+        try (Connection conn = DBInitializer.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        	if (fine > 0.0) {
+        		pstmt.setDouble(1, fine);
+        		pstmt.setInt(2, memberID);
+        	}
+        	
+        	int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+            	System.out.println(fineType + " updated for memberID: " + memberID);
+            } else {
+                System.out.println("Unsuccefully updated fine for memberID: " + memberID);
+            } 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
