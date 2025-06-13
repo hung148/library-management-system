@@ -10,7 +10,8 @@ public class DBInitializer {
         try (Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement()) {
             initializeUserTable(stmt);
-            initializeBookTable(stmt);
+            initializeBookTable(stmt); 
+	    initializeBorrowedBookTable(stmt);
             addLoginState(stmt);
         } catch (Exception e) {
             e.printStackTrace();
