@@ -262,6 +262,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLibraryID(rs.getString("libraryID"));
                 member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
@@ -289,6 +290,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLibraryID(rs.getString("libraryID"));
                 member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
@@ -316,6 +318,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLibraryID(rs.getString("libraryID"));
                 member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
@@ -345,6 +348,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLibraryID(rs.getString("libraryID"));
                 member.setLoginState(rs.getBoolean("login"));
                 memberList.add(member);
             }
@@ -377,7 +381,7 @@ public class LibraryDAO {
     }
 
     public static void updateMember(String email, Member member) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ?, login = ? WHERE email = ? AND type = 'member'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ?, login = ?, libraryID = ? WHERE email = ? AND type = 'member'";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -389,7 +393,8 @@ public class LibraryDAO {
                 pstmt.setString(6, member.getStatus());
                 pstmt.setDouble(7, member.getBalance());
                 pstmt.setBoolean(8, member.getLoginState());
-                pstmt.setString(9, email);
+                pstmt.setString(9, member.getLibraryID());
+                pstmt.setString(10, email);
                 pstmt.executeUpdate();
                 System.out.println("Update member successfully");
         } catch (SQLException e) {
