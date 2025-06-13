@@ -143,7 +143,7 @@ public class AdminLoginController implements Initializable {
         centerAnimation.play();
     }
 
-    private Admin admin;
+    public static Admin admin;
     public static User user;
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
 
@@ -168,6 +168,7 @@ public class AdminLoginController implements Initializable {
                     showChangePasswordDialog(LibraryApplication.stage, username);
                 }
             }
+            clear();
             //load books and admin's info using Thread bc it is a one-time action
             //Thread runs once login successfully
             Thread loadInfoForAdminThread = new Thread(() -> {
@@ -180,7 +181,6 @@ public class AdminLoginController implements Initializable {
 
             });
             loadInfoForAdminThread.start();
-
             LibraryApplication.loadAdminPage();
         }
         else {
@@ -259,6 +259,13 @@ public class AdminLoginController implements Initializable {
     // click Back to go back to Start-page with the 2 options
     @FXML
     private void backToStart(MouseEvent event) {
+        clear();
         LibraryApplication.loadStartPage();
+    }
+
+    private void clear() {
+        inputPassword.clear();
+        inputUsername.clear();
+        alertLogin.setText("");
     }
 }

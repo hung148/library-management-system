@@ -47,6 +47,7 @@ public class LibraryDAO {
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
+                admin.setLoginState(rs.getBoolean("login"));
                 return admin;
             } else {
                 System.out.println("admin not found");
@@ -73,6 +74,7 @@ public class LibraryDAO {
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
+                admin.setLoginState(rs.getBoolean("login"));
                 return admin;
             } else {
                 System.out.println("admin not found");
@@ -99,6 +101,7 @@ public class LibraryDAO {
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
+                admin.setLoginState(rs.getBoolean("login"));
                 return admin;
             } else {
                 System.out.println("Admin not found");
@@ -127,6 +130,7 @@ public class LibraryDAO {
                 admin.setType(rs.getString("type"));
                 admin.setStatus(rs.getString("status"));
                 admin.setBalance(rs.getDouble("balance"));
+                admin.setLoginState(rs.getBoolean("login"));
                 adminList.add(admin);
             }
             System.out.println("Retrieve admin list sucessfully");
@@ -137,7 +141,7 @@ public class LibraryDAO {
     }
 
     public static void updateAdmin(int id, Admin admin) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE id = ? AND type = 'admin'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ?, login = ? WHERE id = ? AND type = 'admin'";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -146,7 +150,8 @@ public class LibraryDAO {
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
-                pstmt.setInt(6, admin.getId());
+                pstmt.setBoolean(6, admin.getLoginState());
+                pstmt.setInt(7, id);
                 pstmt.executeUpdate();
                 System.out.println("Update admin successfully");
         } catch (SQLException e) {
@@ -155,7 +160,7 @@ public class LibraryDAO {
     }
 
     public static void updateAdmin(String email, Admin admin) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ? WHERE email = ? AND type = 'admin'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, balance = ?, login = ? WHERE email = ? AND type = 'admin'";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -164,7 +169,8 @@ public class LibraryDAO {
                 pstmt.setString(3, admin.getUsername());
                 pstmt.setString(4, admin.getName());
                 pstmt.setDouble(5, admin.getBalance());
-                pstmt.setString(6, email);
+                pstmt.setBoolean(6, admin.getLoginState());
+                pstmt.setString(7, email);
                 pstmt.executeUpdate();
                 System.out.println("Update admin successfully");
         } catch (SQLException e) {
@@ -256,6 +262,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
                 System.out.println("member not found");
@@ -282,6 +289,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
                 System.out.println("member not found");
@@ -308,6 +316,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLoginState(rs.getBoolean("login"));
                 return member;
             } else {
                 System.out.println("Member not found");
@@ -336,6 +345,7 @@ public class LibraryDAO {
                 member.setType(rs.getString("type"));
                 member.setStatus(rs.getString("status"));
                 member.setBalance(rs.getDouble("balance"));
+                member.setLoginState(rs.getBoolean("login"));
                 memberList.add(member);
             }
             System.out.println("Retrieve member list sucessfully");
@@ -346,7 +356,7 @@ public class LibraryDAO {
     }
 
     public static void updateMember(int id, Member member) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE id = ? AND type = 'member'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ?, login = ? WHERE id = ? AND type = 'member'";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -357,7 +367,8 @@ public class LibraryDAO {
                 pstmt.setString(5, member.getType());
                 pstmt.setString(6, member.getStatus());
                 pstmt.setDouble(7, member.getBalance());
-                pstmt.setInt(8, member.getId());
+                pstmt.setBoolean(8, member.getLoginState());
+                pstmt.setInt(9, id);
                 pstmt.executeUpdate();
                 System.out.println("Update member successfully");
         } catch (SQLException e) {
@@ -366,7 +377,7 @@ public class LibraryDAO {
     }
 
     public static void updateMember(String email, Member member) {
-        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ? WHERE email = ? AND type = 'member'";
+        String sql = "UPDATE users SET email = ?, password = ?, username = ?, name = ?, type = ?, status = ?, balance = ?, login = ? WHERE email = ? AND type = 'member'";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -377,7 +388,8 @@ public class LibraryDAO {
                 pstmt.setString(5, member.getType());
                 pstmt.setString(6, member.getStatus());
                 pstmt.setDouble(7, member.getBalance());
-                pstmt.setString(8, email);
+                pstmt.setBoolean(8, member.getLoginState());
+                pstmt.setString(9, email);
                 pstmt.executeUpdate();
                 System.out.println("Update member successfully");
         } catch (SQLException e) {

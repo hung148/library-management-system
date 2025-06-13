@@ -155,12 +155,14 @@ public class MemberLoginController implements Initializable {
     // method to open up Register page for new member
     @FXML
     private void onRegisterClick(ActionEvent event) {
+        clear();
         LibraryApplication.loadRegisterPage();
     }
 
     //click Back to go back to Start-page with the 2 options
     @FXML
     private void backToStart(MouseEvent event) {
+        clear();
         LibraryApplication.loadStartPage();
     }
 
@@ -179,6 +181,7 @@ public class MemberLoginController implements Initializable {
 
         member = loadMember(username, password);
         if (member != null) {
+            clear();
             LibraryApplication.loadMemberPage();
         } else {
             alertLogin.setText("* Invalid username or password.");
@@ -210,6 +213,13 @@ public class MemberLoginController implements Initializable {
 
     private Member loadMember(String username, String password) {
         return AuthServices.memberLogin(username, password);
+    }
+
+    private void clear() {
+        // set all content in text field to empty
+        inputPassword.clear();
+        inputUsername.clear();
+        alertLogin.setText("");
     }
 }
 

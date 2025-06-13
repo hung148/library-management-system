@@ -10,9 +10,19 @@ public class Admin extends User {
         this.status = "normal";
         this.type = "admin";
         this.balance = balance;
+        this.loginState = false;
     }
 
-    public Admin() {}
+    public Admin() {
+        this.name = "";
+        this.username = "";
+        this.hashpassword = "";
+        this.email = "";
+        this.status = "normal";
+        this.type = "admin";
+        this.balance = 0;
+        this.loginState = false;
+    }
 
     public Admin(Admin admin) {
         this.id = admin.getId();
@@ -23,6 +33,7 @@ public class Admin extends User {
         this.status = admin.getStatus();
         this.type = admin.getType();
         this.balance = admin.getBalance();
+        this.loginState = admin.getLoginState();
     }
     @Override
     public String getEmail() {

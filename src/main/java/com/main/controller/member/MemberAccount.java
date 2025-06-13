@@ -1,7 +1,11 @@
 package com.main.controller.member;
 
+import com.main.services.AuthServices;
+import com.main.view.LibraryApplication;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import static com.main.controller.MemberLoginController.member;
 
 public class MemberAccount {
     @FXML
@@ -16,4 +20,10 @@ public class MemberAccount {
         memberUserName.setText(email);
         memberEmail.setText(name);
     }
-}
+
+    public void onLogout() {
+        AuthServices.logout(member);
+        // load start page
+        LibraryApplication.loadStartPage();
+    }
+}   

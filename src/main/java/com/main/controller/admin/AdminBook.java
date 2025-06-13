@@ -1,7 +1,7 @@
 package com.main.controller.admin;
 
 import com.main.entity.Book;
-import com.main.view.LibraryApplication
+import com.main.view.LibraryApplication;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

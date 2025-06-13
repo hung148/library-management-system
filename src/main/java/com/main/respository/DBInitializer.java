@@ -11,6 +11,7 @@ public class DBInitializer {
             Statement stmt = conn.createStatement()) {
             initializeUserTable(stmt);
             initializeBookTable(stmt);
+            addLoginState(stmt);
         } catch (Exception e) {
             e.printStackTrace();
         }        
@@ -46,6 +47,34 @@ public class DBInitializer {
             System.out.println("User table created or already exist.");
         } catch (SQLException e) {
             throw e;
+        }
+    }
+    // add log in state to user boolean
+    public static void addLoginState(Statement stmt) {
+        // Check if the log in state exist
+        String pramaQuery = "PRAGMA table_info(users)";
+        Boolean loginStateExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("login")) {
+                    loginStateExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!loginStateExists) {
+            String alterQuery = "ALTER TABLE users ADD COLUMN login BOOLEAN DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("Log in state is added to users table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 

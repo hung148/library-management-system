@@ -158,15 +158,10 @@ public class RegisterController implements Initializable {
 
         if (AuthServices.memberRegister(email, password, username, name, 0.0, libraryID)) {
             LibraryApplication.showAlert(Alert.AlertType.INFORMATION, "Success", "Member registered successfully.");
+            // Optional: Clear the form
+            clear();
             // redirect back to member login page for user to login
             LibraryApplication.loadLoginMemberPage();
-            // Optional: Clear the form
-            usernameField.clear();
-            passwordField.clear();
-            nameField.clear();
-            emailField.clear();
-            lastNameField.clear();
-            libraryIdField.clear();
         } else {
             LibraryApplication.showAlert(Alert.AlertType.ERROR, "Database Error", "Could not register member.");
         }
@@ -175,7 +170,16 @@ public class RegisterController implements Initializable {
     // Cancel click goes back to Member login page
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {
+        clear();
         LibraryApplication.loadLoginMemberPage();
     }
 
+    private void clear() {
+        usernameField.clear();
+        passwordField.clear();
+        nameField.clear();
+        emailField.clear();
+        lastNameField.clear();
+        libraryIdField.clear();
+    }
 }

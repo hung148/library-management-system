@@ -7,15 +7,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import com.main.app.Main;
+import com.main.controller.AdminController;
+import com.main.controller.AdminLoginController;
+import com.main.controller.MemberController;
+import com.main.controller.MemberLoginController;
+import com.main.controller.RegisterController;
+import com.main.controller.StartPageController;
+import com.main.entity.Admin;
+import com.main.entity.Member;
 
 
 public class LibraryApplication extends Application {
@@ -40,6 +47,14 @@ public class LibraryApplication extends Application {
     public static Parent memberPageroot;
     public static Parent adminPageroot;
 
+    // Root nodes controller
+    public static StartPageController startPageController;
+    public static MemberLoginController memberLoginPageController;
+    public static AdminLoginController adminLoginPageController;
+    public static RegisterController registerPageController;
+    public static MemberController memberPageController;
+    public static AdminController adminPageController;
+
     // A single StackPane used to hold all pages for fast switching
     public static StackPane root; 
 
@@ -54,16 +69,22 @@ public class LibraryApplication extends Application {
         try {
             // Load and store all pages only once at startup for faster switching
             startPageroot = startPageloader.load();
+            startPageController = startPageloader.getController();
             pages.add(startPageroot);
             memberLoginPageroot = memberLoginPageloader.load();
+            memberLoginPageController = memberLoginPageloader.getController();
             pages.add(memberLoginPageroot);
             adminLoginPageroot = adminLoginPageloader.load();
+            adminLoginPageController = adminLoginPageloader.getController();
             pages.add(adminLoginPageroot);
             registerPageroot = registerPageloader.load();
+            registerPageController = registerPageloader.getController();
             pages.add(registerPageroot);
             memberPageroot = memberPageloader.load();
+            memberPageController = memberPageloader.getController();
             pages.add(memberPageroot);
             adminPageroot = adminPageloader.load();
+            adminPageController = adminPageloader.getController();
             pages.add(adminPageroot);
 
             // Set all pages to invisible initially
@@ -78,9 +99,22 @@ public class LibraryApplication extends Application {
             System.out.println(e.getMessage());
         }
 
-        // Show the start page
-        startPageroot.toFront();
-        startPageroot.setVisible(true);
+        // if current user not null then show current user 
+        if (Main.currentUser != null) {
+            if (Main.currentUser.getType().equalsIgnoreCase("member")) {
+                MemberLoginController.member = (Member) Main.currentUser;
+                memberPageroot.toFront();
+                memberPageroot.setVisible(true);
+            } else {
+                AdminLoginController.admin = (Admin) Main.currentUser;
+                adminPageroot.toFront();
+                adminPageroot.setVisible(true);
+            }
+        } else {
+            // Show the start page
+            startPageroot.toFront();
+            startPageroot.setVisible(true);
+        }
 
         // Set the scene using the root StackPane and apply CSS
         scene = new Scene(root);
@@ -121,6 +155,10 @@ public class LibraryApplication extends Application {
     public static void loadMemberPage() {
         long before = System.currentTimeMillis();
         setVisible(false);
+        // set homepage display
+        if (memberPageController != null) {
+            memberPageController.setHomePage();
+        }
         memberPageroot.toFront();
         memberPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
@@ -132,6 +170,10 @@ public class LibraryApplication extends Application {
     public static void loadAdminPage() {
         long before = System.currentTimeMillis();
         setVisible(false);
+        // set homepage display
+        if (adminPageController != null) {
+            adminPageController.setHomePage();
+        }
         adminPageroot.toFront();
         adminPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");

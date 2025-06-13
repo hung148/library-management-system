@@ -51,6 +51,12 @@ public class AdminController implements Initializable {
         centerDisplay.set(adminHomeRoot);
     }
 
+    public void setHomePage() {
+        if (centerDisplay != null) {
+            centerDisplay.set(adminHomeRoot);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

@@ -10,6 +10,15 @@ public abstract class User {
     protected String status; // normal, suspended
     protected double balance; // money 
     protected String libraryID;
+    protected Boolean loginState;
+
+    public Boolean getLoginState() {
+        return loginState;
+    }
+
+    public void setLoginState(Boolean loginState) {
+        this.loginState = loginState;
+    }
 
     public abstract String getLibraryID();
 

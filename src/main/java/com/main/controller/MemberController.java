@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 
@@ -42,14 +43,18 @@ public class MemberController implements Initializable {
         account.setMemberData(member.getName(), member.getEmail(), member.getUsername());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void setHomePage() {
         loader = new FXMLLoader(LibraryApplication.class.getResource("member/member-home.fxml"));
         try {
             memberPage.setCenter(loader.load());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setHomePage();
 
     }
 

@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import com.main.entity.Admin;
 import com.main.entity.Member;
+import com.main.entity.User;
 import com.main.respository.LibraryDAO;
 public class AuthServices {
     public static String generateHashedPassword(String plainPass) {
@@ -25,6 +26,8 @@ public class AuthServices {
             if (m.getUsername().equals(username.trim())) {
                 if (checkPassword(password.trim(), m.getHashPassword())) {
                     System.out.println("Member log in successfully");
+                    m.setLoginState(true);
+                    LibraryDAO.updateMember(m.getId(), m);
                     return m;
                 } else {
                     System.out.println("Wrong password");
@@ -35,11 +38,15 @@ public class AuthServices {
         System.out.println("member not exist in database");
         return null;
     }
+
     public static Admin adminLogin(String username, String password) {
         for (Admin a : LibraryDAO.getAdminList()) {
             if (a.getUsername().equals(username.trim())) {
                 if (checkPassword(password.trim(), a.getHashPassword())) {
                     System.out.println("Admin log in successfully");
+                    a.setLoginState(true);
+                    LibraryDAO.updateAdmin(a.getId(), a);
+                    System.out.println(LibraryDAO.getAdminById(a.getId()).getLoginState());
                     return a;
                 } else {
                     System.out.println("Wrong password");
@@ -49,6 +56,15 @@ public class AuthServices {
         }
          System.out.println("admin not exist in database");
         return null;
+    }
+
+    public static void logout(User user) {
+        user.setLoginState(false);
+        if (user.getType().equalsIgnoreCase("member")) {
+            LibraryDAO.updateMember(user.getId(), (Member)user);
+        } else {
+            LibraryDAO.updateAdmin(user.getId(), (Admin)user);
+        }
     }
 
     // register email, password, username, name, balance
