@@ -112,7 +112,11 @@ public class BorrowedBook {
 	public double getLateFine() {
 		return lateFine;
 	}
-
+	
+	
+	public void setLateFine(double lateFine) {
+		this.lateFine = lateFine;
+	}
 
 
 	public double getLostFine() {
