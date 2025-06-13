@@ -571,12 +571,14 @@ public class LibraryDAO {
     	try (Connection conn = DBInitializer.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
     			BorrowedBook b1 = book;
-    			b1.setReturnedDate(returnedDate);
-    			b1.updateStatusAndFine();
     			
+    			b1.setReturnedDate(returnedDate);
+    			b1.updateStatusAndFine();  
+
     			pstmt.setString(1, b1.getStatus());
     			pstmt.setString(2, returnedDate.toString());
     			pstmt.setDouble(3, b1.getLateFine());
+    			pstmt.setDouble(4, b1.getLostFine());
                 pstmt.setInt(5, memberID);
                 pstmt.setString(6, book.getBook().get_ISBN());
 
@@ -607,11 +609,12 @@ public class LibraryDAO {
             }
     }
     
-    public static BorrowedBook searchBorrowedBookByMember(int memberID) {
-    	String sql = "SELECT * FROM borrowedBook WHERE memberId = ?";
+    public static BorrowedBook searchBorrowedBookByMember(int memberID, String isbn) {
+    	String sql = "SELECT * FROM borrowedBook WHERE memberId = ? AND isbn = ?";
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, memberID);
+            pstmt.setString(2, isbn);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
             	BorrowedBook borrowedBook = new BorrowedBook(
@@ -642,6 +645,17 @@ public class LibraryDAO {
                 		getBook(rs.getString("isbn")),
                 		LocalDate.parse(rs.getString("dateIssued"))
                 		);
+            	
+            	borrowedBook.setDeadline(LocalDate.parse(rs.getString("deadline")));
+            	
+            	String returned = rs.getString("returnedDate");
+                if (returned != null) {
+                    borrowedBook.setReturnedDate(LocalDate.parse(returned));
+                }
+                
+                borrowedBook.setLostFine(rs.getDouble("lostFine"));
+                borrowedBook.setLateFine(rs.getDouble("lateFine"));
+                
             	borrowedBookList.add(borrowedBook);
             }
             System.out.println("Successfully retrieved borrowed book list.");
