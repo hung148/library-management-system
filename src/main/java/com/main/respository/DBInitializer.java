@@ -97,4 +97,25 @@ public class DBInitializer {
     }
 
     // initialize borrowed book table
+    private static void initializeBorrowedBookTable(Statement stmt) throws SQLException {
+    	String sql = ("CREATE TABLE IF NOT EXISTS borrowedBook (" +
+	    "id INTEGER UNIQUE PRIMARY KEY," +
+	    "memberId INTEGER NOT NULL," +             
+	    "isbn TEXT NOT NULL," +    
+    	"status TEXT CHECK(status IN ('pending', 'late', 'returned', 'lost')) NOT NULL," + 
+    	"dateIssued TEXT NOT NULL," +
+    	"deadline TEXT NOT NULL," +
+    	"returnedDate TEXT," + 
+    	"lateFine REAL NOT NULL DEFAULT 0.0," + 
+    	"lostFine REAL NOT NULL," + 
+    	"FOREIGN KEY(isbn) REFERENCES bookTable(isbn)," +
+	    "FOREIGN KEY(memberId) REFERENCES users(id))");
+    	
+    	try {
+            stmt.execute(sql);
+            System.out.println("borrowedBook table created or already exist.");
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }
