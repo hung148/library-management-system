@@ -144,12 +144,7 @@ public class AdminLoginController implements Initializable {
         centerAnimation.play();
     }
 
-<<<<<<< Updated upstream
-    public static Admin admin;
-    public static User user;
-=======
     private Admin admin;
->>>>>>> Stashed changes
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
     private final BookListModel bookList = new BookListModel();
 
