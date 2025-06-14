@@ -23,6 +23,7 @@ import com.main.controller.RegisterController;
 import com.main.controller.StartPageController;
 import com.main.entity.Admin;
 import com.main.entity.Member;
+import com.main.respository.LibraryDAO;
 
 
 public class LibraryApplication extends Application {
@@ -98,7 +99,9 @@ public class LibraryApplication extends Application {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
+        // loop through member and admin to see if login state is true 
+        // if it is true then load member or admin page accordingly 
+        LibraryDAO.getLogin();
         // if current user not null then show current user 
         if (Main.currentUser != null) {
             if (Main.currentUser.getType().equalsIgnoreCase("member")) {

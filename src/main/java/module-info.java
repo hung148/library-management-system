@@ -24,6 +24,8 @@ module com.main {
     opens com.main.controller.admin to javafx.fxml;
     opens com.main.controller.member to javafx.fxml;
     exports com.main.services;
+    exports com.main.app;
+    exports com.main.respository;
 }
 
 

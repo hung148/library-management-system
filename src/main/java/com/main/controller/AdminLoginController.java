@@ -189,6 +189,8 @@ public class AdminLoginController implements Initializable {
         }
     }
 
+
+
     public void showChangePasswordDialog(Stage owner, String username) {
         Stage dialog = new Stage();
         dialog.initOwner(owner);
@@ -217,7 +219,11 @@ public class AdminLoginController implements Initializable {
             } else {
                 Admin newAdmin = new Admin(admin);
                 newAdmin.setHashPassword(AuthServices.generateHashedPassword(newPass.getText()));
+                System.out.print(LibraryDAO.getAdminById(admin.getId()).getHashPassword());
                 LibraryDAO.updateAdmin(admin.getId(), newAdmin);
+                Main.currentUser = newAdmin;
+                admin = newAdmin;
+                System.out.print(LibraryDAO.getAdminById(admin.getId()).getHashPassword());
                 dialog.close();
             }
         });
