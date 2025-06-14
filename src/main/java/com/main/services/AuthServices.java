@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.main.app.Main;
 import com.main.entity.Admin;
 import com.main.entity.Member;
 import com.main.entity.User;
@@ -24,10 +25,12 @@ public class AuthServices {
     public static Member memberLogin(String username, String password) {
         for (Member m : LibraryDAO.getMemberList()) {
             if (m.getUsername().equals(username.trim())) {
+                System.out.println(m.getHashPassword());
                 if (checkPassword(password.trim(), m.getHashPassword())) {
                     System.out.println("Member log in successfully");
                     m.setLoginState(true);
                     LibraryDAO.updateMember(m.getId(), m);
+                    Main.currentUser = m;
                     return m;
                 } else {
                     System.out.println("Wrong password");
@@ -46,7 +49,7 @@ public class AuthServices {
                     System.out.println("Admin log in successfully");
                     a.setLoginState(true);
                     LibraryDAO.updateAdmin(a.getId(), a);
-                    System.out.println(LibraryDAO.getAdminById(a.getId()).getLoginState());
+                    Main.currentUser = a;
                     return a;
                 } else {
                     System.out.println("Wrong password");
@@ -65,6 +68,7 @@ public class AuthServices {
         } else {
             LibraryDAO.updateAdmin(user.getId(), (Admin)user);
         }
+        Main.currentUser = null;
     }
 
     // register email, password, username, name, balance

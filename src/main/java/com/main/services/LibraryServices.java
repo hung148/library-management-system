@@ -54,34 +54,38 @@ public class LibraryServices {
 
             if (keywords.toLowerCase().equals(compare.toLowerCase())) {
                 int tempscore = 0;
-                if (tempscore < score) {
+                if (tempscore < score || score == -1) {
                     score = tempscore;
                 }
             } else if (compare.toLowerCase().startsWith(keywords.toLowerCase())) {
                 int tempscore = 1;
-                if (tempscore < score) {
+                if (tempscore < score || score == -1) {
                     score = tempscore;
                 }
             } else if (compare.toLowerCase().contains(keywords.toLowerCase())) {
                 int tempscore = 2;
-                if (tempscore < score) {
+                if (tempscore < score || score == -1) {
                     score = tempscore;
                 } 
             } else {
-                int count = 0;
-                for (int i = 0; i < keywords.toLowerCase().length(); i++) {
-                    for (int j = 0; j < compare.toLowerCase().length(); j++) {
-                        if (keywords.toLowerCase().charAt(i) == compare.toLowerCase().charAt(j)) {
-                           count++;
-                        }
+                int tempscore = Integer.MAX_VALUE; // Make sure this is a valid high starting point
+                int kLen = keywords.length();
+                String lowerKeywords = keywords.toLowerCase();
+                String lowerCompare = compare.toLowerCase();
+
+                for (int i = 0; i <= lowerCompare.length() - kLen; i++) {
+                    String check = lowerCompare.substring(i, i + kLen);
+                    int temptempscore = distance.apply(lowerKeywords, check);
+                    System.out.print(temptempscore + " ");
+                    if (tempscore > temptempscore && temptempscore != -1) {
+                        tempscore = temptempscore;
                     }
                 }
-                if (count >= keywords.length()) {
-                    int tempscore = 3;
-                    if (tempscore < score) {
-                        score = tempscore;
-                    }  
-                }
+                System.out.println();
+                System.out.println(tempscore + " " + score);
+                if (tempscore < score || score == -1) {
+                    score = tempscore + 2;
+                } 
             }
             // Keep best score only
             if (score != -1) {
@@ -89,6 +93,19 @@ public class LibraryServices {
             }
                 
         }
+    }
+
+    public static List<String> splitByLength(String input, int length) {
+        List<String> result = new ArrayList<>();
+        int i = 0;
+        while (i + length <= input.length()) {
+            result.add(input.substring(i, i + length));
+            i += length;
+        }
+        if (i < input.length()) {
+            result.add(input.substring(i)); // last remaining part
+        }
+        return result;
     }
     
     // only admin can do this

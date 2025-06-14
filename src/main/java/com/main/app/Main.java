@@ -2,8 +2,6 @@ package com.main.app;
 
 import java.sql.SQLException;
 
-import com.main.entity.Admin;
-import com.main.entity.Member;
 import com.main.entity.User;
 import com.main.respository.DBInitializer;
 import com.main.respository.LibraryDAO;
@@ -19,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         // initialize database
         DBInitializer.initializeDB();
+        //LibraryDAO.addBookfromFile("src/main/resources/com/main/book/book.txt");
         // add first addmin if not exist
         if (LibraryDAO.getAdminList().length == 0) {
             try {
@@ -32,20 +31,7 @@ public class Main {
                 System.out.println("Error: " + e.getMessage());
             }
         }
-        // loop through member and admin to see if login state is true 
-        // if it is true then load member or admin page accordingly 
-        for (Member member : LibraryDAO.getMemberList()) {
-            if (member.getLoginState()) {
-                currentUser = member;
-                break;
-            }
-        }
-        for (Admin admin : LibraryDAO.getAdminList()) {
-            if (admin.getLoginState()) {
-                currentUser = admin;
-                break;
-            }
-        }
+        
         LibraryApplication.launch(LibraryApplication.class, args);
     }
 }

@@ -16,9 +16,9 @@ public class MemberAccount {
     private Label memberEmail;
 
     public void setMemberData(String name, String email, String userName) {
-        memberName.setText(userName);
-        memberUserName.setText(email);
-        memberEmail.setText(name);
+        memberName.setText(name);
+        memberUserName.setText(userName);
+        memberEmail.setText(email);
     }
 
     public void onLogout() {

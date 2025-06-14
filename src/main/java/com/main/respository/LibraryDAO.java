@@ -1,17 +1,74 @@
 package com.main.respository;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import com.main.app.Main;
+import com.main.controller.AdminController;
+import com.main.controller.AdminLoginController;
+import com.main.controller.admin.AdminAccount;
+import com.main.controller.admin.AdminBook;
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.BorrowedBook;
 import com.main.entity.Member;
 import com.main.services.AuthServices;
 public class LibraryDAO {
-    
+    // get log in state
+    public static void getLogin() {
+        String query = "SELECT * FROM users WHERE login = 1 LIMIT 1";
+        try (Connection conn = DBInitializer.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("type").equals("admin")) {
+                    Main.currentUser = new Admin();
+                    Main.currentUser.setId(rs.getInt("id"));
+                    Main.currentUser.setEmail(rs.getString("email"));
+                    Main.currentUser.setHashPassword(rs.getString("password"));
+                    Main.currentUser.setUsername(rs.getString("username"));
+                    Main.currentUser.setName(rs.getString("name"));
+                    Main.currentUser.setType(rs.getString("type"));
+                    Main.currentUser.setStatus(rs.getString("status"));
+                    Main.currentUser.setBalance(rs.getDouble("balance"));
+                    Main.currentUser.setLibraryID(rs.getString("libraryID"));
+                    Thread loadInfoForAdminThread = new Thread(() -> {
+                        while (true) {
+                            AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
+                            AdminBook adminBook = AdminController.adminBookLoader.getController();
+                            if (adminAccount != null && adminBook != null) {
+                                Collections.addAll(AdminLoginController.books, LibraryDAO.bookList());
+                                adminAccount.displayAccount(Main.currentUser.getName(),Main.currentUser.getEmail(),Main.currentUser.getUsername());
+                                adminBook.displayBooks(AdminLoginController.books);
+                                break;
+                            }
+                        }
+                    });
+                    loadInfoForAdminThread.start();
+                } else {
+                    Main.currentUser = new Member();
+                    Main.currentUser.setId(rs.getInt("id"));
+                    Main.currentUser.setEmail(rs.getString("email"));
+                    Main.currentUser.setHashPassword(rs.getString("password"));
+                    Main.currentUser.setUsername(rs.getString("username"));
+                    Main.currentUser.setName(rs.getString("name"));
+                    Main.currentUser.setType(rs.getString("type"));
+                    Main.currentUser.setStatus(rs.getString("status"));
+                    Main.currentUser.setBalance(rs.getDouble("balance"));
+                    Main.currentUser.setLibraryID(rs.getString("libraryID"));
+                }
+            }
+        } catch (SQLException e) {  
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
     // add, remove, get, update admin
     public static void addAdmin(String email, String password, String username, String name, double balance) throws SQLException {
         String sql = "INSERT INTO users (email, password, username, name, type, status, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -453,6 +510,29 @@ public class LibraryDAO {
             System.out.println("Successfully added book.");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void addBookfromFile(String filepath) {
+        try (FileReader reader = new FileReader(filepath);
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                String[] results = line.split("\\|"); // have to use \\ to escape
+                for (int i = 0; i < results.length; i++) {
+                    results[i] = results[i].trim();
+                }
+                System.out.println(Arrays.toString(results));
+                String title = results[0];
+                String author = results[1];
+                String publisher = results[2];
+                String ISBN = results[3];
+                int totalCopies = Integer.parseInt(results[4]);
+                addBook(ISBN, title, author, publisher, totalCopies);
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
