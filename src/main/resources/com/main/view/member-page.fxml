@@ -7,7 +7,7 @@
 <AnchorPane prefHeight="400" prefWidth="600" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.MemberController">
     <BorderPane fx:id="memberPage" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity">
         <left>
-            <VBox styleClass="user-left-layout" prefHeight="341.0" prefWidth="100.0">
+            <VBox prefHeight="338.0" prefWidth="100.0" styleClass="user-left-layout">
                 <Pane prefHeight="69.0" prefWidth="102.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="100.0" text="What would you like to manage?" textAlignment="CENTER" wrapText="true">
                   <padding>
@@ -26,15 +26,15 @@
             </VBox>
         </left>
         <top>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="59.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+            <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="610.0" BorderPane.alignment="CENTER">
                 <Label layoutX="89.0" layoutY="21.0" text="Welcome, " />
-                <Pane layoutX="472.0" layoutY="-2.0" prefHeight="62.0" prefWidth="101.0" styleClass="corner-box">
-                    <Label alignment="TOP_LEFT" layoutX="7.0" prefHeight="66.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" />
+                <Pane layoutX="472.0" layoutY="-2.0" prefHeight="60.0" prefWidth="101.0" styleClass="corner-box">
+                    <Label alignment="TOP_LEFT" layoutX="7.0" prefHeight="60.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" />
                 </Pane>
             </Pane>
         </top>
         <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="341.0" prefWidth="508.0" BorderPane.alignment="CENTER" />
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="342.0" prefWidth="508.0" BorderPane.alignment="CENTER" />
         </center>
     </BorderPane>
 </AnchorPane>

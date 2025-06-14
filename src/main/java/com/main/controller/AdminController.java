@@ -71,6 +71,7 @@ public class AdminController implements Initializable {
         centerDisplay = new SimpleObjectProperty<>(adminHomeRoot);
         adminPane.centerProperty().bind(centerDisplay);
 
+        //
         System.out.println("initializer from admin controller: " + Thread.currentThread().getName());
 
     }

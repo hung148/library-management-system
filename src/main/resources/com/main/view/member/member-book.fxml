@@ -4,37 +4,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToWidth="true" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
-   <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0">
-        
-            <TableView fx:id="currentBooks" layoutX="63.0" layoutY="168.0" prefHeight="121.0" prefWidth="327.0">
-               <columns>
-                  <TableColumn fx:id="authorCol" prefWidth="87.66667175292969" text="Author" />
-                  <TableColumn fx:id="isbnCol" prefWidth="132.33331298828125" text="ISBN" />
-                  <TableColumn fx:id="titleCol" maxWidth="105.33333333333331" prefWidth="105.33333333333331" text="Title" />
-                  <TableColumn fx:id="publisherCol" prefWidth="87.66667175292969" text="Publisher" />
-               </columns>
-            </TableView>
-            <TableView fx:id="pastBooks" layoutX="63.0" layoutY="334.0" prefHeight="121.0" prefWidth="327.0">
-               <columns>
-                   <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
-                   <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
-                   <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
-                   <TableColumn fx:id="publisherCol1" prefWidth="87.66667175292969" text="Publisher" />
-               </columns>
-            </TableView>
-            <Label layoutX="63.0" layoutY="144.0" prefHeight="17.0" prefWidth="94.0" text="Current Borrows" />
-            <Label layoutX="63.0" layoutY="309.0" prefHeight="17.0" prefWidth="83.0" text="Past Borrows" />
-         <Label layoutX="63.0" layoutY="26.0" prefHeight="17.0" prefWidth="132.0" text="Search Book to Borrow:" />
-         <TextField fx:id="searchBook" layoutX="195.0" layoutY="22.0" prefHeight="25.0" prefWidth="175.0" />
-         <ListView fx:id="resultBook" layoutX="63.0" layoutY="57.0" prefHeight="48.0" prefWidth="327.0" />
-         <Button layoutX="408.0" layoutY="81.0" mnemonicParsing="false" onAction="#onClickBorrow" text="Borrow" />
-         <Button layoutX="382.0" layoutY="22.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
-         <Button layoutX="408.0" layoutY="263.0" mnemonicParsing="false" onAction="#onClickReturn" text="Return" />
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </AnchorPane>
-   </content>
-</ScrollPane>
+<AnchorPane maxHeight="342" maxWidth="500" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberBook">
+    <ScrollPane fitToWidth="true" maxHeight="342" stylesheets="@../pageStyle.css">
+        <VBox>
+            <Pane minHeight="140" prefWidth="500.0">
+                <VBox.margin>
+                    <Insets bottom="10.0" top="10.0" />
+                </VBox.margin>
+                <TextField fx:id="searchBook" layoutX="139.0" layoutY="14.0" prefHeight="25.0" prefWidth="175.0" />
+                <ListView fx:id="resultBook" layoutX="30.0" layoutY="56.0" prefHeight="76.0" prefWidth="405.0" />
+                <Label layoutX="54.0" layoutY="15.0" prefHeight="25.0" prefWidth="80.0" styleClass="subLabels" text="Search Book " />
+                <Button layoutX="339.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
+                <Button layoutX="324.0" layoutY="147.0" mnemonicParsing="false" onAction="#onClickBorrow" text="Borrow Book" />
+            </Pane>
+            <Pane minHeight="140" prefWidth="487.0">
+                <TableView fx:id="currentBooks" layoutX="29.0" layoutY="26.0" prefHeight="125.0" prefWidth="408.0">
+                    <columns>
+                        <TableColumn fx:id="authorCol" prefWidth="87.66667175292969" text="Author" />
+                        <TableColumn fx:id="isbnCol" prefWidth="132.33331298828125" text="ISBN" />
+                        <TableColumn fx:id="titleCol" maxWidth="105.33333333333331" prefWidth="105.33333333333331" text="Title" />
+                        <TableColumn fx:id="publisherCol" prefWidth="87.66667175292969" text="Publisher" />
+                        <TableColumn fx:id="dueCol" prefWidth="87.66667175292969" text="Due Date" />
+                    </columns>
+                </TableView>
+                <Label layoutX="29.0" layoutY="-7.0" prefHeight="33.0" prefWidth="105.0" styleClass="subLabels" text="Current Borrows" wrapText="true" />
+                <Button layoutX="286.0" layoutY="166.0" mnemonicParsing="false" onAction="#onClickReturn" text="Return Book" />
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+                <padding>
+                    <Insets bottom="20.0" />
+                </padding>
+            </Pane>
+            <Pane minHeight="120">
+                <TableView fx:id="pastBooks" layoutX="29.0" layoutY="26.0" prefHeight="125.0" prefWidth="408.0">
+                    <columns>
+                        <TableColumn fx:id="authorCol1" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
+                        <TableColumn fx:id="isbnCol1" prefWidth="100.0" text="ISBN" />
+                        <TableColumn fx:id="titleCol1" prefWidth="124.33331298828125" text="Title" />
+                        <TableColumn fx:id="publisherCol1" prefWidth="87.66667175292969" text="Publisher" />
+                        <TableColumn fx:id="returnCol" prefWidth="87.66667175292969" text="Return Date" />
+                    </columns>
+                </TableView>
+                <Label layoutX="29.0" layoutY="-5.0" prefHeight="33.0" prefWidth="105.0" styleClass="subLabels" text="Past Borrows" wrapText="true" />
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <padding>
+                    <Insets bottom="10.0" />
+                </padding>
+            </Pane>
+        </VBox>
+      <padding>
+         <Insets top="10.0" />
+      </padding>
+    </ScrollPane>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</AnchorPane>

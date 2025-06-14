@@ -20,7 +20,7 @@ module com.main {
     exports com.main.entity;
     exports com.main.controller.admin;
     exports com.main.controller.member;
-    exports com.main.test; //for testing purpose, delete once done
+    exports com.main.model;
     opens com.main.controller.admin to javafx.fxml;
     opens com.main.controller.member to javafx.fxml;
     exports com.main.services;

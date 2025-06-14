@@ -9,6 +9,7 @@ import com.main.controller.admin.*;
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.entity.User;
+import com.main.model.BookListModel;
 import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
 import com.main.view.LibraryApplication;
@@ -143,9 +144,15 @@ public class AdminLoginController implements Initializable {
         centerAnimation.play();
     }
 
+<<<<<<< Updated upstream
     public static Admin admin;
     public static User user;
+=======
+    private Admin admin;
+>>>>>>> Stashed changes
     public static final ObservableList<Book> books = FXCollections.observableArrayList();
+    private final BookListModel bookList = new BookListModel();
+
 
     @FXML
     private void onSignInClick(ActionEvent event) {
@@ -161,24 +168,25 @@ public class AdminLoginController implements Initializable {
         admin = loadAdmin(username, password);
 
         if(admin != null) {
-            user = admin;
             if (admin.getEmail().equals(Main.firstAdminGmail)) {
                 if (password.equals(Main.firstAdminPass)) {
                     // require to change password
                     showChangePasswordDialog(LibraryApplication.stage, username);
                 }
             }
+<<<<<<< Updated upstream
             clear();
+=======
+
+>>>>>>> Stashed changes
             //load books and admin's info using Thread bc it is a one-time action
             //Thread runs once login successfully
             Thread loadInfoForAdminThread = new Thread(() -> {
                 AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
                 adminAccount.displayAccount(admin.getName(),admin.getEmail(),admin.getUsername());
-
-                Collections.addAll(books, LibraryDAO.bookList());
                 AdminBook adminBook = AdminController.adminBookLoader.getController();
-                adminBook.displayBooks(books);
-
+                adminBook.setAdminBookList(bookList);
+                adminBook.setViewBooks(bookList);  //set the tableView in adminBook
             });
             loadInfoForAdminThread.start();
             LibraryApplication.loadAdminPage();

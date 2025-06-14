@@ -51,8 +51,8 @@
     -fx-border-radius: 5;
     -fx-text-alignment: center;
     -fx-alignment: center;          /* center text horizontally and vertically */
-    -fx-pref-height: 20px;          /* fixed height */
-    -fx-pref-width: 70px;           /* fixed width */
+    -fx-pref-height: 22px;          /* fixed height */
+    -fx-pref-width: 80px;           /* fixed width */
     -fx-cursor: hand;               /* cursor pointer on hover */
     -fx-font-size: 14px;            /* adjust font size if needed */
     -fx-transition: all 0.2s ease-in-out;
@@ -136,18 +136,16 @@
     -fx-border-color: gray;
 }
 
-.scroll-container-book {
-    -fx-pref-width: 340;
-    -fx-pref-height: 400;
-    -fx-background-color: rgba(255, 219, 219, 0.51);
+ScrollPane {
+    -fx-background-color: transparent;
     -fx-scroll-behavior: smooth;
     -fx-overflow-y: scroll;
 }
-.scroll-container-book:horizontal, scorll-container-book:vertical{
-    -fx-background-color: transparent;
+.thumb{
+    -fx-background-color: rgba(91, 99, 96, 0.6);
 }
-.scroll-container-book .thumb{
-    -fx-background-color: #b1aeae;
+.track{
+    -fx-background-color: rgba(251, 234, 234, 0.46);
 }
 
 /*alert-style*/

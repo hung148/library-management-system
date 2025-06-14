@@ -65,11 +65,11 @@
            </VBox.margin>
         </GridPane>
     </VBox>
-   <Button layoutX="243.0" layoutY="352.0" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="signinPagebutton" text="Cancel">
+   <Button onAction="#onCancelClick" layoutX="243.0" layoutY="352.0" style="-fx-background-color: white;" styleClass="signinPagebutton" text="Cancel">
       <padding>
          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
       </padding></Button>
-   <Button contentDisplay="TOP" layoutX="154.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" styleClass="signinPagebutton" text="Add Book">
+   <Button onAction="#onAddBookClick" contentDisplay="TOP" layoutX="154.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="signinPagebutton" text="Add Book">
       <padding>
          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
       </padding></Button>

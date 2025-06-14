@@ -30,6 +30,18 @@ public class Book {
     public int getTotalCopies() { return _totalCopies; }
     public int getAvailableCopies() { return _availableCopies;}
     // Setters
+    public void set_ISBN(String _ISBN) {
+        this._ISBN = _ISBN;
+    }
+    public void set_title(String _title) {
+        this._title = _title;
+    }
+    public void set_author(String _author) {
+        this._author = _author;
+    }
+    public void set_publisher(String _publisher) {
+        this._publisher = _publisher;
+    }
     public void setTotalCopies(int totalCopies ) {
     	_totalCopies = totalCopies;
     }
@@ -37,7 +49,8 @@ public class Book {
     public void setAvailableCopies(int availableCopies ) {
     	_availableCopies = availableCopies;
     }
-    
+
+
     public void printBookInfo() {
     	System.out.println("Book's title: " + _title);
     	System.out.println("Book's author: " + _author);
@@ -46,6 +59,8 @@ public class Book {
     	System.out.println("Book's total copies: " + _totalCopies);
     	System.out.println("Book's available copies: " + _availableCopies);
     }
+
+
 
     @Override
     public String toString() {

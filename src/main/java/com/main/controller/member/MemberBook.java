@@ -17,7 +17,10 @@ import static com.main.services.LibraryServices.searchBook;
 
 
 public class MemberBook {
-    //search book and list view for book result
+    //add these columns once dueDate and returnDate columns are set up in LibraryDAO
+    public TableColumn dueCol;
+    public TableColumn returnCol;
+
     @FXML
     private TextField searchBook;
     @FXML
