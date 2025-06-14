@@ -8,7 +8,6 @@ import com.main.controller.admin.*;
 
 import com.main.entity.Admin;
 import com.main.entity.Book;
-import com.main.entity.User;
 import com.main.model.BookListModel;
 import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
@@ -169,11 +168,7 @@ public class AdminLoginController implements Initializable {
                     showChangePasswordDialog(LibraryApplication.stage, username);
                 }
             }
-<<<<<<< Updated upstream
             clear();
-=======
-
->>>>>>> Stashed changes
             //load books and admin's info using Thread bc it is a one-time action
             //Thread runs once login successfully
             Thread loadInfoForAdminThread = new Thread(() -> {
