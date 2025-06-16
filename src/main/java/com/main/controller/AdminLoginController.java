@@ -144,7 +144,6 @@ public class AdminLoginController implements Initializable {
     }
 
     private Admin admin;
-    public static final ObservableList<Book> books = FXCollections.observableArrayList();
     private final BookListModel bookList = new BookListModel();
 
 

@@ -22,7 +22,7 @@
             <Label fx:id="memberName" GridPane.columnIndex="1" />
             <Label fx:id="memberUserName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="memberEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button text="Log out" onAction="#onLogout" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Button styleClass="signinPagebutton" text="Log out" onAction="#onLogout" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
       <padding>
          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
       </padding>

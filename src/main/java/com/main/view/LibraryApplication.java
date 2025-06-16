@@ -21,8 +21,11 @@ import com.main.controller.MemberController;
 import com.main.controller.MemberLoginController;
 import com.main.controller.RegisterController;
 import com.main.controller.StartPageController;
+import com.main.controller.admin.AdminAccount;
+import com.main.controller.admin.AdminBook;
 import com.main.entity.Admin;
 import com.main.entity.Member;
+import com.main.model.BookListModel;
 import com.main.respository.LibraryDAO;
 
 
@@ -109,7 +112,15 @@ public class LibraryApplication extends Application {
                 memberPageroot.toFront();
                 memberPageroot.setVisible(true);
             } else {
-                AdminLoginController.admin = (Admin) Main.currentUser;
+                Thread loadInfoForAdminThread = new Thread(() -> {
+                    AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
+                    adminAccount.displayAccount(Main.currentUser.getName(),Main.currentUser.getEmail(),Main.currentUser.getUsername());
+                    AdminBook adminBook = AdminController.adminBookLoader.getController();
+                    BookListModel bookList = new BookListModel();
+                    adminBook.setAdminBookList(bookList);
+                    adminBook.setViewBooks(bookList);  //set the tableView in adminBook
+                });
+                loadInfoForAdminThread.start();
                 adminPageroot.toFront();
                 adminPageroot.setVisible(true);
             }

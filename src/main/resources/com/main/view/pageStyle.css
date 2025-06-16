@@ -51,8 +51,6 @@
     -fx-border-radius: 5;
     -fx-text-alignment: center;
     -fx-alignment: center;          /* center text horizontally and vertically */
-    -fx-pref-height: 22px;          /* fixed height */
-    -fx-pref-width: 80px;           /* fixed width */
     -fx-cursor: hand;               /* cursor pointer on hover */
     -fx-font-size: 14px;            /* adjust font size if needed */
     -fx-transition: all 0.2s ease-in-out;

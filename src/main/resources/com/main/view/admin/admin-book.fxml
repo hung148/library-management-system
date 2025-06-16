@@ -24,7 +24,7 @@
         </columnResizePolicy>
     </TableView>
     <Pane prefHeight="78.0" prefWidth="627.0">
-        <Button layoutX="400.0" layoutY="29.0" onAction="#clickEdit" prefHeight="25.0" prefWidth="115.0"
+        <Button layoutX="400.0" layoutY="29.0" onAction="#clickRemoveOrEdit" prefHeight="25.0" prefWidth="115.0"
                 styleClass="signinPagebutton" text="Edit or Remove">
          <padding>
              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>

@@ -39,19 +39,6 @@ public class LibraryDAO {
                     Main.currentUser.setStatus(rs.getString("status"));
                     Main.currentUser.setBalance(rs.getDouble("balance"));
                     Main.currentUser.setLibraryID(rs.getString("libraryID"));
-                    Thread loadInfoForAdminThread = new Thread(() -> {
-                        while (true) {
-                            AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
-                            AdminBook adminBook = AdminController.adminBookLoader.getController();
-                            if (adminAccount != null && adminBook != null) {
-                                Collections.addAll(AdminLoginController.books, LibraryDAO.bookList());
-                                adminAccount.displayAccount(Main.currentUser.getName(),Main.currentUser.getEmail(),Main.currentUser.getUsername());
-                                adminBook.displayBooks(AdminLoginController.books);
-                                break;
-                            }
-                        }
-                    });
-                    loadInfoForAdminThread.start();
                 } else {
                     Main.currentUser = new Member();
                     Main.currentUser.setId(rs.getInt("id"));
@@ -588,13 +575,17 @@ public class LibraryDAO {
     }
 
     public static void updateBook(String isbn, Book book) {
-        String sql = "UPDATE bookTable SET totalCopies = ?, availableCopies = ? WHERE isbn = ?";
+        String sql = "UPDATE bookTable SET isbn = ?, title = ?, author = ?, publisher = ?, totalCopies = ?, availableCopies = ? WHERE isbn = ?";
 
         try (Connection conn = DBInitializer.connect(); 
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, book.getTotalCopies());
-                pstmt.setInt(2, book.getAvailableCopies());
-                pstmt.setString(3, isbn);
+                pstmt.setString(1, book.get_ISBN());
+                pstmt.setString(2, book.get_title());
+                pstmt.setString(3, book.get_author());
+                pstmt.setString(4, book.get_publisher());
+                pstmt.setInt(5, book.getTotalCopies());
+                pstmt.setInt(6, book.getAvailableCopies());
+                pstmt.setString(7, isbn);
                 pstmt.executeUpdate();
                 System.out.println("Successfully updated book.");
         } catch (SQLException e) {
