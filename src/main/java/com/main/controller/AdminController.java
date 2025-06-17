@@ -25,7 +25,7 @@ import static com.main.controller.AdminLoginController.admin;
 
 
 public class AdminController implements Initializable {
-    @FXML private Label insertName;
+    @FXML public Label insertName;
     @FXML
     private BorderPane adminPane;
     @FXML
@@ -89,7 +89,11 @@ public class AdminController implements Initializable {
         //
         System.out.println("initializer from admin controller: " + Thread.currentThread().getName());
         Platform.runLater(() -> {
-            this.insertName.setText(Main.currentUser.getName());
+            if (Main.currentUser != null) {
+                if (Main.currentUser.getType().equals("admin")) {
+                        this.insertName.setText(Main.currentUser.getName());
+                }
+            }
         });
     }
 

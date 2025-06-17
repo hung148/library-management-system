@@ -11,5 +11,9 @@
             fx:controller="com.main.controller.member.MemberHomepage"
             prefHeight="342.0" prefWidth="508.0"
             stylesheets="@../pageStyle.css">
-<Label fx:id="temp" alignment="TOP_CENTER"/>
+            <ScrollPane fitToWidth="true" prefHeight="342.0" prefWidth="508.0">
+                <content>
+                    <Label fx:id="temp" alignment="CENTER" wrapText="true" />
+                </content>
+            </ScrollPane>
 </AnchorPane>

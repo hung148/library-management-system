@@ -65,69 +65,69 @@ public class TestDB {
     }
     public static void testAdminAndUser() throws Exception {
         DBInitializer.initializeDB();
-        // System.out.println("Test addAdmin()");
-        // LibraryDAO.addAdmin(
-        //     "trinhhungqt2004@gmail.com", 
-        //     "NguyenHungSky123@", 
-        //     "hung123", 
-        //     "Trinh Dinh Nguyen Hung", 
-        //     1000);
-        // LibraryDAO.addAdmin(
-        //     "test1@gmail.com", 
-        //     "pass1", 
-        //     "adminname1", 
-        //     "name1", 
-        //     2000);
-        // LibraryDAO.addAdmin(
-        //     "test2@gmail.com", 
-        //     "pass2", 
-        //     "adminname2", 
-        //     "name2", 
-        //     3000);
-        // System.out.println("Test getAdminList()");
-        // for (Admin admin : LibraryDAO.getAdminList()) {
-        //     System.out.println("----------------------------");
-        //     System.out.println(admin.toString());
-        //     System.out.println("----------------------------");
-        // }
-        // System.out.println("Test getAdminByUsername()");
-        // System.out.println((LibraryDAO.getAdminByUsername("adminname2") != null) ? LibraryDAO.getAdminByUsername("adminname2").toString() : "");
-        // System.out.println("Test getAdminById()");
-        // System.out.println("get Admin at id = 1");
-        // System.out.println((LibraryDAO.getAdminById(1) != null) ? LibraryDAO.getAdminById(1).toString() : "");
-        // System.out.println("Test getAdminByEmail()");
-        // System.out.println("get Admin at email = trinhhungqt2004@gmail.com");
-        // System.out.println((LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com") != null) ? LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com").toString() : "");
-        // System.out.println("Test removeAdmin() by id");
-        // System.out.println("remove Admin by id = 2");
-        // LibraryDAO.removeAdmin(2);
-        // for (Admin admin : LibraryDAO.getAdminList()) {
-        //     System.out.println("----------------------------");
-        //     System.out.println(admin.toString());
-        //     System.out.println("----------------------------");
-        // }
-        // System.out.println("Test removeAdmin() by email");
-        // System.out.println("remove Admin by email = test1@gmail.com");
-        // LibraryDAO.removeAdmin("test1@gmail.com");
-        // for (Admin admin : LibraryDAO.getAdminList()) {
-        //     System.out.println("----------------------------");
-        //     System.out.println(admin.toString());
-        //     System.out.println("----------------------------");
-        // }
-        // System.out.println("Test updateAdmin()");
-        // Admin newadmin = new Admin();
-        // newadmin.setName("newAdmin");
-        // newadmin.setEmail("newAdminEmail");
-        // newadmin.setHashPassword(AuthServices.generateHashedPassword("newAdminPassword"));
-        // newadmin.setUsername("newAdminUsername");
-        // newadmin.setBalance(2300);
-        // LibraryDAO.updateAdmin("test2@gmail.com", newadmin);
-        // for (Admin admin : LibraryDAO.getAdminList()) {
-        //     System.out.println("----------------------------");
-        //     System.out.println(admin.toString());
-        //     System.out.println("----------------------------");
-        // }
-        // test member 
+        System.out.println("Test addAdmin()");
+        LibraryDAO.addAdmin(
+            "trinhhungqt2004@gmail.com", 
+            "NguyenHungSky123@", 
+            "hung123", 
+            "Trinh Dinh Nguyen Hung", 
+            1000);
+        LibraryDAO.addAdmin(
+            "test1@gmail.com", 
+            "pass1", 
+            "adminname1", 
+            "name1", 
+            2000);
+        LibraryDAO.addAdmin(
+            "test2@gmail.com", 
+            "pass2", 
+            "adminname2", 
+            "name2", 
+            3000);
+        System.out.println("Test getAdminList()");
+        for (Admin admin : LibraryDAO.getAdminList()) {
+            System.out.println("----------------------------");
+            System.out.println(admin.toString());
+            System.out.println("----------------------------");
+        }
+        System.out.println("Test getAdminByUsername()");
+        System.out.println((LibraryDAO.getAdminByUsername("adminname2") != null) ? LibraryDAO.getAdminByUsername("adminname2").toString() : "");
+        System.out.println("Test getAdminById()");
+        System.out.println("get Admin at id = 1");
+        System.out.println((LibraryDAO.getAdminById(1) != null) ? LibraryDAO.getAdminById(1).toString() : "");
+        System.out.println("Test getAdminByEmail()");
+        System.out.println("get Admin at email = trinhhungqt2004@gmail.com");
+        System.out.println((LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com") != null) ? LibraryDAO.getAdminByEmail("trinhhungqt2004@gmail.com").toString() : "");
+        System.out.println("Test removeAdmin() by id");
+        System.out.println("remove Admin by id = 2");
+        LibraryDAO.removeAdmin(2);
+        for (Admin admin : LibraryDAO.getAdminList()) {
+            System.out.println("----------------------------");
+            System.out.println(admin.toString());
+            System.out.println("----------------------------");
+        }
+        System.out.println("Test removeAdmin() by email");
+        System.out.println("remove Admin by email = test1@gmail.com");
+        LibraryDAO.removeAdmin("test1@gmail.com");
+        for (Admin admin : LibraryDAO.getAdminList()) {
+            System.out.println("----------------------------");
+            System.out.println(admin.toString());
+            System.out.println("----------------------------");
+        }
+        System.out.println("Test updateAdmin()");
+        Admin newadmin = new Admin();
+        newadmin.setName("newAdmin");
+        newadmin.setEmail("newAdminEmail");
+        newadmin.setHashPassword(AuthServices.generateHashedPassword("newAdminPassword"));
+        newadmin.setUsername("newAdminUsername");
+        newadmin.setBalance(2300);
+        LibraryDAO.updateAdmin("test2@gmail.com", newadmin);
+        for (Admin admin : LibraryDAO.getAdminList()) {
+            System.out.println("----------------------------");
+            System.out.println(admin.toString());
+            System.out.println("----------------------------");
+        }
+        //test member 
         System.out.println("Test addMember()");
         LibraryDAO.addMember(
             "member1@gmail.com", 
@@ -185,30 +185,30 @@ public class TestDB {
             "Book 1",
             "Person1", 
             "publisher1", 
-            30);
+            30, 10);
         LibraryDAO.addBook(
             "4309340320", 
             "Book 2",
             "Person2", 
             "publisher2", 
-            50);
+            50, 10);
         LibraryDAO.addBook(
             "0849323242", 
             "Book 3",
             "Person3", 
             "publisher3", 
-            10);
+            10, 10);
         // Sample data
-        LibraryDAO.addBook("1234567890", "Java Basics", "John Doe", "Tech Press", 3);
-        LibraryDAO.addBook("9876543210", "Effective Java", "Joshua Bloch", "Pearson", 5);
-        LibraryDAO.addBook("5555555555", "Clean Code", "Robert Martin", "Prentice Hall", 4);
+        LibraryDAO.addBook("1234567890", "Java Basics", "John Doe", "Tech Press", 3, 30);
+        LibraryDAO.addBook("9876543210", "Effective Java", "Joshua Bloch", "Pearson", 5, 40);
+        LibraryDAO.addBook("5555555555", "Clean Code", "Robert Martin", "Prentice Hall", 4, 50);
         
         
-        LibraryDAO.addBook("9781337275347", "Calculus", "Ron Larson", "Cengage Learning", 7);
-        LibraryDAO.addBook("9781484255865", "Jakarta EE Recipes: A Problem-Solution Approach", "Josh Juneau", "Apress", 4);
-        LibraryDAO.addBook("9781998114801", "Of Mice and Men", "John Steinbeck", "Pomodoro Books", 9);
-        LibraryDAO.addBook("9780241968581", "One Hundred Years of Solitude", "Gabriel Garcia Marquez", "Penguin", 5);
-        LibraryDAO.addBook("9780671880316", "Schindler's List", "Thomas Keneally", "Atria Books", 13);
+        LibraryDAO.addBook("9781337275347", "Calculus", "Ron Larson", "Cengage Learning", 7, 70);
+        LibraryDAO.addBook("9781484255865", "Jakarta EE Recipes: A Problem-Solution Approach", "Josh Juneau", "Apress", 4, 80);
+        LibraryDAO.addBook("9781998114801", "Of Mice and Men", "John Steinbeck", "Pomodoro Books", 9, 90);
+        LibraryDAO.addBook("9780241968581", "One Hundred Years of Solitude", "Gabriel Garcia Marquez", "Penguin", 5, 100);
+        LibraryDAO.addBook("9780671880316", "Schindler's List", "Thomas Keneally", "Atria Books", 13, 40);
         		
 
         System.out.println();
@@ -292,7 +292,7 @@ public class TestDB {
         }
 
         // 2. Add a borrowed book record
-        LibraryDAO.addBorrowedBook(member.getId(), b7);
+        //LibraryDAO.addBorrowedBook(member.getId(), b7);
 
         // 3. Retrieve and print borrowed book
         BorrowedBook borrowedBook = LibraryDAO.searchBorrowedBookByMember(member.getId(), "1234567890");
@@ -336,7 +336,7 @@ public class TestDB {
 
         if (b8 == null || member1 == null) return;
 
-        LibraryDAO.addBorrowedBook(member1.getId(), b8);
+        //LibraryDAO.addBorrowedBook(member1.getId(), b8);
 
         BorrowedBook bb = LibraryDAO.searchBorrowedBookByMember(member1.getId(), "9876543210");
         if (bb != null) {
@@ -357,7 +357,7 @@ public class TestDB {
 
         if (b9 == null || member2 == null) return;
 
-        LibraryDAO.addBorrowedBook(member2.getId(), b9);
+        //LibraryDAO.addBorrowedBook(member2.getId(), b9);
 
         BorrowedBook bb1 = LibraryDAO.searchBorrowedBookByMember(member2.getId(), "5555555555");
         if (bb1 != null) {
@@ -380,7 +380,7 @@ public class TestDB {
 
         if (b10 == null || member3 == null) return;
 
-        LibraryDAO.addBorrowedBook(member3.getId(), b10);
+        //LibraryDAO.addBorrowedBook(member3.getId(), b10);
 
         BorrowedBook bb2 = LibraryDAO.searchBorrowedBookByMember(member3.getId(), "2320321093");
         if (bb2 != null) {

@@ -60,7 +60,11 @@ public class MemberController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setHomePage();
         Platform.runLater(() -> {
-            this.insertName.setText(Main.currentUser.getName());
+            if (Main.currentUser != null) {
+                if (Main.currentUser.getType().equals("member")) {
+                        this.insertName.setText(Main.currentUser.getName());
+                }
+            }
         });
     }
 

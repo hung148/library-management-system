@@ -26,8 +26,9 @@ public class BookListModel {
         return this.list;
     }
     public void addToList(Book book) {
-        LibraryDAO.addBook(book.get_ISBN(),book.get_title(),book.get_author(),book.get_publisher(),book.getTotalCopies());
+        LibraryDAO.addBook(book.get_ISBN(),book.get_title(),book.get_author(),book.get_publisher(),book.getTotalCopies(), book.getValue());
     }
+
     public void removeFromList(Book book) {
         LibraryDAO.removeBook(book.get_ISBN());
     }

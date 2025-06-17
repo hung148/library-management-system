@@ -7,6 +7,7 @@ public class Book {
     private String _publisher = "";
     private int _totalCopies = 0;
     private int _availableCopies = 0;
+    private double _value = 0;
     
     public Book() {
     	this(null, null, null, null, 0);
@@ -29,6 +30,7 @@ public class Book {
     public String get_publisher() { return _publisher; }
     public int getTotalCopies() { return _totalCopies; }
     public int getAvailableCopies() { return _availableCopies;}
+    public double getValue() { return _value;}
     // Setters
     public void set_ISBN(String _ISBN) {
         this._ISBN = _ISBN;
@@ -48,6 +50,10 @@ public class Book {
     
     public void setAvailableCopies(int availableCopies ) {
     	_availableCopies = availableCopies;
+    }
+
+    public void setValue(double value) {
+        this._value = value;
     }
 
 

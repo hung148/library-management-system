@@ -5,6 +5,7 @@ package com.main.view;
 import com.main.controller.admin.AdminMembers;
 import com.main.model.MemberListModel;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.main.app.Main;
@@ -26,6 +28,7 @@ import com.main.controller.StartPageController;
 import com.main.controller.admin.AdminAccount;
 import com.main.controller.admin.AdminBook;
 import com.main.entity.Admin;
+import com.main.entity.BorrowedBook;
 import com.main.entity.Member;
 import com.main.model.BookListModel;
 import com.main.respository.LibraryDAO;
@@ -69,6 +72,28 @@ public class LibraryApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException  {
+        // start thread for borrow book update status late, lost ?
+        Thread updateBorrow = new Thread() {
+            @Override
+            public void run() {
+                while(true) {
+                    try {
+                        BorrowedBook[] borrows = LibraryDAO.borrowedBookList();
+                        for (BorrowedBook book : borrows) {
+                            book.updateStatusAndFine();
+                        }
+                        // Sleep before next check (e.g., every 10 second)
+                        Thread.sleep(10000); // 10 second in milliseconds
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
+                    } 
+                }
+                
+            }
+        };
+        updateBorrow.setDaemon(true);
+        updateBorrow.start();
+
         LibraryApplication.stage = stage; // Save reference to the main stage
         root = new StackPane(); // Create the shared root pane
 
@@ -178,6 +203,13 @@ public class LibraryApplication extends Application {
         if (memberPageController != null) {
             memberPageController.setHomePage();
         }
+        Platform.runLater(() -> {
+            if (Main.currentUser != null) {
+                if (Main.currentUser.getType().equals("member")) {
+                        memberPageController.insertName.setText(Main.currentUser.getName());
+                }
+            }
+        });
         memberPageroot.toFront();
         memberPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");
@@ -193,6 +225,13 @@ public class LibraryApplication extends Application {
         if (adminPageController != null) {
             adminPageController.setHomePage();
         }
+        Platform.runLater(() -> {
+            if (Main.currentUser != null) {
+                if (Main.currentUser.getType().equals("admin")) {
+                        adminPageController.insertName.setText(Main.currentUser.getName());
+                }
+            }
+        });
         adminPageroot.toFront();
         adminPageroot.setVisible(true);
         System.out.println("Switch time: " + (System.currentTimeMillis() - before) + "ms");

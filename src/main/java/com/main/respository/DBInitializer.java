@@ -13,6 +13,9 @@ public class DBInitializer {
             initializeBookTable(stmt);
             initializeBorrowedBookTable(stmt);
             addLoginState(stmt);
+            addValueColumn(stmt);
+            addIsPayFineColumn(stmt);
+            addIsReturendColumn(stmt);
         } catch (Exception e) {
             e.printStackTrace();
         }        
@@ -25,7 +28,7 @@ public class DBInitializer {
             // db file will be created in the project root if not exist
             initializeDB();
             conn = DriverManager.getConnection(url);
-            System.out.println("Connection established.");
+            //System.out.println("Connection established.");
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
@@ -45,7 +48,7 @@ public class DBInitializer {
         "libraryID TEXT UNIQUE)");
         try {
             stmt.execute(sql);
-            System.out.println("User table created or already exist.");
+            //System.out.println("User table created or already exist.");
         } catch (SQLException e) {
             throw e;
         }
@@ -79,6 +82,90 @@ public class DBInitializer {
         }
     }
 
+    public static void addValueColumn(Statement stmt) {
+        // Check if the value column exist
+        String pramaQuery = "PRAGMA table_info(bookTable)";
+        Boolean valueExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("value")) {
+                    valueExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!valueExists) {
+            String alterQuery = "ALTER TABLE bookTable ADD COLUMN value REAL DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("value column is added to book table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void addIsPayFineColumn(Statement stmt) {
+        // Check if the value column exist
+        String pramaQuery = "PRAGMA table_info(borrowedBook)";
+        Boolean valueExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("isPayFine")) {
+                    valueExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!valueExists) {
+            String alterQuery = "ALTER TABLE borrowedBook ADD COLUMN isPayFine BOOLEAN DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("isPayFine column is added to book table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void addIsReturendColumn(Statement stmt) {
+        // Check if the value column exist
+        String pramaQuery = "PRAGMA table_info(borrowedBook)";
+        Boolean valueExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("isReturned")) {
+                    valueExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!valueExists) {
+            String alterQuery = "ALTER TABLE borrowedBook ADD COLUMN isReturned BOOLEAN DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("isReturned column is added to book table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     // initialize book table 
     private static void initializeBookTable(Statement stmt) throws SQLException {
     	String sql = ("CREATE TABLE IF NOT EXISTS bookTable (" +
@@ -91,7 +178,7 @@ public class DBInitializer {
     	
     	try {
             stmt.execute(sql);
-            System.out.println("bookTable table created or already exist.");
+            //System.out.println("bookTable table created or already exist.");
         } catch (SQLException e) {
             throw e;
         }
@@ -114,7 +201,7 @@ public class DBInitializer {
     	
     	try {
             stmt.execute(sql);
-            System.out.println("borrowedBook table created or already exist.");
+            //System.out.println("borrowedBook table created or already exist.");
         } catch (SQLException e) {
             throw e;
         }
