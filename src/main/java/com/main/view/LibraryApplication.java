@@ -2,6 +2,8 @@
 // scene.getStylesheets().add(cssURL.toExternalForm());
 package com.main.view;
 
+import com.main.controller.admin.AdminMembers;
+import com.main.model.MemberListModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -118,7 +120,10 @@ public class LibraryApplication extends Application {
                     AdminBook adminBook = AdminController.adminBookLoader.getController();
                     BookListModel bookList = new BookListModel();
                     adminBook.setAdminBookList(bookList);
-                    adminBook.setViewBooks(bookList);  //set the tableView in adminBook
+                    adminBook.setViewBooks(bookList); //set the tableView in adminBook
+                    MemberListModel memeberList = new MemberListModel();
+                    AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
+                    adminMembers.setViewMembers(memeberList);
                 });
                 loadInfoForAdminThread.start();
                 adminPageroot.toFront();

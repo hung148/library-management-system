@@ -1,7 +1,11 @@
 package com.main.controller;
 
 
+import com.main.app.Main;
+import com.main.controller.admin.AdminAccount;
+import com.main.controller.admin.AdminBook;
 import com.main.view.LibraryApplication;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -9,13 +13,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.main.controller.AdminLoginController.admin;
+
 
 public class AdminController implements Initializable {
+    @FXML private Label insertName;
     @FXML
     private BorderPane adminPane;
     @FXML
@@ -34,6 +44,10 @@ public class AdminController implements Initializable {
 
     private ObjectProperty<Node> centerDisplay;
 
+    public void setInsertName(String insertName) {
+        this.insertName.setText(insertName);
+    }
+
     @FXML
     private void clickAccount() throws IOException {
         centerDisplay.set(adminAccountRoot);
@@ -41,6 +55,7 @@ public class AdminController implements Initializable {
     @FXML
     private void clickBook() throws IOException {
         centerDisplay.set(adminBookRoot);
+
     }
     @FXML
     private void clickMembers() throws IOException {
@@ -73,7 +88,9 @@ public class AdminController implements Initializable {
 
         //
         System.out.println("initializer from admin controller: " + Thread.currentThread().getName());
-
+        Platform.runLater(() -> {
+            this.insertName.setText(Main.currentUser.getName());
+        });
     }
 
 }

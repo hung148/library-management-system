@@ -25,7 +25,18 @@ public class BookListModel {
     public ObservableList<Book> getList() {
         return this.list;
     }
-    public void updateList(Book book) {
+    public void addToList(Book book) {
         LibraryDAO.addBook(book.get_ISBN(),book.get_title(),book.get_author(),book.get_publisher(),book.getTotalCopies());
+    }
+    public void removeFromList(Book book) {
+        LibraryDAO.removeBook(book.get_ISBN());
+    }
+    public void updateBook(Book book) {
+        LibraryDAO.updateBook(book.get_ISBN(),book);
+    }
+
+
+    public void updateList(Book book) {
+        this.list.add(book);
     }
 }

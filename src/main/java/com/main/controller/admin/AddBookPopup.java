@@ -6,6 +6,7 @@ import com.main.model.BookListModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import org.jetbrains.annotations.NotNull;
 
 public class AddBookPopup {
     @FXML
@@ -18,11 +19,15 @@ public class AddBookPopup {
     private TextField addPublisher;
     @FXML
     private TextField addTotal;
-    private final AdminBook adminBook = AdminController.adminBookLoader.getController();
     private BookListModel bookList;
+    private final AdminBook adminBook = AdminController.adminBookLoader.getController();
 
-    public void setBookListModel(BookListModel bookList) {
+    public void setBookList(BookListModel bookList) {
         this.bookList = bookList;
+    }
+
+    public BookListModel getBookList() {
+        return this.bookList;
     }
 
     //need to add new book into the current library....
@@ -43,12 +48,24 @@ public class AddBookPopup {
         bookList.getList().add(newBook());
         bookList.updateList(newBook());
         adminBook.getViewBooks().setItems(bookList.getList());
-        adminBook.getAddBookStage().close();
+
+        adminBook.getAddEditStage().close();
+        clearInputs();
     }
 
     @FXML
     private void onCancelClick(ActionEvent event) {
-        adminBook.getAddBookStage().close();
+        AdminBook adminBook = AdminController.adminBookLoader.getController();
+        adminBook.getAddEditStage().close();
+        clearInputs();
+    }
+
+    private void clearInputs() {
+        this.addTitle.clear();
+        this.addAuthor.clear();
+        this.addISBN.clear();
+        this.addPublisher.clear();
+        this.addTotal.clear();
     }
 }
 

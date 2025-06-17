@@ -1,9 +1,11 @@
 package com.main.controller;
 
+import com.main.app.Main;
 import com.main.controller.member.MemberAccount;
 import com.main.entity.Book;
 import com.main.respository.LibraryDAO;
 import com.main.view.LibraryApplication;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 
@@ -23,6 +26,7 @@ import static com.main.controller.MemberLoginController.member;
 
 public class MemberController implements Initializable {
     public BorderPane memberPage;
+    public Label insertName;
     private FXMLLoader loader;
     public static ObservableList<Book> currentBorrowed = FXCollections.observableArrayList();
     public static final ObservableList<Book> pastBorrowed = FXCollections.observableArrayList();
@@ -55,7 +59,9 @@ public class MemberController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setHomePage();
-
+        Platform.runLater(() -> {
+            this.insertName.setText(Main.currentUser.getName());
+        });
     }
 
     @FXML

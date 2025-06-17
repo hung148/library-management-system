@@ -1,14 +1,11 @@
 package com.main.controller;
 
-
-
 import com.main.app.Main;
-
 import com.main.controller.admin.*;
-
 import com.main.entity.Admin;
 import com.main.entity.Book;
 import com.main.model.BookListModel;
+import com.main.model.MemberListModel;
 import com.main.respository.LibraryDAO;
 import com.main.services.AuthServices;
 import com.main.view.LibraryApplication;
@@ -40,7 +37,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class AdminLoginController implements Initializable {
@@ -53,12 +49,14 @@ public class AdminLoginController implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private AnchorPane leftPane;
-    @FXML
     private AnchorPane rightPane;
 
     private PauseTransition debounce = new PauseTransition(Duration.millis(120));
     private Timeline centerAnimation;
+
+    public static Admin admin;
+    private final BookListModel bookList =  new BookListModel();
+    private final MemberListModel memberList = new  MemberListModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resouces) {
@@ -143,8 +141,6 @@ public class AdminLoginController implements Initializable {
         centerAnimation.play();
     }
 
-    private Admin admin;
-    private final BookListModel bookList = new BookListModel();
 
 
     @FXML
@@ -171,11 +167,16 @@ public class AdminLoginController implements Initializable {
             //load books and admin's info using Thread bc it is a one-time action
             //Thread runs once login successfully
             Thread loadInfoForAdminThread = new Thread(() -> {
+
                 AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
                 adminAccount.displayAccount(admin.getName(),admin.getEmail(),admin.getUsername());
+
                 AdminBook adminBook = AdminController.adminBookLoader.getController();
-                adminBook.setAdminBookList(bookList);
-                adminBook.setViewBooks(bookList);  //set the tableView in adminBook
+                adminBook.setAdminBookList(this.bookList);
+                adminBook.setViewBooks(this.bookList);  //set the tableView in adminBook
+                AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
+                adminMembers.setViewMembers(this.memberList);
+                adminMembers.setMemberListModel(this.memberList);
             });
             loadInfoForAdminThread.start();
             LibraryApplication.loadAdminPage();

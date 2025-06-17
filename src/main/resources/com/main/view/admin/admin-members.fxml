@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
-    <Pane layoutX="27.0" layoutY="-3.0" prefHeight="420.0" prefWidth="470.0">
-        <Label prefHeight="77.0" prefWidth="87.0" text="admin managing members page" wrapText="true" />
-    </Pane>
+    <TableView fx:id="viewMembers" layoutX="9.0" prefHeight="290.0">
+        <columns>
+            <TableColumn fx:id="libraryIDCol" prefWidth="100" text="Library ID" />
+            <TableColumn fx:id="nameCol" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="usernameCol" prefWidth="100" text="Username" />
+            <TableColumn fx:id="emailCol" prefWidth="120" text="Email" />
+            <TableColumn fx:id="balanceCol" prefWidth="70" text="Balance" />
+        </columns>
+        <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </padding>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </AnchorPane>

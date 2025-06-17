@@ -7,6 +7,7 @@
 <VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.main.controller.admin.AdminBook">
     <Pane prefHeight="33.0" prefWidth="500.0"/>
+    <Label fx:id="noBookSelectedAlert" styleClass="alertLogin" />
     <TableView fx:id="viewBooks" prefHeight="293.0">
         <columns>
             <TableColumn fx:id="authorCol" prefWidth="120" text="Author"/>
@@ -24,7 +25,7 @@
         </columnResizePolicy>
     </TableView>
     <Pane prefHeight="78.0" prefWidth="627.0">
-        <Button layoutX="400.0" layoutY="29.0" onAction="#clickRemoveOrEdit" prefHeight="25.0" prefWidth="115.0"
+        <Button layoutX="400.0" layoutY="29.0" onAction="#clickEdit" prefHeight="25.0" prefWidth="115.0"
                 styleClass="signinPagebutton" text="Edit or Remove">
          <padding>
              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>

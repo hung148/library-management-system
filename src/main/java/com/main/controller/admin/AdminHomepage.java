@@ -5,15 +5,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AdminHomepage implements Initializable {
-    @FXML
-    private Label temp;
+    public Label date;
+    private final Date currentDate = new Date();
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        temp.setText("will put something here later");
+        date.setText(currentDate.toString());
     }
+
+
 }

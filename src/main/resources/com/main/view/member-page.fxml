@@ -27,7 +27,8 @@
         </left>
         <top>
             <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="610.0" BorderPane.alignment="CENTER">
-                <Label layoutX="89.0" layoutY="21.0" text="Welcome, " />
+                <Label styleClass="header" layoutX="70.0" layoutY="21.0" text="Welcome," />
+                <Label styleClass="header" fx:id="insertName" layoutX="186" layoutY="21"/>
                 <Pane layoutX="472.0" layoutY="-2.0" prefHeight="60.0" prefWidth="101.0" styleClass="corner-box">
                     <Label alignment="TOP_LEFT" layoutX="7.0" prefHeight="60.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" />
                 </Pane>

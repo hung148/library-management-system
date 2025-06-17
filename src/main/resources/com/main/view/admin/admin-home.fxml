@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.main.controller.admin.AdminHomepage"
-            prefHeight="400.0" prefWidth="600.0">
-        <Label fx:id="temp" alignment="TOP_CENTER"/>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminHomepage">
+        <Label alignment="TOP_CENTER" layoutX="10" layoutY="10.0" styleClass="subLabels" text="Welcome to your homepage!" />
+        <Label alignment="TOP_CENTER" layoutX="10" layoutY="35.0" styleClass="subLabels" text="Today's date:" />
+        <Label fx:id="date" alignment="TOP_CENTER" layoutX="10.0" layoutY="60.0" styleClass="subLabels" />
 </AnchorPane>
