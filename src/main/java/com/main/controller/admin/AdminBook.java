@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -90,6 +89,7 @@ public class AdminBook implements Initializable {
         addBookPopup.setBookList(this.bookList);
         addEditStage.setScene(addScene);
         addEditStage.setTitle("Add New Book");
+        addEditStage.initOwner(LibraryApplication.stage);
         addEditStage.setResizable(false);
         addEditStage.showAndWait();
     }
@@ -108,6 +108,7 @@ public class AdminBook implements Initializable {
             editBookPopup.loadEditBook(editBook);
             addEditStage.setScene(editScene);
             addEditStage.setTitle("Edit or Remove Book");
+            addEditStage.initOwner(LibraryApplication.stage);
             addEditStage.setResizable(false);
             addEditStage.showAndWait();
         } catch (NullPointerException e) {

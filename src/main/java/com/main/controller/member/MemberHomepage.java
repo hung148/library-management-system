@@ -30,7 +30,7 @@ public class MemberHomepage implements Initializable {
 
                 StringBuilder display = new StringBuilder("Important:\n\n");
                 for (BorrowedBook book : borrowed) {
-                    if (book.getStatus().equalsIgnoreCase("lost") && book.isPayFine() == false) {
+                    if (book.getStatus().equalsIgnoreCase("lost") && book.isPayFineAfterLost() == false) {
                         String title = book.getBook().get_title();
                         LocalDate due = book.getDeadline();
                         String status = book.getStatus();

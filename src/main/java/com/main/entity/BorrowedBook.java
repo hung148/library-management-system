@@ -17,8 +17,49 @@ public class BorrowedBook {
     private double lostFine;
 	private boolean isPayFine = false;
 	private boolean isReturnedAfterLate = false;
+	private boolean isPayFineAfterLost = false;
+	private boolean isReturnedAfterLost = false;
+	private int id;
+	
+	
 
-    public boolean isPayFine() {
+    public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public boolean isPayFineAfterLost() {
+		return isPayFineAfterLost;
+	}
+
+
+
+	public void setPayFineAfterLost(boolean isPayFineAfterLost) {
+		this.isPayFineAfterLost = isPayFineAfterLost;
+	}
+
+
+
+	public boolean isReturnedAfterLost() {
+		return isReturnedAfterLost;
+	}
+
+
+
+	public void setReturnedAfterLost(boolean isReturnedAfterLost) {
+		this.isReturnedAfterLost = isReturnedAfterLost;
+	}
+
+
+
+	public boolean isPayFine() {
 		return isPayFine;
 	}
 
@@ -85,14 +126,21 @@ public class BorrowedBook {
 				LibraryDAO.updateFine(memberID, this.lateFine, 1);
 			} else if (daysLate > 14) {
 				// Mark as lost
+				System.out.println(daysLate);
 				LibraryDAO.updateBorrowedBookStatus(this, "lost");
+				this.status = "lost";
 				LibraryDAO.updateFine(memberID, this.lostFine, 0);
 			}
 		} else {
 			if (returnedDate.isAfter(deadline)) {
-				this.status = "late";
-				int daysLate = (int) ChronoUnit.DAYS.between(deadline, returnedDate);
-				this.lateFine = daysLate * LATE_FINE;
+				long dayAfter = ChronoUnit.DAYS.between(deadline, returnedDate); 
+				if (dayAfter > 14) {
+					this.status = "lost";
+				} else {
+					this.status = "late";
+					int daysLate = (int) ChronoUnit.DAYS.between(deadline, returnedDate);
+					this.lateFine = daysLate * LATE_FINE;
+				}
 			} else {
 				this.status = "returned";
 				this.lateFine = 0.0;

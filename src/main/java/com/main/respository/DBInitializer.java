@@ -16,6 +16,8 @@ public class DBInitializer {
             addValueColumn(stmt);
             addIsPayFineColumn(stmt);
             addIsReturendColumn(stmt);
+            addIsPayFineAfterLost(stmt);
+            addIsReturedAfterLost(stmt);
         } catch (Exception e) {
             e.printStackTrace();
         }        
@@ -160,6 +162,62 @@ public class DBInitializer {
             try {
                 stmt.executeUpdate(alterQuery);
                 System.out.println("isReturned column is added to book table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void addIsReturedAfterLost(Statement stmt) {
+        // Check if the value column exist
+        String pramaQuery = "PRAGMA table_info(borrowedBook)";
+        Boolean valueExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("isReturnedAfterLost")) {
+                    valueExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!valueExists) {
+            String alterQuery = "ALTER TABLE borrowedBook ADD COLUMN isReturnedAfterLost BOOLEAN DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("isReturnedAfterLost column is added to book table");
+            }  catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void addIsPayFineAfterLost(Statement stmt) {
+        // Check if the value column exist
+        String pramaQuery = "PRAGMA table_info(borrowedBook)";
+        Boolean valueExists = false;
+        try (ResultSet rs = stmt.executeQuery(pramaQuery)) {
+            while (rs.next()) {
+                String existColumn = rs.getString("name");
+                if (existColumn.equalsIgnoreCase("isPayFineAfterLost")) {
+                    valueExists = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Add the column if it does not exist
+        if (!valueExists) {
+            String alterQuery = "ALTER TABLE borrowedBook ADD COLUMN isPayFineAfterLost BOOLEAN DEFAULT 0";
+            try {
+                stmt.executeUpdate(alterQuery);
+                System.out.println("isPayFineAfterLost column is added to book table");
             }  catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

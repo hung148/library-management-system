@@ -66,10 +66,33 @@
                         <TableColumn fx:id="daysLateCol" prefWidth="87.66667175292969" text="Days Late" />
                         <TableColumn fx:id="fineCol" prefWidth="87.66667175292969" text="Fine" />
                         <TableColumn fx:id="payFineCol" prefWidth="87.66667175292969" text="Is Pay Fine" />
-                        <TableColumn fx:id="actionCol" prefWidth="150" text="Action" />
+                        <TableColumn fx:id="actionCol" prefWidth="200" text="Action" />
                     </columns>
                 </TableView>
                 <Label layoutX="29.0" layoutY="-3.0" prefHeight="33.0" prefWidth="105.0" styleClass="subLabels" text="Late Borrows" wrapText="true" />
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <padding>
+                    <Insets bottom="10.0" />
+                </padding>
+            </Pane>
+            <Pane minHeight="120">
+                <TableView fx:id="lostBooks" layoutX="29.0" layoutY="26.0" prefHeight="125.0" prefWidth="408.0">
+                    <columns>
+                        <TableColumn fx:id="authorCol3" maxWidth="102.33334350585938" prefWidth="102.33334350585938" text="Author" />
+                        <TableColumn fx:id="isbnCol3" prefWidth="100.0" text="ISBN" />
+                        <TableColumn fx:id="titleCol3" prefWidth="124.33331298828125" text="Title" />
+                        <TableColumn fx:id="publisherCol3" prefWidth="87.66667175292969" text="Publisher" />
+                        <TableColumn fx:id="returnDateAfterLostCol" prefWidth="87.66667175292969" text="Return Date" />
+                        <TableColumn fx:id="duedateCol" prefWidth="87.66667175292969" text="Dealine" />
+                        <TableColumn fx:id="daysLostCol" prefWidth="87.66667175292969" text="Days Lost" />
+                        <TableColumn fx:id="fineLostCol" prefWidth="87.66667175292969" text="Fine" />
+                        <TableColumn fx:id="payFineLostCol" prefWidth="87.66667175292969" text="Is Pay Fine" />
+                        <TableColumn fx:id="actionLostCol" prefWidth="200" text="Action" />
+                    </columns>
+                </TableView>
+                <Label layoutX="29.0" layoutY="-3.0" prefHeight="33.0" prefWidth="105.0" styleClass="subLabels" text="Lost Borrows" wrapText="true" />
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>

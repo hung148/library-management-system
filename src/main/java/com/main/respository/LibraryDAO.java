@@ -662,8 +662,9 @@ public class LibraryDAO {
             try(Connection conn = DBInitializer.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 LocalDate today = LocalDate.now();
-                
-                pstmt.setString(1, "pending");
+                BorrowedBook newBorrowedBook = new BorrowedBook(memberID, book, today, duedate);
+                newBorrowedBook.updateStatusAndFine();
+                pstmt.setString(1, newBorrowedBook.getStatus());
                 pstmt.setString(2, today.toString());
                 pstmt.setString(3, duedate.toString());
                 pstmt.setNull(4, java.sql.Types.VARCHAR);
@@ -755,7 +756,9 @@ public class LibraryDAO {
 
                     borrowedBook.setPayFine(rs.getBoolean("isPayFine"));
                     borrowedBook.setReturnedAfterLate(rs.getBoolean("isReturned"));
-
+                    borrowedBook.setPayFineAfterLost(rs.getBoolean("isPayFineAfterLost"));
+                    borrowedBook.setReturnedAfterLost(rs.getBoolean("isReturnedAfterLost"));
+                    borrowedBook.setId(rs.getInt("id"));
                     borrowedBooks.add(borrowedBook);
                 }
 
@@ -799,7 +802,9 @@ public class LibraryDAO {
                     }
                     borrowedBook.setPayFine(rs.getBoolean("isPayFine"));
                     borrowedBook.setReturnedAfterLate(rs.getBoolean("isReturned"));
-
+                    borrowedBook.setPayFineAfterLost(rs.getBoolean("isPayFineAfterLost"));
+                    borrowedBook.setReturnedAfterLost(rs.getBoolean("isReturnedAfterLost"));
+                    borrowedBook.setId(rs.getInt("id"));
                 } else {
                     System.out.println("No borrowed book found under memberID: " + memberID);
                 } 
@@ -810,8 +815,11 @@ public class LibraryDAO {
             // Step 2: Do post-processing outside DB lock
             if (borrowedBook != null) {
                 borrowedBook.updateStatusAndFine(); // safe now, even if it writes
+                if (borrowedBook.getStatus().equalsIgnoreCase("lost")) {
+                    System.out.println(borrowedBook.getBook().get_title());
+                }
             }
-            return null;
+            return borrowedBook;
         }
     }
     public static void updateBorrowedBookStatus(BorrowedBook borrow, String status) {
@@ -825,9 +833,9 @@ public class LibraryDAO {
                 int affectedRows = pstmt.executeUpdate();
 
                 if (affectedRows > 0) {
-                    //System.out.println("Status updated to '" + status + "' for book: " + borrow.getBook().get_title());
+                    System.out.println("Status updated to '" + status + "' for book: " + borrow.getBook().get_title());
                 } else {
-                    //System.out.println("No rows updated. Either already returned or not found.");
+                    System.out.println("No rows updated. Either already returned or not found.");
                 }
 
             } catch (SQLException e) {
@@ -942,10 +950,11 @@ public class LibraryDAO {
                     double balance = amount - fine;
 
                     if (balance >= 0.0) {
-                        sql = "UPDATE borrowedBook SET lostFine = ? WHERE memberId = ?";
+                        sql = "UPDATE borrowedBook SET lostFine = ?, isPayFineAfterLost = ? WHERE memberId = ?";
                         pstmt = conn.prepareStatement(sql);
                         pstmt.setDouble(1, balance);
-                        pstmt.setInt(2, memberID);
+                        pstmt.setBoolean(2, true);
+                        pstmt.setInt(3, memberID);
                         Member member = getMemberById(memberID);
                         member.setBalance(balance);
                         updateMember(memberID, member);
