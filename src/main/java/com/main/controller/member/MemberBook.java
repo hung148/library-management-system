@@ -293,6 +293,25 @@ public class MemberBook {
                                     break;
                                 }
                             }
+                        } else if (book.getStatus().equalsIgnoreCase("pending")) {
+                            for (BorrowedBook current : lateBooks.getItems()) {
+                                if (current.getId() == book.getId()) {
+                                    currentBorrowed.add(book);
+                                    lateBorrowed.remove(current);
+                                    displayLateBorrow();
+                                    displayCurrentBorrow();
+                                    break;
+                                }
+                            }
+                            for (BorrowedBook current : lostBooks.getItems()) {
+                                if (current.getId() == book.getId()) {
+                                    currentBorrowed.add(book);
+                                    lostBorrowed.remove(current);
+                                    displayLostBorrow();
+                                    displayCurrentBorrow();
+                                    break;
+                                }
+                            }
                         }
                     } 
                     try {
@@ -634,7 +653,7 @@ public class MemberBook {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
 
-                LocalDate today = LocalDate.now().minusWeeks(3);
+                LocalDate today = LocalDate.now();
                 LocalDate twoWeeksLater = today.plusWeeks(3);
 
                 // Disable dates before today or after 2 weeks from now

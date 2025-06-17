@@ -116,8 +116,10 @@ public class BorrowedBook {
 
 	public void updateStatusAndFine() {
 		LocalDate today = LocalDate.now();
+		System.out.println(today.toString());
 	    if (returnedDate == null)  {
 			long daysLate = ChronoUnit.DAYS.between(deadline, today);
+			System.out.println(daysLate);
 			if (daysLate > 0 && daysLate <= 14) {
 				// Mark as late
 				LibraryDAO.updateBorrowedBookStatus(this, "late");
@@ -130,6 +132,13 @@ public class BorrowedBook {
 				LibraryDAO.updateBorrowedBookStatus(this, "lost");
 				this.status = "lost";
 				LibraryDAO.updateFine(memberID, this.lostFine, 0);
+			} else {
+				LibraryDAO.updateBorrowedBookStatus(this, "pending");
+				this.status = "pending";
+				LibraryDAO.updateBorrowedBookIsPayFine(this, false);
+				LibraryDAO.updateBorrowedBookIsPayFineAfterLost(this, false);
+				LibraryDAO.updateBorrowedBookIsReturned(this, false);
+				LibraryDAO.updateBorrowedBookIsReturnedAfterLost(this, false);
 			}
 		} else {
 			if (returnedDate.isAfter(deadline)) {

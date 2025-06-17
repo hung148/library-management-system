@@ -913,6 +913,94 @@ public class LibraryDAO {
             return 0.0;
         }
     }
+
+    public static void updateBorrowedBookIsPayFine(BorrowedBook borrow, Boolean isPayFine) {
+        String sql = "UPDATE borrowedBook SET isPayFine = ? WHERE memberId = ? AND isbn = ? AND status != 'returned'";
+        synchronized (DB_LOCK) {
+            try (Connection conn = DBInitializer.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setBoolean(1, isPayFine);
+                pstmt.setInt(2, borrow.getMemberID()); // or borrow.getMemberId() depending on your class
+                pstmt.setString(3, borrow.getBook().get_ISBN());
+
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows > 0) {
+                    System.out.println("isPayFine updated to '" + isPayFine + "' for book: " + borrow.getBook().get_title());
+                } else {
+                    System.out.println("No rows updated. Either already returned or not found.");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error updating borrow status: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void updateBorrowedBookIsReturned(BorrowedBook borrow, Boolean isReturned) {
+        String sql = "UPDATE borrowedBook SET isReturned = ? WHERE memberId = ? AND isbn = ? AND status != 'returned'";
+        synchronized (DB_LOCK) {
+            try (Connection conn = DBInitializer.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setBoolean(1, isReturned);
+                pstmt.setInt(2, borrow.getMemberID()); // or borrow.getMemberId() depending on your class
+                pstmt.setString(3, borrow.getBook().get_ISBN());
+
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows > 0) {
+                    System.out.println("isReturned updated to '" + isReturned + "' for book: " + borrow.getBook().get_title());
+                } else {
+                    System.out.println("No rows updated. Either already returned or not found.");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error updating borrow status: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void updateBorrowedBookIsPayFineAfterLost(BorrowedBook borrow, Boolean isPayFineAfterLost) {
+        String sql = "UPDATE borrowedBook SET isPayFineAfterLost = ? WHERE memberId = ? AND isbn = ? AND status != 'returned'";
+        synchronized (DB_LOCK) {
+            try (Connection conn = DBInitializer.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setBoolean(1, isPayFineAfterLost);
+                pstmt.setInt(2, borrow.getMemberID()); // or borrow.getMemberId() depending on your class
+                pstmt.setString(3, borrow.getBook().get_ISBN());
+
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows > 0) {
+                    System.out.println("isPayFineAfterLost updated to '" + isPayFineAfterLost + "' for book: " + borrow.getBook().get_title());
+                } else {
+                    System.out.println("No rows updated. Either already returned or not found.");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error updating borrow status: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void updateBorrowedBookIsReturnedAfterLost(BorrowedBook borrow, Boolean isReturnedAfterLost) {
+        String sql = "UPDATE borrowedBook SET isReturnedAfterLost = ? WHERE memberId = ? AND isbn = ? AND status != 'returned'";
+        synchronized (DB_LOCK) {
+            try (Connection conn = DBInitializer.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setBoolean(1, isReturnedAfterLost);
+                pstmt.setInt(2, borrow.getMemberID()); // or borrow.getMemberId() depending on your class
+                pstmt.setString(3, borrow.getBook().get_ISBN());
+
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows > 0) {
+                    System.out.println("isReturnedAfterLost updated to '" + isReturnedAfterLost + "' for book: " + borrow.getBook().get_title());
+                } else {
+                    System.out.println("No rows updated. Either already returned or not found.");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error updating borrow status: " + e.getMessage());
+            }
+        }
+    }
     
     public static void payFine(int memberID, double amount, int fineChoice) {
     	String sql;
