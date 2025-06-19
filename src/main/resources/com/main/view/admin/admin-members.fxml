@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
-    <TableView fx:id="viewMembers" layoutX="9.0" prefHeight="290.0">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.admin.AdminMembers">
+    <TableView fx:id="viewMembers" prefHeight="290" prefWidth="510" layoutY="10" layoutX="3">
         <columns>
             <TableColumn fx:id="libraryIDCol" prefWidth="100" text="Library ID" />
             <TableColumn fx:id="nameCol" prefWidth="100.0" text="Name" />
@@ -13,17 +13,8 @@
             <TableColumn fx:id="emailCol" prefWidth="120" text="Email" />
             <TableColumn fx:id="balanceCol" prefWidth="70" text="Balance" />
         </columns>
-        <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-        </padding>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
 </AnchorPane>

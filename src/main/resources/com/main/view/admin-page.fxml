@@ -3,26 +3,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="adminPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
-   <left>
-      <VBox styleClass="user-left-layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="361.0" prefWidth="95.0">
-         <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="89.0" prefWidth="104.0" styleClass="subLabels" text="What would you like to manage?" textAlignment="CENTER" wrapText="true" />
-         <Button styleClass="user-page-buttons" alignment="CENTER" contentDisplay="CENTER" onAction="#clickHomepage" text="Home" />
-         <Button styleClass="user-page-buttons" accessibleText="add or remove books" contentDisplay="BOTTOM" onAction="#clickBook" text="Books" />
-         <Button styleClass="user-page-buttons" alignment="CENTER" onAction="#clickMembers" text="Library's Members" textAlignment="CENTER" wrapText="true" />
-         <Button styleClass="user-page-buttons" onAction="#clickAccount"  text="My Account" />
-      </VBox>
-   </left>
-   <top>
-      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <Label styleClass="header" layoutX="70.0" layoutY="21.0" text="Welcome," />
-         <Label styleClass="header" fx:id="insertName" layoutX="186" layoutY="21"/>
-         <Pane layoutX="450.0" prefHeight="60.0" prefWidth="93.0" styleClass="corner-box">
-            <Label styleClass="corner-header" alignment="CENTER" layoutX="4.0" layoutY="-3.0" prefHeight="66.0" prefWidth="85.0" text="the bookkeeper's library" textOverrun="CLIP" underline="true" wrapText="true" />
+<BorderPane fx:id="adminPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544" prefWidth="650" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.AdminController">
+      <left>
+         <Pane styleClass="user-left-layout">
+            <VBox alignment="TOP_CENTER" layoutX="3.6666667461395264" maxHeight="-Infinity" maxWidth="-Infinity"
+                  spacing="4">
+               <Label alignment="CENTER" contentDisplay="CENTER"
+                      prefHeight="70.0" prefWidth="106.0" styleClass="subLabels" text="What would you like to manage?"
+                      textAlignment="CENTER" wrapText="true"/>
+               <Button alignment="CENTER" contentDisplay="CENTER" onAction="#clickHomepage"
+                       styleClass="user-page-buttons" text="Home"/>
+               <Button accessibleText="add or remove books" contentDisplay="BOTTOM" onAction="#clickBook"
+                       styleClass="user-page-buttons" text="Books"/>
+               <Button alignment="CENTER" onAction="#clickMembers" styleClass="user-page-buttons"
+                       text="Library's Members" textAlignment="CENTER" wrapText="true"/>
+               <Button onAction="#clickAccount" styleClass="user-page-buttons" text="My Account"/>
+            </VBox>
          </Pane>
-      </Pane>
-   </top>
-   <center>
-   
-   </center>
-</BorderPane>
+      </left>
+      <top>
+      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <Label layoutX="70.0" layoutY="30.0" styleClass="header" text="Welcome," />
+         <Label fx:id="insertName" layoutX="186" layoutY="30" styleClass="header" />
+            <Pane layoutX="450.0" prefHeight="70.0" prefWidth="100.0" styleClass="corner-box">
+               <Label layoutX="4.0" prefHeight="68.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" textOverrun="CLIP" underline="true" wrapText="true" />
+            </Pane>
+         </Pane>
+      </top>
+      <center>
+      </center>
+   </BorderPane>

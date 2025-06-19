@@ -4,12 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberAccount">
+<AnchorPane prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.member.MemberAccount">
     
-        <GridPane alignment="CENTER" hgap="2.0" layoutX="72.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="56.0">
+        <GridPane styleClass="user-info-display" alignment="CENTER" vgap="10.0" layoutX="50.0" layoutY="80.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="65.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="135.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

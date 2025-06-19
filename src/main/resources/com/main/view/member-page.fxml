@@ -1,41 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400" prefWidth="600" stylesheets="@pageStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.MemberController">
-    <BorderPane fx:id="memberPage" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity">
-        <left>
-            <VBox prefHeight="338.0" prefWidth="100.0" styleClass="user-left-layout">
-                <Pane prefHeight="69.0" prefWidth="102.0">
-                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="100.0" text="What would you like to manage?" textAlignment="CENTER" wrapText="true">
-                  <padding>
-                     <Insets bottom="2.0" left="3.0" right="3.0" top="2.0" />
-                  </padding></Label>
-               <VBox.margin>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </VBox.margin>
-                </Pane>
-                <Button onAction="#clickHomepage" styleClass="user-page-buttons" text="Homepage" />
-                <Button onAction="#clickBook" styleClass="user-page-buttons" text="Books" />
-                <Button onAction="#clickAccount" styleClass="user-page-buttons" text="My Account" />
-            <BorderPane.margin>
-               <Insets />
-            </BorderPane.margin>
-            </VBox>
-        </left>
-        <top>
-            <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="610.0" BorderPane.alignment="CENTER">
-                <Label styleClass="header" layoutX="70.0" layoutY="21.0" text="Welcome," />
-                <Label styleClass="header" fx:id="insertName" layoutX="186" layoutY="21"/>
-                <Pane layoutX="472.0" layoutY="-2.0" prefHeight="60.0" prefWidth="101.0" styleClass="corner-box">
-                    <Label alignment="TOP_LEFT" layoutX="7.0" prefHeight="60.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" />
-                </Pane>
+ <BorderPane prefWidth="650" prefHeight="544" stylesheets="@pageStyle.css" fx:id="memberPage" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.controller.MemberController">
+    <top>
+        <Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Label layoutX="70.0" layoutY="30.0" styleClass="header" text="Welcome," />
+            <Label fx:id="insertName" layoutX="186" layoutY="30" styleClass="header" />
+            <Pane layoutX="450.0" prefHeight="70.0" prefWidth="100.0" styleClass="corner-box">
+                <Label layoutX="4.0" prefHeight="68.0" prefWidth="85.0" styleClass="corner-header" text="the bookkeeper's library" />
             </Pane>
-        </top>
-        <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="342.0" prefWidth="508.0" BorderPane.alignment="CENTER" />
-        </center>
-    </BorderPane>
-</AnchorPane>
+        </Pane>
+    </top>
+     <left>
+         <Pane styleClass="user-left-layout">
+             <VBox alignment="TOP_CENTER" layoutX="3" maxHeight="-Infinity" maxWidth="-Infinity" spacing="4">
+                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="100.0" text="What would you like to manage?" textAlignment="CENTER" wrapText="true"/>
+                 <Button onAction="#clickHomepage" styleClass="user-page-buttons" text="Homepage" />
+                 <Button onAction="#clickBook" styleClass="user-page-buttons" text="Books" />
+                 <Button onAction="#clickAccount" styleClass="user-page-buttons" text="My Account" />
+             </VBox>
+         </Pane>
+     </left>
+    
+ </BorderPane>

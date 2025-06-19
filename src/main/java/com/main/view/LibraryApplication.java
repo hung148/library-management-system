@@ -143,12 +143,10 @@ public class LibraryApplication extends Application {
                     AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
                     adminAccount.displayAccount(Main.currentUser.getName(),Main.currentUser.getEmail(),Main.currentUser.getUsername());
                     AdminBook adminBook = AdminController.adminBookLoader.getController();
-                    BookListModel bookList = new BookListModel();
-                    adminBook.setAdminBookList(bookList);
-                    adminBook.setViewBooks(bookList); //set the tableView in adminBook
-                    MemberListModel memeberList = new MemberListModel();
                     AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
-                    adminMembers.setViewMembers(memeberList);
+                    adminBook.setAdminBookList(new BookListModel());
+                    adminBook.setViewBooks(adminBook.getBookList()); //set the tableView in adminBook
+                    adminMembers.setViewMembers(new MemberListModel());
                 });
                 loadInfoForAdminThread.start();
                 adminPageroot.toFront();

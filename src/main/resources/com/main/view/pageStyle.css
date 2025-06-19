@@ -28,6 +28,7 @@
 .accountLabels {
     -fx-font-family: "Nirmala UI";
     -fx-font-weight: bold;
+    -fx-font-size: 14;
 }
 
 .startLabels {
@@ -90,14 +91,14 @@
 
 .user-left-layout{
     -fx-background-color: rgba(255, 219, 219, 0.38);
-    -fx-spacing: 5;
-    -fx-pref-width: 102;
+    -fx-pref-width: 106;
+    -fx-alignment: center-left ;
 }
 
 .user-page-buttons {
     -fx-background-color: rgba(255, 219, 219, 0.51); /* #ffdbdb82 */
     -fx-border-style: hidden;
-    -fx-border-color: dimgray;
+    /*-fx-border-color: dimgray;*/
     -fx-border-width: 0.7;
     -fx-border-radius: 2;           /*radius of each corner of border*/
     -fx-text-alignment: center;
@@ -123,7 +124,7 @@
 
 .corner-header {
     -fx-font-family: "Century Schoolbook";
-    -fx-font-size: 13;
+    -fx-font-size: 14;
     -fx-wrap-text: true;
     -fx-text-overrun: clip;
     -fx-underline: true;
@@ -132,6 +133,7 @@
 .corner-box {
     -fx-background-color: rgba(216, 27, 27, 0.45);
     -fx-border-color: gray;
+    -fx-alignment: center;
 }
 
 ScrollPane {
@@ -177,6 +179,13 @@ ScrollPane {
 
 }
 
-.page-header {
+.user-info-display {
+    -fx-font-family: "Nirmala UI Semilight";
+    -fx-font-size: 13;
+}
 
+.admin-home {
+    -fx-font-family: Century;
+    -fx-font-size: 16;
+    -fx-effect: dropshadow(gaussian, lightpink, 12, 0.5, 0, 0);
 }

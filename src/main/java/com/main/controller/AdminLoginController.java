@@ -15,6 +15,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,10 +51,9 @@ public class AdminLoginController implements Initializable {
 
     private PauseTransition debounce = new PauseTransition(Duration.millis(120));
     private Timeline centerAnimation;
-
     public static Admin admin;
-    private final BookListModel bookList =  new BookListModel();
-    private final MemberListModel memberList = new  MemberListModel();
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resouces) {
@@ -163,19 +163,42 @@ public class AdminLoginController implements Initializable {
             clear();
             //load books and admin's info using Thread bc it is a one-time action
             //Thread runs once login successfully
-            Thread loadInfoForAdminThread = new Thread(() -> {
+            Task<Void> loadInfoForAdminTask = new Task<>() {
+                private final BookListModel bookList = new BookListModel();
+                private final MemberListModel memberList = new MemberListModel();
 
-                AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
-                adminAccount.displayAccount(admin.getName(),admin.getEmail(),admin.getUsername());
+                @Override
+                protected Void call() throws Exception {
+                    AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
+                    adminAccount.displayAccount(admin.getName(), admin.getEmail(), admin.getUsername());
 
-                AdminBook adminBook = AdminController.adminBookLoader.getController();
-                adminBook.setAdminBookList(this.bookList);
-                adminBook.setViewBooks(this.bookList);  //set the tableView in adminBook
-                AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
-                adminMembers.setViewMembers(this.memberList);
-                adminMembers.setMemberListModel(this.memberList);
-            });
-            loadInfoForAdminThread.start();
+                    AdminBook adminBook = AdminController.adminBookLoader.getController();
+                    if(adminBook.getBookList().getList() == null) {
+                        adminBook.setAdminBookList(this.bookList);
+                        adminBook.setViewBooks(this.bookList);      //set the tableView in adminBook
+                    }
+
+                    AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
+                    if(adminMembers.getMemberList().getList() == null) {
+                        adminMembers.setViewMembers(this.memberList);
+                        adminMembers.setMemberListModel(this.memberList);
+                    }
+                    return null;
+                }
+            };
+//            Thread loadInfoForAdminThread = new Thread(() -> {
+//
+//                AdminAccount adminAccount = AdminController.adminAccountLoader.getController();
+//                adminAccount.displayAccount(admin.getName(),admin.getEmail(),admin.getUsername());
+//
+//                AdminBook adminBook = AdminController.adminBookLoader.getController();
+//                adminBook.setAdminBookList(this.bookList);
+//                adminBook.setViewBooks(this.bookList);  //set the tableView in adminBook
+//                AdminMembers adminMembers = AdminController.adminMembersLoader.getController();
+//                adminMembers.setViewMembers(this.memberList);
+//                adminMembers.setMemberListModel(this.memberList);
+//            });
+            new Thread(loadInfoForAdminTask).start();
             LibraryApplication.loadAdminPage();
         }
         else {
@@ -183,9 +206,6 @@ public class AdminLoginController implements Initializable {
             setAlertLoginToEmpty();
         }
     }
-
-
-
     public void showChangePasswordDialog(Stage owner, String username) {
         Stage dialog = new Stage();
         dialog.initOwner(owner);
