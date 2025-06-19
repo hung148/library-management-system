@@ -184,7 +184,7 @@ ScrollPane {
     -fx-font-size: 13;
 }
 
-.admin-home {
+.user-home {
     -fx-font-family: Century;
     -fx-font-size: 16;
     -fx-effect: dropshadow(gaussian, lightpink, 12, 0.5, 0, 0);

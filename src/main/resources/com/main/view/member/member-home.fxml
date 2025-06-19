@@ -11,7 +11,8 @@
             fx:controller="com.main.controller.member.MemberHomepage"
             prefHeight="342.0" prefWidth="508.0"
             stylesheets="@../pageStyle.css">
-            <ScrollPane fitToWidth="true" prefHeight="342.0" prefWidth="508.0">
+    <Label alignment="TOP_CENTER" styleClass="user-home" text="Welcome to your homepage!" layoutY="2" layoutX="4" />
+            <ScrollPane layoutY="26" layoutX="4" fitToWidth="true" prefHeight="342.0" prefWidth="508.0">
                 <content>
                     <Label fx:id="temp" alignment="CENTER" wrapText="true" />
                 </content>
